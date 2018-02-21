@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
 let Users = require('./models').Users
+let Items = require('./models').Items
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
@@ -30,12 +31,43 @@ const authorization = function(request, response, next){
   }
 }
 
+// Authorize user and get current user
 app.get('/user',
 authorization,
 function(request, response){
   response.json({user: request.currentUser})
 })
 
+// Lists all the users, will edit/remove later. DJH 2/21/18
+app.get('/items', (req, res) => {
+  Items.findAll().then(items => {
+    res.json({items: items})
+  })
+})
+
+// Log a user in
+app.post('/login', (req, res) => {
+  var password = req.body.password
+  var email = req.body.email
+
+  Users.findOne({
+    where: {
+      email: email
+    }
+  })
+  .then(user => {
+    if(user.veryifyPassword(password)) {
+      res.json({message: "Login Success"})
+    } else {
+      res.json({message: "Invalid Password"})
+    }
+  })
+  .catch(e => {
+    console.log(e)
+  })
+})
+
+// Create new user
 app.post('/users', function(request, response){
   Users.create(
     {
