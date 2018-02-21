@@ -1,5 +1,6 @@
 const request = require('supertest')
 const app = require('../app')
+let Users = require('../models').Users
 
 describe("App", ()=>{
   it("Tests the root path", ()=>{
@@ -11,6 +12,16 @@ describe("App", ()=>{
   it("Lists items", ()=>{
     return request(app).get("/items").then(response => {
       expect(response.statusCode).toBe(200)
+    })
+  })
+
+  it("Logs in", ()=>{
+    return request(app).post("/login").send({
+      email: "danhook007@icloud.com",
+      password: "tonyromo1"
+    })
+    .then(res => {
+      expect(res.body.message).toBe("Login Success")
     })
   })
 
