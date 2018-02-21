@@ -112,84 +112,23 @@ app.post('/items/new', (req, res) => {
 
 })
 
-//
-// Items.create({
-//   name: 'Chair',
-//   price: 70,
-//   Users: [
-//     { firstName: "Joe" },
-//     { firstName: "Slander" }
-//   ]
-// }, {
-//   include: [{
-//     model: Users,
-//     as: 'Users'
-//   }]
-// })
 
+// removeItems
+// addItems
+// createItem
+// setItem(item)
 
 Users.findOne({
   where: {
-    id: 2
+    id: 3
   }
 })
 .then(user => {
-    user.addItems([1,2,3,4])
+    user.addItems([1,2,3])
 })
-.then(function(item){
-    // setItem(item)
-}).catch(function(error){
+.catch(error => {
   console.log(error)
 })
-
-
-// Users.addItem({
-//   where: {
-//     firstName: "Joe"
-//   }
-// })
-
-
-// Users.create({
-//   firstName: 'Dan',
-//   email: 'danhook007@icloud.com',
-//   lastName: 'Hook'
-// }).then(function(user){
-//   // console.log(user.get())
-//
-//   return user.createItem({
-//     price: '100',
-//     name: 'Headphones'
-//   })
-// })
-// .then(function(item){
-//   // console.log("New Item", item.get())
-// }).catch(function(error){
-//   console.log(error)
-// })
-
-// Users.findOne({
-//   where: {
-//   firstName: "Dan"
-//   }
-// }).then(function(user) {
-//   return user.createItem({
-//     price: '200',
-//     name: "good headphones"
-//   })
-// })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

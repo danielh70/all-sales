@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate: function(models) {
         items.belongsToMany(models.users, { through: "UserItems" })
-
       }
     }
   });
