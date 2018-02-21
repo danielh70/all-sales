@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const uuid = require('uuid/v1')
 
 module.exports = function(sequelize, DataTypes) {
-  var Users = sequelize.define('Users', {
+  var users = sequelize.define('users', {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
   classMethods: {
     associate: function(models) {
-      Users.hasMany(models.Items, { foreignKey: "userId" })
+      users.belongsToMany(models.items, { through: "UserItems" })
     }
   },
     setterMethods:{
@@ -78,5 +78,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return Users;
+  return users;
 };

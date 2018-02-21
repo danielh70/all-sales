@@ -2,6 +2,8 @@ const request = require('supertest')
 const app = require('../app')
 let Users = require('../models').Users
 
+jest.mock('../models/mocks/user')
+
 describe("App", ()=>{
   it("Tests the root path", ()=>{
     return request(app).get("/").then(response => {
@@ -24,6 +26,7 @@ describe("App", ()=>{
       expect(res.body.message).toBe("Login Success")
     })
   })
+
 
   // it("Creates a User", ()=>{
   //   return request(app).post("/users").send({

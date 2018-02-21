@@ -12,6 +12,7 @@
     "body-parser": "^1.18.2",
     "crypto": "^1.0.1",
     "express": "^4.16.2",
+    "express-validator": "^5.0.1",
     "pg": "^6.1.5",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^4.0.0",

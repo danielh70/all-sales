@@ -1,14 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Items = sequelize.define('Items', {
+  var items = sequelize.define('items', {
     name: DataTypes.STRING,
     price: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        Items.belongsTo(models.Users, { foreignKey: "userId" })
+        items.belongsToMany(models.users, { through: "UserItems" })
+
       }
     }
   });
-  return Items;
+  return items;
 };
