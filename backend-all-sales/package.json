@@ -1,0 +1,26 @@
+{
+  "name": "backend-all-sales",
+  "version": "1.0.0",
+  "description": "Sell all used items",
+  "main": "index.js",
+  "author": "Daniel Hook",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
+    "express": "^4.16.2",
+    "pg": "^6.1.5",
+    "sequelize": "^3.30.4",
+    "sequelize-cli": "^4.0.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.0",
+    "jest": "^22.4.0",
+    "sequelize-mock": "^0.10.2",
+    "supertest": "^3.0.0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "danielhook",
+    "password": null,
+    "database": "all-sales",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "danielhook",
+    "password": null,
+    "database": "all-sales",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "danielhook",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
