@@ -7,7 +7,7 @@
   "author": "Daniel Hook",
   "license": "MIT",
   "scripts": {
-    "start": "node cat-tinder-backend/index.js",
+    "start": "node frontend-all-sales/index.js",
     "heroku-postbuild": "cd backend-all-sales && sequelize db:migrate && sequelize db:seed:undo:all && sequelize db:seed:all && cd .. && cd frontend-all-sales/ && yarn install && yarn build"
   },
   "engines": {
