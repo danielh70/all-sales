@@ -17,15 +17,15 @@ describe("App", ()=>{
     })
   })
 
-  it("Logs in", ()=>{
-    return request(app).post("/login").send({
-      email: "danhook007@icloud.com",
-      password: "tonyromo1"
-    })
-    .then(res => {
-      expect(res.body.message).toBe("Login Success")
-    })
-  })
+  // it("Logs in", ()=>{
+  //   return request(app).post("/login").send({
+  //     email: "danhook007@icloud.com",
+  //     password: "tonyromo1"
+  //   })
+  //   .then(res => {
+  //     expect(res.body.message).toBe("Login Success")
+  //   })
+  // })
 
 
   // it("Creates a User", ()=>{

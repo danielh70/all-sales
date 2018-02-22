@@ -5,10 +5,12 @@ var app = express();
 let Users = require('./models').users
 let Items = require('./models').items
 let UserItems = require('./models').UserItems
+let cors = require('cors')
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.json({message: 'Server running =\')'})
@@ -126,8 +128,8 @@ Users.findOne({
 .then(user => {
     user.addItems([1,2,3])
 })
-.catch(error => {
-  console.log(error)
+.catch(e => {
+  console.log(e)
 })
 
 
