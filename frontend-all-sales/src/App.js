@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './components/navbar';
+import Shopping from './presentation/shopping';
 import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
 import {
   Col,
@@ -24,7 +25,7 @@ class App extends Component {
          )} />
 
          <Route exact path="/shopping" render={props => (
-          <NavBar />
+           <Shopping />
         )} />
 
           </div>

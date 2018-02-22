@@ -55,7 +55,7 @@ app.get('/users', (req, res) => {
 /**
 * Lists all the items
 */
-app.get('/items', (req, res) => {
+app.get('/shopping', (req, res) => {
   Items.findAll().then(items => {
     res.json({items: items})
   })
