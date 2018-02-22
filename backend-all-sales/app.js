@@ -1,16 +1,19 @@
-var express = require('express');
+var express = require('express')
 var bodyParser = require('body-parser')
 var validator = require('express-validator')
-var app = express();
+var app = express()
 let Users = require('./models').users
 let Items = require('./models').items
 let UserItems = require('./models').UserItems
 let cors = require('cors')
+var path = require('path')
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
+
+app.use(express.static(path.resolve(__dirname, '../frontend-all-sales/build')));
 
 app.get('/', (req, res) => {
   res.json({message: 'Server running =\')'})
@@ -39,14 +42,14 @@ const authorization = function(request, response, next){
 /**
 * Authorize user and get current user
 */
-app.get('/user',
+app.get('/api/user',
 authorization,
 function(request, response){
   response.json({user: request.currentUser})
 })
 
 // Lists all the users will edit/remove later. DJH 2/21/18
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
   Users.findAll().then(users => {
     res.json({users: users})
   })
@@ -55,7 +58,7 @@ app.get('/users', (req, res) => {
 /**
 * Lists all the items
 */
-app.get('/shopping', (req, res) => {
+app.get('/api/shopping', (req, res) => {
   Items.findAll().then(items => {
     res.json({items: items})
   })
@@ -64,7 +67,7 @@ app.get('/shopping', (req, res) => {
 /**
 * Log a user in
 */
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   var password = req.body.password
   var email = req.body.email
 
@@ -88,7 +91,7 @@ app.post('/login', (req, res) => {
 /**
 * Create a new user
 */
-app.post('/users', function(request, response){
+app.post('/api/users', function(request, response){
   Users.create(
     {
       firstName: request.body.firstName,
@@ -110,9 +113,9 @@ app.post('/users', function(request, response){
   })
 })
 
-app.post('/items/new', (req, res) => {
-
-})
+// app.post('/api/items/new', (req, res) => {
+//
+// })
 
 
 // removeItems
@@ -132,6 +135,9 @@ Users.findOne({
   console.log(e)
 })
 
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend-all-sales/build', 'index.html')); });
 
 
 module.exports = app

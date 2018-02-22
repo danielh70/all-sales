@@ -9,7 +9,12 @@ import {
 } from 'react-bootstrap'
 import '../App.css';
 
-const API = "http://localhost:3000"
+var APIURL;
+  if(process.env.NODE_ENV === 'production') {
+    APIURL = "/"
+  } else {
+    APIURL = "http://localhost:3000/"
+  }
 
 class Shopping extends Component {
   constructor(props) {
@@ -20,7 +25,7 @@ class Shopping extends Component {
   }
 
   componentWillMount() {
-    fetch(`${API}/shopping`)
+    fetch(`${APIURL}api/shopping`)
     .then(resp => {
       return resp.json()
     })
