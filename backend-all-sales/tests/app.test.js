@@ -12,7 +12,7 @@ describe("App", ()=>{
   })
 
   it("Lists items", ()=>{
-    return request(app).get("/items").then(response => {
+    return request(app).get("/api/shopping").then(response => {
       expect(response.statusCode).toBe(200)
     })
   })
