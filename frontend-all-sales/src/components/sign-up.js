@@ -24,7 +24,6 @@ class SignUp extends Component {
       },
       validation: null
     }
-    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit(e) {
@@ -40,7 +39,7 @@ class SignUp extends Component {
   render() {
     const { validation, form } = this.state
     const { firstName, lastName, email, password } = form
-    console.log(this.state.form);
+    // console.log(this.state.form);
 
     return (
       <div className="flex-container">

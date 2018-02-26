@@ -25,6 +25,7 @@ class Shopping extends Component {
       .then(res => {
         this.setState({items: res.items})
       })
+      .catch(e => console.log(e))
     }
 
   render() {

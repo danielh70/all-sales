@@ -19,14 +19,14 @@ app.get('/', (req, res) => {
   res.json({message: 'Server running =\')'})
 });
 
-const authorization = function(request, response, next){
-  const token = request.query.authToken || request.body.authToken
+const authorization = function(req, response, next){
+  const token = req.query.authToken || req.body.authToken
   if(token){
     User.findOne({
       where: {authToken: token}
     }).then((user)=>{
       if(user){
-        request.currentUser = user
+        req.currentUser = user
         next()
       }else{
         response.status(401)
@@ -44,8 +44,8 @@ const authorization = function(request, response, next){
 */
 app.get('/api/user',
 authorization,
-function(request, response){
-  response.json({user: request.currentUser})
+function(req, response){
+  response.json({user: req.currentUser})
 })
 
 // Lists all the users will edit/remove later. DJH 2/21/18
@@ -91,22 +91,23 @@ app.post('/api/login', (req, res) => {
 /**
 * Create a new user
 */
-app.post('/api/users', function(request, response){
+app.post('/api/users', function(req, res){
   Users.create(
     {
-      firstName: request.body.firstName,
-      lastName: request.body.lastName,
-      email: request.body.email,
-      password: request.body.password
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password
     }
   ).then(user => {
-    response.json({
+    res.status(201)
+    res.json({
       message: 'success',
       user: user
     })
   }).catch(error => {
-    response.status(400)
-    response.json({
+    res.status(400)
+    res.json({
       message: "Unable to create User",
       errors: error.errors
     })

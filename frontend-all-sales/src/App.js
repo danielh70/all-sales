@@ -15,7 +15,7 @@ class App extends Component {
               <div>
                 <NavBar />
                 <h1 className="header">Welcome</h1>
-             </div>
+              </div>
             )} />
 
            <Route exact path="/shopping" render={props => (
