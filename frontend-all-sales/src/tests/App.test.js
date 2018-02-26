@@ -4,7 +4,7 @@ import App from '../App';
 import { mount } from 'enzyme'
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import NavBar from '../components/navbar';
+import NavBar from '../components/logged-out-nav';
 
 Enzyme.configure({ adapter: new Adapter() });
 

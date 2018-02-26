@@ -14,7 +14,7 @@ class App extends Component {
             <Route exact path="/" render={props => (
               <div>
                 <NavBar />
-                <h1 className="header">Welcome</h1>
+                <h1 className="header">Welcome {localStorage.name}!</h1>
               </div>
             )} />
 

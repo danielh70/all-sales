@@ -32,6 +32,9 @@ class SignUpPage extends Component {
     .then(res => {
       // console.log(res)
       if(res.status === 201) {
+        if(res.status === 201) {
+          localStorage.setItem('name', params.firstName)
+        }
         this.setState({success: true})
       }
     })

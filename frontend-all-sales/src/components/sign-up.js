@@ -41,6 +41,7 @@ class SignUp extends Component {
     const { firstName, lastName, email, password } = form
     // console.log(this.state.form);
 
+
     return (
       <div className="flex-container">
         <h1>Sign Up</h1>
