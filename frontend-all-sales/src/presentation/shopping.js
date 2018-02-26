@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navbar';
-import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
-import {
-  Col,
-  Grid,
-  PageHeader,
-  Row
-} from 'react-bootstrap'
 import '../App.css';
 
 var APIURL;
@@ -26,13 +19,13 @@ class Shopping extends Component {
 
   componentWillMount() {
     fetch(`${APIURL}api/shopping`)
-    .then(resp => {
-      return resp.json()
-    })
-    .then(resp => {
-      this.setState({ items: resp.items })
-    })
-  }
+      .then(res => {
+        return res.json()
+      })
+      .then(res => {
+        this.setState({items: res.items})
+      })
+    }
 
   render() {
     const { items } = this.state

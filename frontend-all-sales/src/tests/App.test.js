@@ -24,11 +24,23 @@ test('navbar renders', () => {
   expect(app.find('.shop-text').length).toEqual(2)
 })
 
+test('log in text shows on navbar', () => {
+  const app = mount(<NavBar />)
+  expect(app.find('NavItem > .log-in-nav').text()).toEqual('Log In')
+})
+
+test('sign up text shows on navbar', () => {
+  const app = mount(<NavBar />)
+  expect(app.find('NavItem > .sign-up-nav').text()).toEqual('Sign Up')
+})
+
+
 // test('see all items button works', () => {
 //   const app = mount(<App />)
 //   app.find('.shop-text').simulate('click')
 //   expect(app.find())
 // })
 
-test('shopping page renders items list')
+test('shopping page renders items list', () => {
+})
 test('home page shows exactly 3 items')
