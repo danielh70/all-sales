@@ -31,6 +31,16 @@ class Shopping extends Component {
   render() {
     const { items } = this.state
 
+    if (items.length === 0) {
+      return (
+        <div className="container">
+          <div className="grid">
+            <h1>Loading...</h1>
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div>
         <NavBar />
