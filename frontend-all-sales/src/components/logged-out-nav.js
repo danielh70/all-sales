@@ -33,7 +33,7 @@ class LoggedOutNav extends Component {
             <NavItem className="sign-up-nav" eventKey={1} href="/signup">
               Sign Up
             </NavItem>
-            <NavItem className="log-in-nav" eventKey={2} href="#">
+            <NavItem className="log-in-nav" eventKey={2} href="/login">
               Log In
             </NavItem>
           </Nav>

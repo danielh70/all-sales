@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import NavBar from './components/navbar';
+import NavBarHeader from './components/navbar';
 import Shopping from './presentation/shopping';
 import SignUpPage from './presentation/sign-up-presentation';
+import LogInPage from './presentation/log-in-presentation';
 import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
 import './App.css';
 
@@ -13,8 +14,8 @@ class App extends Component {
           <div>
             <Route exact path="/" render={props => (
               <div>
-                <NavBar />
-                <h1 className="header">Welcome {localStorage.name}!</h1>
+                <NavBarHeader />
+                <h1 className="header">Welcome</h1>
               </div>
             )} />
 
@@ -24,6 +25,10 @@ class App extends Component {
 
             <Route exact path="/signup" render={props => (
               <SignUpPage />
+            )} />
+
+            <Route exact path="/login" render={props => (
+              <LogInPage />
             )} />
           </div>
         </Router>

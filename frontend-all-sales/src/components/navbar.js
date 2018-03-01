@@ -25,16 +25,18 @@ class NavBarHeader extends Component {
 
   LogInCheck() {
     if (this.state.loggedIn !== false) {
-      return < LoggedInNav logOut={this.logOut.bind(this)} />
+      return <LoggedInNav logOut={this.logOut.bind(this)} />
     } else {
-      return < LoggedOutNav />
+      return <LoggedOutNav />
     }
   }
 
   render() {
     console.log(this.state)
     return (
-      this.LogInCheck()
+      <div>
+        {this.LogInCheck()}
+      </div>
 
     )
   }

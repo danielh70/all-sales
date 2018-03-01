@@ -12,13 +12,18 @@ import {
 } from 'react-bootstrap'
 
 
-class SignUp extends Component {
+var APIURL;
+  if(process.env.NODE_ENV === 'production') {
+    APIURL = "/"
+  } else {
+    APIURL = "http://localhost:3000/"
+  }
+
+class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
-        firstName: '',
-        lastName: '',
         email: '',
         password: ''
       },
@@ -26,10 +31,35 @@ class SignUp extends Component {
     }
   }
 
-  handleSubmit(e) {
-    // e.preventDefault()
-    this.props.onSubmit(this.state.form)
+  // handleSubmit(e) {
+  //   // e.preventDefault()
+  //   this.props.onSubmit(this.state.form)
+  // }
+
+
+  authorize(e) {
+    const { email, password } = this.state.form
+
+      fetch(`${APIURL}api/login`,
+      {
+          method: "POST",
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+                email: email,
+                password: password
+            })
+      }).then(res => {
+        res.json()
+        // console.log("habababab", res)
+      })
+      .then(data => {
+          console.log("res:", data);
+      })
+      .catch(e => console.log("error:", e))
   }
+
 
   handleChange(e) {
     const formState = Object.assign({}, this.state.form)
@@ -38,9 +68,9 @@ class SignUp extends Component {
   }
 
   render() {
-    const { validation, form } = this.state
-    const { firstName, lastName, email, password } = form
-    // console.log(this.state.form);
+    const { email, password } = this.state.form
+    const { validation } = this.state
+    console.log(this.state.form)
 
     return (
       <div className="flex-container">
@@ -48,34 +78,6 @@ class SignUp extends Component {
         <form className="sign-up">
           <Col xs={4}></Col>
           <Col xs={4}>
-            <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
-                <ControlLabel id="first-name">First Name</ControlLabel>
-                <FormControl
-                  name="firstName"
-                  type="text"
-                  value={firstName}
-                  placeholder="First Name"
-                  onChange={this.handleChange.bind(this)}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
-                <ControlLabel>Last Name</ControlLabel>
-                <FormControl
-                  name="lastName"
-                  type="text"
-                  value={lastName}
-                  placeholder="Last Name"
-                  onChange={this.handleChange.bind(this)}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
             <Row>
               <FormGroup controlId="formBasicText" validationState={validation}>
                 <ControlLabel>Email</ControlLabel>
@@ -105,14 +107,21 @@ class SignUp extends Component {
               </FormGroup>
             </Row>
             <Row>
-              <Button id="submit" onClick={this.handleSubmit.bind(this)}>Create Account</Button>
+              <Button id="submit" onClick={this.authorize.bind(this)}>Log In</Button>
             </Row>
           </Col>
           <Col xs={4}></Col>
         </form>
       </div>
-    );
+
+    )
   }
 }
 
-export default SignUp
+
+
+
+
+
+
+export default LogIn
