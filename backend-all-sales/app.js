@@ -7,13 +7,11 @@ let Items = require('./models').items
 let UserItems = require('./models').UserItems
 let cors = require('cors')
 let path = require('path')
-let cookieParser = require('cookie-parser')
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
-app.use(cookieParser())
 
 app.use(express.static(path.resolve(__dirname, '../frontend-all-sales/build')));
 
@@ -79,12 +77,11 @@ app.post('/api/login', (req, res) => {
     }
   })
   .then(user => {
-    if(user.veryifyPassword(password)) {
-      if(user.veryifyPassword(password)) {
-        res.cookie("authToken", user.authToken)
-      }
-      res.json({message: "Login Success"})
-      console.log("the cookies:", req.cookies)
+    let auth = user.veryifyPassword(password)
+
+    if(auth) {
+      res.json({authToken: user.authToken})
+      // res.json({message: "Login Success"})
     } else {
       res.json({message: "Invalid Password"})
     }

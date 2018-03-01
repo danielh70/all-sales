@@ -13,11 +13,11 @@ class NavBarHeader extends Component {
 
   logOut() {
     this.setState({loggedIn: false})
-    localStorage.removeItem("name")
+    localStorage.removeItem("authToken")
   }
 
   componentWillMount() {
-    if (typeof localStorage.name !== "undefined") {
+    if (typeof localStorage.authToken !== "undefined") {
       this.setState({loggedIn: true})
     } else {
     }

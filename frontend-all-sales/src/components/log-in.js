@@ -37,31 +37,35 @@ class LogIn extends Component {
   // }
 
 
-  authorize(e) {
+  authorize = (e) => {
     const { email, password } = this.state.form
 
-      fetch(`${APIURL}api/login`,
-      {
-          method: "POST",
-          headers: {
-              'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-                email: email,
-                password: password
-            })
-      }).then(res => {
-        res.json()
-        // console.log("habababab", res)
+    fetch(`${APIURL}api/login`,
+    {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+    },
+      body: JSON.stringify({
+        email: email,
+        password: password
       })
-      .then(data => {
-          console.log("res:", data);
-      })
-      .catch(e => console.log("error:", e))
+    })
+    .then(res => {
+      return res.json()
+      console.log("habababab", res)
+    })
+    .then(data => {
+      if(data.authToken !== undefined) {
+      localStorage.setItem("authToken", data.authToken)
+        console.log("res:", data);
+      }
+    })
+    .catch(e => console.log("error:", e))
   }
 
 
-  handleChange(e) {
+  handleChange = (e) => {
     const formState = Object.assign({}, this.state.form)
     formState[e.target.name] = e.target.value
     this.setState({ form: formState })
@@ -86,7 +90,7 @@ class LogIn extends Component {
                   type="text"
                   value={email}
                   placeholder="Email"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
                 <FormControl.Feedback />
                 <HelpBlock>Validation is based on string length.</HelpBlock>
@@ -100,14 +104,14 @@ class LogIn extends Component {
                   type="text"
                   value={password}
                   placeholder="Password"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
                 <FormControl.Feedback />
                 <HelpBlock>Validation is based on string length.</HelpBlock>
               </FormGroup>
             </Row>
             <Row>
-              <Button id="submit" onClick={this.authorize.bind(this)}>Log In</Button>
+              <Button id="submit" onClick={this.authorize}>Log In</Button>
             </Row>
           </Col>
           <Col xs={4}></Col>
