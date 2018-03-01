@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Navbar, Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import LoggedInNav from './logged-in-nav';
 import LoggedOutNav from './logged-out-nav';
+import { functions } from '../functions/functions';
+
 
 class NavBarHeader extends Component {
   constructor(props) {
@@ -19,12 +21,13 @@ class NavBarHeader extends Component {
   componentWillMount() {
     if (typeof localStorage.authToken !== "undefined") {
       this.setState({loggedIn: true})
-    } else {
+      } else {
     }
   }
 
+
   LogInCheck() {
-    if (this.state.loggedIn !== false) {
+    if (functions.authCheck()) {
       return <LoggedInNav logOut={this.logOut.bind(this)} />
     } else {
       return <LoggedOutNav />
@@ -32,7 +35,7 @@ class NavBarHeader extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(authToken)
     return (
       <div>
         {this.LogInCheck()}

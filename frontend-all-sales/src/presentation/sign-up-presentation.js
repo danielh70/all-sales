@@ -19,7 +19,7 @@ class SignUpPage extends Component {
     }
   }
 
-  handleNewUser(e) {
+  handleNewUser = (e) => {
     fetch(`${APIURL}api/users`,
       {
         body: JSON.stringify(e),
@@ -48,7 +48,7 @@ class SignUpPage extends Component {
       <div>
         <NavBar />
 
-          <SignUp onSubmit={this.handleNewUser.bind(this)} />
+          <SignUp onSubmit={this.handleNewUser} />
 
           {this.state.success && <Redirect to="/" />}
       </div>
