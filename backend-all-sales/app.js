@@ -102,13 +102,15 @@ app.post('/api/users', function(req, res){
       email: req.body.email,
       password: req.body.password
     }
-  ).then(user => {
+  )
+  .then(user => {
     res.status(201)
     res.json({
       message: 'success',
-      user: user
+      authToken: user.authToken
     })
-  }).catch(error => {
+  })
+  .catch(error => {
     res.status(400)
     res.json({
       message: "Unable to create User",

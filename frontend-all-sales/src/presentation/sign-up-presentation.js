@@ -19,10 +19,10 @@ class SignUpPage extends Component {
     }
   }
 
-  handleNewUser(params) {
+  handleNewUser(e) {
     fetch(`${APIURL}api/users`,
       {
-        body: JSON.stringify(params),
+        body: JSON.stringify(e),
         headers: {
           "Content-Type": "application/json"
         },
@@ -30,13 +30,15 @@ class SignUpPage extends Component {
       }
     )
     .then(res => {
-      // console.log(res)
-      if(res.status === 201) {
-        if(res.status === 201) {
-          localStorage.setItem('name', params.firstName)
-        }
-        this.setState({success: true})
+      if (res.status === 201) {
+        return res.json()
       }
+    })
+    .then(res => {
+      localStorage.setItem("authToken", res.authToken)
+    })
+    .then(e => {
+      this.setState({success: true})
     })
     .catch(e => console.log(e))
   }
