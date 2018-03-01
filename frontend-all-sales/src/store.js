@@ -1,6 +1,7 @@
-import { createStore } from 'redux'
-import counterReducer from './reducers/counter'
+import { createStore, applyMiddleware } from 'redux'
+import combineReducers from './reducers/index'
+import logger from 'redux-logger'
 
 
 const initialState = {count: 0}
-export default createStore(counterReducer, initialState)
+export default createStore(combineReducers, applyMiddleware(logger))
