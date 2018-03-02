@@ -7,40 +7,31 @@ import '../App.css';
 
 const mapStateToProps = (store) => {
   return({
-    items: store.items.all,
-    APIURL: store.APIURL
+    items: store.items.all
   })
 }
-export default connect(mapStateToProps)(class Shopping extends Component {
 
-  componentWillMount(){
-  this.props.dispatch(getItems(this.props.APIURL))
+export default connect(mapStateToProps)(({items}) => {
+
+  if (items.length === 0) {
+    return (
+      <div className="container">
+        <div className="grid">
+          <h1>Loading...</h1>
+        </div>
+      </div>
+    )
   }
 
-    render() {
-      return (
-        <div>
-          <NavBar />
-
-          {this.props.items.map((el, i) => {
-            return (
-              <h5 key={i}>{el.name}</h5>
-            )
-          })}
-
-        </div>
-      );
-    }
+    return (
+      <div>
+        <NavBar />
+        {items.map((el, i) => {
+          return (
+            <h5 key={i}>{el.name}</h5>
+          )
+        })}
+      </div>
+    );
   }
 )
-
-//
-// if (this.props.items.length === 0) {
-//   return (
-//     <div className="container">
-//       <div className="grid">
-//         <h1>Loading...</h1>
-//       </div>
-//     </div>
-//   )
-// }
