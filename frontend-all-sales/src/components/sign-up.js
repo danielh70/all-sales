@@ -10,6 +10,7 @@ import {
   ControlLabel,
   Button
 } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
@@ -19,18 +20,20 @@ const mapStateToProps = (store) =>{
   return {
     userForm: store.userForm.user,
     errors: store.userForm.errors,
-    APIURL: store.appState.APIURL
+    APIURL: store.appState.APIURL,
+    newUserSuccess: store.userForm.newUserSuccess
   }
 }
 
 
 export default connect(mapStateToProps)(class SignUp extends Component {
 
-  handleChange(e) {
+
+  handleChange = (e) => {
   this.props.dispatch(updateUserForm(e.target.name, e.target.value))
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.props.dispatch(addUser(this.props.APIURL, this.props.userForm))
   }
 
@@ -45,12 +48,6 @@ export default connect(mapStateToProps)(class SignUp extends Component {
   return errorString === "" ? null : errorString
 }
 
-  //
-  // handleChange(e) {
-  //   const formState = Object.assign({}, this.state.form)
-  //   formState[e.target.name] = e.target.value
-  //   this.setState({ form: formState })
-  // }
 
   render() {
     const { firstName, lastName, email, password } = this.props.userForm
@@ -69,7 +66,7 @@ export default connect(mapStateToProps)(class SignUp extends Component {
                   type="text"
                   value={firstName}
                   placeholder="First Name"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
                 <FormControl.Feedback />
                 <HelpBlock>Validation is based on string length.</HelpBlock>
@@ -83,7 +80,7 @@ export default connect(mapStateToProps)(class SignUp extends Component {
                   type="text"
                   value={lastName}
                   placeholder="Last Name"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
                 <FormControl.Feedback />
                 <HelpBlock>Validation is based on string length.</HelpBlock>
@@ -97,7 +94,7 @@ export default connect(mapStateToProps)(class SignUp extends Component {
                   type="text"
                   value={email}
                   placeholder="Email"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
                 <FormControl.Feedback />
                 <HelpBlock>Validation is based on string length.</HelpBlock>
@@ -111,18 +108,19 @@ export default connect(mapStateToProps)(class SignUp extends Component {
                   type="text"
                   value={password}
                   placeholder="Password"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
                 <FormControl.Feedback />
                 <HelpBlock>Validation is based on string length.</HelpBlock>
               </FormGroup>
             </Row>
             <Row>
-              <Button id="submit" onClick={this.handleSubmit.bind(this)}>Create Account</Button>
+              <Button id="submit" onClick={this.handleSubmit}>Create Account</Button>
             </Row>
           </Col>
           <Col xs={4}></Col>
         </form>
+        {this.props.newUserSuccess && <Redirect to="/" />}
       </div>
     );
   }

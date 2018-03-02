@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBarHeader from './components/navbar';
 import Shopping from './presentation/shopping';
-import SignUpPage from './presentation/sign-up-presentation';
+import { SignUpPage } from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
 import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
 import './App.css';

@@ -9,16 +9,16 @@ const initialState = {
   errors: []
 }
 
-export default (currentState=initialState, action) =>{
+export default (currentState=initialState, action) => {
   let newState
   switch(action.type){
     case("SIGNUP_FORM_UPDATED"):{
       const newUser = Object.assign({}, currentState.user, {[action.payload.attribute]: action.payload.value})
-      newState = Object.assign({}, currentState, {user: newUser})
+      newState = Object.assign({}, currentState, { user: newUser })
       break
     }
     case("USER_ADDED"):{
-      newState = Object.assign({}, currentState, {newUserSuccess: true})
+      newState = Object.assign({}, currentState, { newUserSuccess: true })
       break
     }
 

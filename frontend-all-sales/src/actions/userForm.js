@@ -20,19 +20,19 @@ export function addUser(APIURL, e){
         method: "POST"
       }
     )
-    .then((rawResponse)=> {
-      return rawResponse.json()
+    .then(res => {
+      return res.json()
     })
-    .then((parsedResponse) => {
-      if(parsedResponse.errors) {
+    .then(res => {
+      if(res.errors) {
         dispatch({
           type: 'ERROR_ADDING_USER',
-          payload: parsedResponse.errors
+          payload: res.errors
         })
       } else {
         dispatch({
           type: 'USER_ADDED',
-          payload: parsedResponse.user
+          payload: res.user
         })
       }
     })
