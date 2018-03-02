@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import NavBar from '../components/navbar';
-import { getItems } from '../actions/items'
 import '../App.css';
 
 
