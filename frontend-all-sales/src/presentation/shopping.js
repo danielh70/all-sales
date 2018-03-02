@@ -6,30 +6,22 @@ import '../App.css';
 
 
 const mapStateToProps = (store) => {
-  return({
+  return {
     items: store.items.all
-  })
+  }
 }
 
 export default connect(mapStateToProps)(({items}) => {
 
   if (items.length === 0) {
-    return (
-      <div className="container">
-        <div className="grid">
-          <h1>Loading...</h1>
-        </div>
-      </div>
-    )
+    return <h1>Loading...</h1>
   }
 
     return (
       <div>
         <NavBar />
         {items.map((el, i) => {
-          return (
-            <h5 key={i}>{el.name}</h5>
-          )
+          return <h5 key={i}>{el.name}</h5>
         })}
       </div>
     );
