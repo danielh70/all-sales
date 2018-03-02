@@ -11,36 +11,49 @@ import {
   Button
 } from 'react-bootstrap'
 
+import { connect } from 'react-redux'
 
-class SignUp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      form: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-      },
-      validation: null
-    }
-  }
+import { addUser, updateUserForm } from '../actions/userForm'
 
-  handleSubmit(e) {
-    // e.preventDefault()
-    this.props.onSubmit(this.state.form)
+const mapStateToProps = (store) =>{
+  return {
+    userForm: store.userForm.user,
+    errors: store.userForm.errors,
+    APIURL: store.appState.APIURL
   }
+}
+
+
+export default connect(mapStateToProps)(class SignUp extends Component {
 
   handleChange(e) {
-    const formState = Object.assign({}, this.state.form)
-    formState[e.target.name] = e.target.value
-    this.setState({ form: formState })
+  this.props.dispatch(updateUserForm(e.target.name, e.target.value))
   }
 
+  handleSubmit() {
+    this.props.dispatch(addUser(this.props.APIURL, this.props.userForm))
+  }
+
+  errorsFor(attribute){
+  var errorString = ""
+  if(this.props.errors.length > 0){
+    const errors = this.props.errors.filter(error => error.param === attribute )
+    if(errors){
+      errorString = errors.map(error => error.msg ).join(", ")
+    }
+  }
+  return errorString === "" ? null : errorString
+}
+
+  //
+  // handleChange(e) {
+  //   const formState = Object.assign({}, this.state.form)
+  //   formState[e.target.name] = e.target.value
+  //   this.setState({ form: formState })
+  // }
+
   render() {
-    const { validation, form } = this.state
-    const { firstName, lastName, email, password } = form
-    // console.log(this.state.form);
+    const { firstName, lastName, email, password } = this.props.userForm
 
     return (
       <div className="flex-container">
@@ -49,7 +62,7 @@ class SignUp extends Component {
           <Col xs={4}></Col>
           <Col xs={4}>
             <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
+              <FormGroup controlId="formBasicText" >
                 <ControlLabel id="first-name">First Name</ControlLabel>
                 <FormControl
                   name="firstName"
@@ -63,7 +76,7 @@ class SignUp extends Component {
               </FormGroup>
             </Row>
             <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
+              <FormGroup controlId="formBasicText">
                 <ControlLabel>Last Name</ControlLabel>
                 <FormControl
                   name="lastName"
@@ -77,7 +90,7 @@ class SignUp extends Component {
               </FormGroup>
             </Row>
             <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
+              <FormGroup controlId="formBasicText">
                 <ControlLabel>Email</ControlLabel>
                 <FormControl
                   name="email"
@@ -91,7 +104,7 @@ class SignUp extends Component {
               </FormGroup>
             </Row>
             <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
+              <FormGroup controlId="formBasicText">
                 <ControlLabel>Password</ControlLabel>
                 <FormControl
                   name="password"
@@ -114,5 +127,4 @@ class SignUp extends Component {
     );
   }
 }
-
-export default SignUp
+)

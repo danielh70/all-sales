@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navbar';
 import SignUp from '../components/sign-up';
-import Center from '../components/center';
 import { Redirect } from 'react-router-dom';
 
 var APIURL;

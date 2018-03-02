@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
-import counterReducer from './counter'
-
+import userFormReducer from './userForm'
+import appStateReducer from './appState'
 
 export default combineReducers({
-  counter: counterReducer
+  userForm: userFormReducer,
+  appState: appStateReducer
 })

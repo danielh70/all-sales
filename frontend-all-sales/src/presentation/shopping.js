@@ -18,7 +18,6 @@ class Shopping extends Component {
   }
 
   
-
   componentWillMount() {
     fetch(`${APIURL}api/shopping`)
       .then(res => {

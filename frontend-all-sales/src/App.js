@@ -3,7 +3,6 @@ import NavBarHeader from './components/navbar';
 import Shopping from './presentation/shopping';
 import SignUpPage from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
-import Connected from './components/test';
 import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
 import './App.css';
 
@@ -30,10 +29,6 @@ class App extends Component {
 
             <Route exact path="/login" render={props => (
               <LogInPage />
-            )} />
-
-            <Route exact path="/redux" render={props => (
-              <Connected />
             )} />
           </div>
         </Router>
