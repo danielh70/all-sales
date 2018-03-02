@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
   Col,
-  Grid,
-  PageHeader,
   Row,
   FormGroup,
   FormControl,
@@ -53,7 +51,6 @@ class LogIn extends Component {
     })
     .then(res => {
       return res.json()
-      console.log("habababab", res)
     })
     .then(data => {
       if(data.authToken !== undefined) {

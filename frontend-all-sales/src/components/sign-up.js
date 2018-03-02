@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
   Col,
-  Grid,
-  PageHeader,
   Row,
   FormGroup,
   FormControl,
@@ -11,9 +9,7 @@ import {
   Button
 } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
-
 import { connect } from 'react-redux'
-
 import { addUser, updateUserForm } from '../actions/userForm'
 
 const mapStateToProps = (store) =>{

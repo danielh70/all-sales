@@ -3,12 +3,6 @@ import NavBar from '../components/navbar';
 import LogIn from '../components/log-in';
 import { Redirect } from 'react-router-dom';
 
-var APIURL;
-  if(process.env.NODE_ENV === 'production') {
-    APIURL = "/"
-  } else {
-    APIURL = "http://localhost:3000/"
-  }
 
 class LogInPage extends Component {
   constructor(props) {

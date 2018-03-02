@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import LoggedInNav from './logged-in-nav';
 import LoggedOutNav from './logged-out-nav';
 import { functions } from '../functions/functions';

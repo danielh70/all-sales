@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import NavBar from '../components/navbar';
 import SignUp from '../components/sign-up';
-import { Redirect } from 'react-router-dom';
+import NavBarHeader from '../components/navbar'
 
 
 export const SignUpPage = () => {
   return (
     <div>
+      <NavBarHeader />
       <SignUp />
     </div>
   )

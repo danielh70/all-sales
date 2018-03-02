@@ -1,60 +1,46 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import NavBar from '../components/navbar';
+import { getItems } from '../actions/items'
 import '../App.css';
 
-var APIURL;
-  if(process.env.NODE_ENV === 'production') {
-    APIURL = "/"
-  } else {
-    APIURL = "http://localhost:3000/"
-  }
 
-class Shopping extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: []
-    }
-  }
-
-  
-  componentWillMount() {
-    fetch(`${APIURL}api/shopping`)
-      .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        this.setState({items: res.items})
-      })
-      .catch(e => console.log(e))
-    }
-
-  render() {
-    const { items } = this.state
-
-    if (items.length === 0) {
-      return (
-        <div className="container">
-          <div className="grid">
-            <h1>Loading...</h1>
-          </div>
-        </div>
-      )
-    }
-
-    return (
-      <div>
-        <NavBar />
-
-        {items.map((el, i) => {
-          return (
-            <h5 key={i}>{el.name}</h5>
-          )
-        })}
-
-      </div>
-    );
-  }
+const mapStateToProps = (store) => {
+  return({
+    items: store.items.all,
+    APIURL: store.APIURL
+  })
 }
+export default connect(mapStateToProps)(class Shopping extends Component {
 
-export default Shopping
+  componentWillMount(){
+  this.props.dispatch(getItems(this.props.APIURL))
+  }
+
+    render() {
+      return (
+        <div>
+          <NavBar />
+
+          {this.props.items.map((el, i) => {
+            return (
+              <h5 key={i}>{el.name}</h5>
+            )
+          })}
+
+        </div>
+      );
+    }
+  }
+)
+
+//
+// if (this.props.items.length === 0) {
+//   return (
+//     <div className="container">
+//       <div className="grid">
+//         <h1>Loading...</h1>
+//       </div>
+//     </div>
+//   )
+// }
