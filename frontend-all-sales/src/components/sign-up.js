@@ -1,124 +1,61 @@
-import React, { Component } from 'react';
-import {
-  Col,
-  Row,
-  FormGroup,
-  FormControl,
-  HelpBlock,
-  ControlLabel,
-  Button
-} from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { addUser, updateUserForm } from '../actions/userForm'
-
-const mapStateToProps = (store) =>{
-  return {
-    userForm: store.userForm.user,
-    errors: store.userForm.errors,
-    APIURL: store.appState.APIURL,
-    newUserSuccess: store.userForm.newUserSuccess
-  }
-}
+import React from 'react'
+import { reduxForm, Field } from 'redux-form'
+import { createUser } from '../actions/userForm'
+import validate from './validate'
 
 
-export default connect(mapStateToProps)(class SignUp extends Component {
+const createRenderer = render => ({ input, meta, label, ...rest }) =>
+  <div
+    className={[
+      meta.error && meta.touched ? 'error' : '',
+      meta.active ? 'active' : '', 'sign-up',
 
-
-  handleChange = (e) => {
-  this.props.dispatch(updateUserForm(e.target.name, e.target.value))
-  }
-
-  handleSubmit = () => {
-    this.props.dispatch(addUser(this.props.APIURL, this.props.userForm))
-  }
-
-  errorsFor(attribute){
-  var errorString = ""
-  if(this.props.errors.length > 0){
-    const errors = this.props.errors.filter(error => error.param === attribute )
-    if(errors){
-      errorString = errors.map(error => error.msg ).join(", ")
+    ].join(' ')}
+  >
+    <label>
+      {label}
+    </label> <br />
+    {render(input, label, rest)}
+    {meta.error &&
+      meta.touched &&
+      <span>
+        {meta.error}
+      </span>
     }
-  }
-  return errorString === "" ? null : errorString
-}
+  </div>
 
-
-  render() {
-    const { firstName, lastName, email, password } = this.props.userForm
-
-    return (
-      <div className="flex-container">
-        <h1>Sign Up</h1>
-        <form className="sign-up">
-          <Col xs={4}></Col>
-          <Col xs={4}>
-            <Row>
-              <FormGroup controlId="formBasicText" >
-                <ControlLabel id="first-name">First Name</ControlLabel>
-                <FormControl
-                  name="firstName"
-                  type="text"
-                  value={firstName}
-                  placeholder="First Name"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <FormGroup controlId="formBasicText">
-                <ControlLabel>Last Name</ControlLabel>
-                <FormControl
-                  name="lastName"
-                  type="text"
-                  value={lastName}
-                  placeholder="Last Name"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <FormGroup controlId="formBasicText">
-                <ControlLabel>Email</ControlLabel>
-                <FormControl
-                  name="email"
-                  type="text"
-                  value={email}
-                  placeholder="Email"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <FormGroup controlId="formBasicText">
-                <ControlLabel>Password</ControlLabel>
-                <FormControl
-                  name="password"
-                  type="text"
-                  value={password}
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <Button id="submit" onClick={this.handleSubmit}>Create Account</Button>
-            </Row>
-          </Col>
-          <Col xs={4}></Col>
-        </form>
-        {this.props.newUserSuccess && <Redirect to="/" />}
-      </div>
-    );
-  }
-}
+const RenderInput = createRenderer((input, label) =>
+  <input className="App" {...input} placeholder={label} className="animated fadeIn"/>
 )
+
+
+let SignUpForm = ({ handleSubmit, submitting }) =>
+
+<div className="flex-test flex-container">
+    <center>
+        <form onSubmit={handleSubmit(createUser)}>
+          <Field name="firstName" label="First Name" component={RenderInput} /> <br />
+          <Field name="lastName" label="Last Name" component={RenderInput} /> <br />
+          <Field name="email" label="Email" component={RenderInput} /> <br />
+          <Field name="password" label="Password" component={RenderInput} />
+          <br />
+          <button type="submit" disabled={submitting}>
+            Submit
+          </button>
+        </form>
+    </center>
+
+</div>
+SignUpForm = reduxForm({
+  form: 'UserSignup',
+  destroyOnUnmount: true,
+  validate
+})(SignUpForm)
+
+
+export default SignUpForm;
+// const RenderSelect = createRenderer((input, label, { children }) =>
+//   <select {...input}>
+//     {children}
+//   </select>
+// )

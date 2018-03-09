@@ -1,3 +1,5 @@
+import axios from 'axios';
+const APIURL = 'http://localhost:3000/'
 
 export function updateUserForm(attribute, value){
   return {
@@ -38,3 +40,8 @@ export function addUser(APIURL, e){
     })
   }
 }
+
+export function createUser(user) {
+    return axios.post(`${APIURL}api/users`, user)
+    .catch(e => console.log("error posting:", e))
+  }
