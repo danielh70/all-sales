@@ -1,15 +1,6 @@
 import axios from 'axios';
 const APIURL = 'http://localhost:3000/'
 
-export function updateUserForm(attribute, value){
-  return {
-    type: 'SIGNUP_FORM_UPDATED',
-    payload: {
-      attribute: attribute,
-      value: value
-    }
-  }
-}
 
 export function addUser(APIURL, e){
   return (dispatch) => {
@@ -23,9 +14,11 @@ export function addUser(APIURL, e){
       }
     )
     .then(res => {
+      console.log("res", res);
       return res.json()
     })
     .then(res => {
+      console.log("2nd res", res);
       if(res.errors) {
         dispatch({
           type: 'ERROR_ADDING_USER',
@@ -39,6 +32,11 @@ export function addUser(APIURL, e){
       }
     })
   }
+}
+
+export function userLogin(user) {
+  return axios.post(`${APIURL}api/login`)
+  .catch(e => console.log("error logging in:", e))
 }
 
 export function createUser(user) {

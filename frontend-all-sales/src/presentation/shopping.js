@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NavBar from '../components/navbar';
+import { Loader } from './Loader'
 import '../App.css';
 
 
@@ -13,7 +14,7 @@ const mapStateToProps = (store) => {
 export default connect(mapStateToProps)(({items}) => {
 
   if (items.length === 0) {
-    return <h1>Loading...</h1>
+    return <Loader />
   }
 
     return (

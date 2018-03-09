@@ -2,11 +2,11 @@
   text-align: center;
 }
 
- .App {
-  text-align: center;
+body {
+  background-color: lightgray;
 }
 
-div.sign-up {
+input.sign-up {
   width: 400px;
   height: 44px;
   margin: 5px;
@@ -18,16 +18,11 @@ div.flex-test {
 
 .flex-container {
   justify-content: space-between;
-} 
+}
 
 .error input {
   border-color: red;
   box-shadow: 2px;
-}
-
-#move-over {
-  position: relative;
-  left: 3px;
 }
 
 .error .validation{

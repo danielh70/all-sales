@@ -1,6 +1,6 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { createUser } from '../actions/userForm'
+import { addUser } from '../actions/userForm'
 import validate from './validate'
 
 
@@ -12,20 +12,21 @@ const createRenderer = render => ({ input, meta, label, ...rest }) =>
 
     ].join(' ')}
   >
-    <label>
-      {label}
-    </label> <br />
-    {render(input, label, rest)}
     {meta.error &&
       meta.touched &&
       <span>
         {meta.error}
       </span>
     }
+    <label>
+      {label}
+    </label> <br />
+    {render(input, label, rest)}
+
   </div>
 
 const RenderInput = createRenderer((input, label) =>
-  <input className="App" {...input} placeholder={label} className="animated fadeIn"/>
+  <input {...input} placeholder={label} className="sign-up"/>
 )
 
 
@@ -33,7 +34,7 @@ let SignUpForm = ({ handleSubmit, submitting }) =>
 
 <div className="flex-test flex-container">
     <center>
-        <form onSubmit={handleSubmit(createUser)}>
+        <form onSubmit={handleSubmit(addUser)}>
           <Field name="firstName" label="First Name" component={RenderInput} /> <br />
           <Field name="lastName" label="Last Name" component={RenderInput} /> <br />
           <Field name="email" label="Email" component={RenderInput} /> <br />

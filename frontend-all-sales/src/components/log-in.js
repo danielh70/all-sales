@@ -1,128 +1,54 @@
-import React, { Component } from 'react';
-import {
-  Col,
-  Row,
-  FormGroup,
-  FormControl,
-  HelpBlock,
-  ControlLabel,
-  Button
-} from 'react-bootstrap'
+import React from 'react'
+import { reduxForm, Field } from 'redux-form'
+import { userLogin } from '../actions/userForm'
+import validate from './validate'
 
 
-var APIURL;
-  if(process.env.NODE_ENV === 'production') {
-    APIURL = "/"
-  } else {
-    APIURL = "http://localhost:3000/"
-  }
+const createRenderer = render => ({ input, meta, label, ...rest }) =>
+  <div
+    className={[
+      meta.error && meta.touched ? 'error' : '',
+      meta.active ? 'active' : ''
 
-class LogIn extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      form: {
-        email: '',
-        password: ''
-      },
-      validation: null
+    ].join(' ')}
+  >
+    {meta.error &&
+      meta.touched &&
+      <span>
+        {meta.error}
+      </span>
     }
-  }
+    <label>
+      {label}
+    </label> <br />
+    {render(input, label, rest)}
+  </div>
 
-  // handleSubmit(e) {
-  //   // e.preventDefault()
-  //   this.props.onSubmit(this.state.form)
-  // }
-
-
-  authorize = (e) => {
-    const { email, password } = this.state.form
-
-    fetch(`${APIURL}api/login`,
-    {
-      method: "POST",
-      headers: {
-        'content-type': 'application/json'
-    },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-    .then(res => {
-      return res.json()
-    })
-    .then(data => {
-      if(data.authToken !== undefined) {
-      localStorage.setItem("authToken", data.authToken)
-        console.log("res:", data);
-      }
-    })
-    .catch(e => console.log("error:", e))
-  }
+const RenderInput = createRenderer((input, label) =>
+  <input {...input} placeholder={label} className="sign-up"/>
+)
 
 
-  handleChange = (e) => {
-    const formState = Object.assign({}, this.state.form)
-    formState[e.target.name] = e.target.value
-    this.setState({ form: formState })
-  }
+let LoginForm = ({ handleSubmit, submitting }) =>
 
-  render() {
-    const { email, password } = this.state.form
-    const { validation } = this.state
-    console.log(this.state.form)
-
-    return (
-      <div className="flex-container">
-        <h1>Sign Up</h1>
-        <form className="sign-up">
-          <Col xs={4}></Col>
-          <Col xs={4}>
-            <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
-                <ControlLabel>Email</ControlLabel>
-                <FormControl
-                  name="email"
-                  type="text"
-                  value={email}
-                  placeholder="Email"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <FormGroup controlId="formBasicText" validationState={validation}>
-                <ControlLabel>Password</ControlLabel>
-                <FormControl
-                  name="password"
-                  type="text"
-                  value={password}
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-                <HelpBlock>Validation is based on string length.</HelpBlock>
-              </FormGroup>
-            </Row>
-            <Row>
-              <Button id="submit" onClick={this.authorize}>Log In</Button>
-            </Row>
-          </Col>
-          <Col xs={4}></Col>
+<div className="flex-test flex-container">
+    <center>
+        <form onSubmit={handleSubmit(userLogin)}>
+          <Field name="email" label="Email" component={RenderInput} /> <br />
+          <Field name="password" label="Password" component={RenderInput} />
+          <br />
+          <button type="submit" disabled={submitting}>
+            Submit
+          </button>
         </form>
-      </div>
+    </center>
 
-    )
-  }
-}
-
-
-
-
-
+</div>
+LoginForm = reduxForm({
+  form: 'UserLogin',
+  destroyOnUnmount: true,
+  validate
+})(LoginForm)
 
 
-export default LogIn
+export default LoginForm;
