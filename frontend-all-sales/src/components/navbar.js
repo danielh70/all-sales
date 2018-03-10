@@ -24,7 +24,6 @@ class NavBarHeader extends Component {
     }
   }
 
-
   LogInCheck() {
     if (functions.authCheck()) {
       return <LoggedInNav logOut={this.logOut.bind(this)} />
