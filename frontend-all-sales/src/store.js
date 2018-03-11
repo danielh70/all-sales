@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import reducer from './reducers/index'
 
-const middleware = [logger, thunk]
+// const middleware = [logger, thunk]
 var initialState = {}
 
 export default createStore(

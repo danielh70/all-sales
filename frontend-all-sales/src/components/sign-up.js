@@ -1,6 +1,6 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { addUser } from '../actions/userForm'
+import { createUser } from '../actions/userForm'
 import validate from './validate'
 
 
@@ -34,7 +34,7 @@ let SignUpForm = ({ handleSubmit, submitting }) =>
 
 <div className="flex-test flex-container">
     <center>
-        <form onSubmit={handleSubmit(addUser)}>
+        <form onSubmit={handleSubmit(createUser)}>
           <Field name="firstName" label="First Name" component={RenderInput} /> <br />
           <Field name="lastName" label="Last Name" component={RenderInput} /> <br />
           <Field name="email" label="Email" component={RenderInput} /> <br />
@@ -45,6 +45,7 @@ let SignUpForm = ({ handleSubmit, submitting }) =>
           </button>
         </form>
     </center>
+
 
 </div>
 SignUpForm = reduxForm({

@@ -1,6 +1,5 @@
 const APIURL = 'http://localhost:3000/'
 
-
 export function addUser(APIURL, e){
   return (dispatch) => {
     return fetch(`${APIURL}api/users`,
@@ -89,9 +88,28 @@ export function logout() {
     type: "LOG_OUT"
   })
 }
-//
-//
-// export function createUser(user) {
-//     return axios.post(`${APIURL}api/users`, user)
-//     .catch(e => console.log("error posting:", e))
-//   }
+
+
+export function createUser(e) {
+    return fetch(`${APIURL}api/users`,
+      {
+        body: JSON.stringify(e),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST"
+      }
+    )
+    .then(res => {
+      // console.log("res", res)
+      return res.json()
+    })
+    .then(res => {
+      localStorage.setItem("authToken", res.authToken)
+      // console.log("2nd res", res)
+    })
+    .then(res => {
+      window.location.reload()
+    })
+    .catch(e => console.log(e))
+}
