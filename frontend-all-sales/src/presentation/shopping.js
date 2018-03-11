@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getItems } from '../actions/items'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
 import '../App.css';
@@ -7,23 +8,31 @@ import '../App.css';
 
 const mapStateToProps = (store) => {
   return {
-    items: store.items.all
+    items: store.items.all,
+    APIURL: store.appState.APIURL
   }
 }
 
-export default connect(mapStateToProps)(({items}) => {
+export default connect(mapStateToProps)(class Shopping extends Component {
 
-  if (items.length === 0) {
-    return <Loader />
+
+  componentDidMount() {
+    this.props.dispatch(getItems(this.props.APIURL))
   }
 
-    return (
-      <div>
-        <NavBar />
-        {items.map((el, i) => {
-          return <h5 key={i}>{el.name}</h5>
-        })}
-      </div>
-    );
+    render() {
+    // console.log(this.props.items)
+
+      return (
+        <div>
+          <NavBar />
+          { this.props.items.length === 0 && <Loader /> }
+
+          {this.props.items.map((el, i) => {
+            return <h5 key={i}>{el.name}</h5>
+          })}
+        </div>
+      )
+    }
   }
 )

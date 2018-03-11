@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import LoggedInNav from './logged-in-nav';
 import LoggedOutNav from './logged-out-nav';
-import { functions } from '../functions/functions';
+import { connect } from 'react-redux';
+import { logout, setLoginStatus } from '../actions/userForm'
 
-
-class NavBarHeader extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loggedIn: false
-    }
+const mapStateToProps = (store) => {
+  return {
+    APIURL: store.appState.APIURL,
+    authorized: store.authorized.loggedIn
   }
+}
 
-  logOut() {
-    this.setState({loggedIn: false})
+
+export default connect(mapStateToProps)(class NavBarHeader extends Component {
+
+  logout = () => {
     localStorage.removeItem("authToken")
+    this.props.dispatch(logout())
   }
+
+  // componentWillMount() {
+  //   this.props.dispatch(setLoginStatus(this.props.APIURL))
+  // }
 
   componentWillMount() {
-    if (typeof localStorage.authToken !== "undefined") {
-      this.setState({loggedIn: true})
-      } else {
-    }
-  }
-
-  LogInCheck() {
-    if (functions.authCheck()) {
-      return <LoggedInNav logOut={this.logOut.bind(this)} />
+    if (this.props.authorized) {
+      return <LoggedInNav logout={this.logout}/>
     } else {
       return <LoggedOutNav />
     }
@@ -36,11 +35,10 @@ class NavBarHeader extends Component {
     // console.log(authToken)
     return (
       <div>
-        {this.LogInCheck()}
+        {this.componentWillMount()}
       </div>
 
     )
   }
 }
-
-export default NavBarHeader;
+)

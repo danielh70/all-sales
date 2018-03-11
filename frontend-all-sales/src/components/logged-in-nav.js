@@ -33,7 +33,7 @@ class LoggedInNav extends Component {
             </NavDropdown>
           </Nav>
           <Nav pullRight>
-            <NavItem className="log-in-nav" eventKey={2} onClick={this.props.logOut}>
+            <NavItem className="log-in-nav" eventKey={2} onClick={this.props.logout} href="/">
               Log Out
             </NavItem>
           </Nav>

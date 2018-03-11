@@ -6,7 +6,9 @@ import { SignUpPage } from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { getItems } from './actions/items';
+import { setLoginStatus } from './actions/userForm';
 import './App.css';
+
 
 const mapStateToProps = (store) => {
   return {
@@ -18,6 +20,7 @@ export default connect(mapStateToProps)(class App extends Component {
 
   componentWillMount() {
     this.props.dispatch(getItems(this.props.APIURL))
+    this.props.dispatch(setLoginStatus(this.props.APIURL))
   }
 
     render() {

@@ -80,8 +80,7 @@ app.post('/api/login', (req, res) => {
     let auth = user.veryifyPassword(password)
 
     if(auth) {
-      res.json({authToken: user.authToken})
-      // res.json({message: "Login Success"})
+      res.json({user: user})
     } else {
       res.json({message: "Invalid Password"})
     }

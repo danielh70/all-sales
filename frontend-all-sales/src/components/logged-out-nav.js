@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavDropdown, MenuItem, NavItem, FormGroup, FormControl } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 
 class LoggedOutNav extends Component {
   render() {

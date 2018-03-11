@@ -1,7 +1,8 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { userLogin } from '../actions/userForm'
+import { login } from '../actions/userForm'
 import validate from './validate'
+import { connect } from 'react-redux'
 
 
 const createRenderer = render => ({ input, meta, label, ...rest }) =>
@@ -33,7 +34,7 @@ let LoginForm = ({ handleSubmit, submitting }) =>
 
 <div className="flex-test flex-container">
     <center>
-        <form onSubmit={handleSubmit(userLogin)}>
+        <form onSubmit={handleSubmit(login)}>
           <Field name="email" label="Email" component={RenderInput} /> <br />
           <Field name="password" label="Password" component={RenderInput} />
           <br />
@@ -50,5 +51,4 @@ LoginForm = reduxForm({
   validate
 })(LoginForm)
 
-
-export default LoginForm;
+export default LoginForm

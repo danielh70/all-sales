@@ -11,5 +11,5 @@ var initialState = {}
 export default createStore(
     reducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
+    composeWithDevTools(applyMiddleware(thunk, logger))
   )
