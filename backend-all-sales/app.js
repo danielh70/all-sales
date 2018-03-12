@@ -29,7 +29,7 @@ const authorization = function(req, res, next){
         req.currentUser = user
         next()
       }else{
-        res.status(401)
+        // res.status(401)
         res.json({message:'Authorization Token Invalid'})
       }
     })

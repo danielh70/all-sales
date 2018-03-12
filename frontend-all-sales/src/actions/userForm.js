@@ -59,7 +59,7 @@ export function login(e){
 
 export function setLoginStatus(APIURL) {
   let token = localStorage.getItem("authToken")
-
+  
   return (dispatch) => {
     return fetch(`${APIURL}api/user?authToken=${token}`)
       .then(res => {
