@@ -12,7 +12,7 @@ class LoggedInNav extends Component {
         <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/" className="header">All Sales</a>
+            <a href="/home" className="header">All Sales</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

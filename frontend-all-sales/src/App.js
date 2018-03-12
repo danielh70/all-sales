@@ -5,6 +5,7 @@ import Shopping from './presentation/shopping';
 import SignUpPage from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
 import Cart from './components/cart';
+import Home from './presentation/home';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { getItems } from './actions/items';
 import { setLoginStatus } from './actions/userForm';
@@ -32,8 +33,11 @@ export default connect(mapStateToProps)(class App extends Component {
               <Route exact path="/" render={props => (
                 <div>
                   <NavBarHeader />
-                  <h1 className="header">Welcome</h1>
                 </div>
+              )} />
+
+              <Route exact path="/home" render={props => (
+                <Home />
               )} />
 
              <Route exact path="/shopping" render={props => (

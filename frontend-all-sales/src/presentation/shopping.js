@@ -4,6 +4,7 @@ import { getItems } from '../actions/items'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
 import '../App.css';
+import { Checkbox } from 'react-bootstrap'
 
 
 const mapStateToProps = (store) => {
@@ -20,17 +21,34 @@ export default connect(mapStateToProps)(class Shopping extends Component {
     this.props.dispatch(getItems(this.props.APIURL))
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("nextProps:", nextProps);
+  // }
+
+  handleAdd = (el) => {
+    console.log(el)
+  }
+
     render() {
-    // console.log(this.props.items)
+    const { items } = this.props
+    console.log("items:", this.props.items)
 
       return (
         <div>
+          <fieldset>
           <NavBar />
-          { this.props.items.length === 0 && <Loader /> }
+          { items.length === 0 && <Loader /> }
 
-          {this.props.items.map((el, i) => {
-            return <h5 key={i}>{el.name}</h5>
+          {items.map(el => {
+            return (
+              <div key={el.id}>
+                <h5 id={el.id}>{el.name}</h5>
+                <input type="checkbox" id="coding" name="interest" value={el.id} />
+              </div>
+            )
           })}
+          <button type="submit" onClick={this.handleAdd}>Click</button>
+          </fieldset>
         </div>
       )
     }
