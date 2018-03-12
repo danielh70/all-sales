@@ -1,4 +1,10 @@
-const APIURL = 'http://localhost:3000/'
+var APIURL;
+  if(process.env.NODE_ENV === 'production') {
+    APIURL = "/"
+  } else {
+    APIURL = "http://localhost:3000/"
+  }
+
 
 export function addUser(APIURL, e){
   return (dispatch) => {
@@ -59,7 +65,7 @@ export function login(e){
 
 export function setLoginStatus(APIURL) {
   let token = localStorage.getItem("authToken")
-  
+
   return (dispatch) => {
     return fetch(`${APIURL}api/user?authToken=${token}`)
       .then(res => {
