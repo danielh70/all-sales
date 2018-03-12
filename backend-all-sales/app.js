@@ -7,6 +7,8 @@ let Items = require('./models').items
 let UserItems = require('./models').UserItems
 let cors = require('cors')
 let path = require('path')
+let sequelize = require('sequelize')
+let Op = sequelize.Op
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
@@ -29,7 +31,7 @@ const authorization = function(req, res, next){
         req.currentUser = user
         next()
       }else{
-        res.status(401)
+        // res.status(401)
         res.json({message:'Authorization Token Invalid'})
       }
     })
@@ -128,17 +130,45 @@ app.post('/api/users', function(req, res){
 // createItem
 // setItem(item)
 
-Users.findOne({
-  where: {
-    id: 3
-  }
+// Users.findOne({
+//   where: {
+//     id: 3
+//   }
+// })
+// .then(user => {
+//     user.addItems([1,2,3])
+// })
+// .catch(e => {
+//   console.log(e)
+// })
+
+
+app.get('/api/items/user', authorization, (req, res) => {
+  // let user = req.currentUser.id
+  let user = 3
+
+
+  console.log("auth:", user)
+
+  UserItems.findAll({
+    where: {
+      userId: user
+    }
+  })
+  .then(items => {
+    res.json({items: items})
+    console.log(res.itemId)
+  })
 })
-.then(user => {
-    user.addItems([1,2,3])
-})
-.catch(e => {
-  console.log(e)
-})
+
+
+
+
+
+
+
+
+
 
 
 app.get('*', (req, res) => {
