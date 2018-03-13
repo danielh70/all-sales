@@ -16,7 +16,7 @@ class Checkbox extends Component {
         id: id
       }
     ));
-
+    
     handleCheckboxChange(label, id);
   }
 

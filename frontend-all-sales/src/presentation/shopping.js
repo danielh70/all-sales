@@ -6,9 +6,6 @@ import { Loader } from './Loader'
 import '../App.css';
 import Checkbox from '../components/checkbox';
 
-// post to database the ID's of the selected items
-// WHERE user id = current user id
-// backend "add" the item ids
 
 const mapStateToProps = (store) => {
   return {
