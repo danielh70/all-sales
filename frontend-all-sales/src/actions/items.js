@@ -15,8 +15,10 @@ export function getItems(APIURL) {
 }
 
 export function getUserItems(APIURL) {
+  let token = localStorage.getItem("authToken")
+
   return (dispatch) => {
-    return fetch(`${APIURL}api/items/user?authToken=9236b2f0-24bc-11e8-8d57-d5435fb00974`,
+    return fetch(`${APIURL}api/items/user?authToken=${token}`,
     {
       headers: {
         "Content-Type": 'application/json'
