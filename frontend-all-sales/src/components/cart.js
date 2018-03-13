@@ -21,11 +21,12 @@ export default connect(mapStateToProps)(class Cart extends Component {
 
   componentWillMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
+    .then(this.props.dispatch(getUserItems(this.props.APIURL)))
   }
 
-  componentDidMount() {
-    this.props.dispatch(getUserItems(this.props.APIURL))
-  }
+  // componentDidMount() {
+  //
+  // }
   //
   // componentWillReceiveProps(nextProps) {
   //   console.log("nextProps:", nextProps);

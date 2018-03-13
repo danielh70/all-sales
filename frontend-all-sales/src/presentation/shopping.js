@@ -19,20 +19,21 @@ const mapStateToProps = (store) => {
 export default connect(mapStateToProps)(class Shopping extends Component {
 
   componentDidMount() {
-    this.props.dispatch(getItems(this.props.APIURL))
+    this.props.dispatch(setLoginStatus(this.props.APIURL))
+    .then(this.props.dispatch(getItems(this.props.APIURL)))
     this.selectedCheckboxes = new Set();
   }
-
-  componentWillMount() {
-    this.props.dispatch(setLoginStatus(this.props.APIURL))
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("next props:", nextProps)
-    if (!nextProps.items) {
-
-    }
-  }
+  //
+  // componentWillMount() {
+  //
+  // }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("next props:", nextProps)
+  //   if (!nextProps.items) {
+  //
+  //   }
+  // }
 
 
   handleFormSubmit = (id) => {
