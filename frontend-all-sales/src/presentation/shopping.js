@@ -10,7 +10,8 @@ import Checkbox from '../components/checkbox';
 const mapStateToProps = (store) => {
   return {
     items: store.items.all,
-    APIURL: store.appState.APIURL
+    APIURL: store.appState.APIURL,
+    authorized: store.authorized.authToken
   }
 }
 
@@ -24,6 +25,8 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
   handleFormSubmit = (id, label) => {
     id.preventDefault();
+    let token = this.props.authorized
+    console.log(token)
 
       for (const checkbox of this.selectedCheckboxes) {
         console.log(this.selectedCheckboxes, 'is selected.');
@@ -31,7 +34,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
       console.log(this.selectedCheckboxes);
       let selected = [...this.selectedCheckboxes]
       console.log(selected)
-        fetch(`${this.props.APIURL}api/items/new?authToken=9236b2f0-24bc-11e8-8d57-d5435fb00974`,
+        fetch(`${this.props.APIURL}api/items/new?authToken=${token}`,
           {
             body: JSON.stringify(selected),
             headers: {
