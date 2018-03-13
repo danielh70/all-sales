@@ -156,7 +156,7 @@ app.get('/api/items/user', authorization, (req, res) => {
     }
   })
   .then(items => {
-    res.json({items: items})
+    res.json({ items: items })
     console.log(res.itemId)
   })
 })

@@ -37,7 +37,9 @@ export default connect(mapStateToProps)(class App extends Component {
               )} />
 
               <Route exact path="/home" render={props => (
+                <div id="haha">
                 <Home />
+                </div>
               )} />
 
              <Route exact path="/shopping" render={props => (
