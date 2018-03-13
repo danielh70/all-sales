@@ -17,9 +17,16 @@ const mapStateToProps = (store) => {
 
 export default connect(mapStateToProps)(class Shopping extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch(getItems(this.props.APIURL))
     this.selectedCheckboxes = new Set();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("next props:", nextProps)
+    if (!nextProps.items) {
+
+    }
   }
 
 
