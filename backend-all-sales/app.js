@@ -120,21 +120,23 @@ app.post('/api/users', function(req, res){
   })
 })
 
-app.post('/api/items/new', (req, res) => {
+app.post('/api/items/new', authorization, (req, res) => {
+  console.log("req", req.body)
   let user = req.currentUser.id
-  let items = req.body.items
+  let items = req.body
+  console.log("items ------------:", items);
 
-  Users.findOne({
-    where: {
-      id: user
-    }
-  })
-  .then(user => {
-      user.addItems(...items)
-  })
-  .catch(e => {
-    console.log(e)
-  })
+  // Users.findOne({
+  //   where: {
+  //     id: user
+  //   }
+  // })
+  // .then(user => {
+  //     user.addItems([3,5])
+  // })
+  // .catch(e => {
+  //   console.log("error!", e)
+  // })
 })
 
 
@@ -147,8 +149,7 @@ app.post('/api/items/new', (req, res) => {
 
 
 app.get('/api/items/user', authorization, (req, res) => {
-  // let user = req.currentUser.id
-  let user = 3
+  let user = req.currentUser.id
 
 
   console.log("auth:", user)
