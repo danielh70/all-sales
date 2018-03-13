@@ -23,7 +23,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   }
 
 
-  handleFormSubmit = (id, label) => {
+  handleFormSubmit = (id) => {
     id.preventDefault();
     let token = this.props.authorized
     console.log(token)
@@ -53,8 +53,8 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
   toggleCheckbox = (label, id) => {
     console.log("label id:", id);
-    if (this.selectedCheckboxes.has(id, label)) {
-      this.selectedCheckboxes.delete(id, label);
+    if (this.selectedCheckboxes.has(id)) {
+      this.selectedCheckboxes.delete(id);
     } else {
       this.selectedCheckboxes.add(id);
     }
@@ -64,12 +64,6 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   createCheckboxes = () => (
     this.props.items.map(this.createCheckbox)
   )
-
-  loader() {
-    while (this.props.items.length === 0) {
-      return <Loader />
-    }
-  }
 
   createCheckbox = label => (
     <Checkbox
