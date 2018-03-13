@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items'
 import NavBar from '../components/navbar';
+import { Loader } from '../presentation/Loader'
 import '../App.css';
 
 
@@ -19,7 +20,6 @@ export default connect(mapStateToProps)(class Cart extends Component {
   }
 
     render() {
-
       return (
         <div>
           <NavBar />

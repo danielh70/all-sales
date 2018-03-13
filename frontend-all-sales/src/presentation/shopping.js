@@ -74,7 +74,10 @@ export default connect(mapStateToProps)(class Shopping extends Component {
           <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
 
-              <button className="btn btn-default" type="submit">Save</button>
+            {
+            this.selectedCheckboxes &&
+            <button className="btn btn-default" type="submit">Save</button>
+            }
             </form>
         </div>
       )
