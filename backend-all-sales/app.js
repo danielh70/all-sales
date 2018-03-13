@@ -7,8 +7,7 @@ let Items = require('./models').items
 let UserItems = require('./models').UserItems
 let cors = require('cors')
 let path = require('path')
-let sequelize = require('sequelize')
-let Op = sequelize.Op
+var sequelize = require('sequelize');
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
@@ -21,23 +20,23 @@ app.get('/', (req, res) => {
   res.json({message: 'Server running =\')'})
 });
 
-const authorization = function(req, res, next){
+const authorization = function(req, res, next) {
   const token = req.query.authToken || req.body.authToken
   if(token){
     Users.findOne({
-      where: {authToken: token}
-    }).then((user)=>{
-      if(user){
+      where: { authToken: token }
+    }).then((user) => {
+      if(user) {
         req.currentUser = user
         next()
-      }else{
+      } else {
         // res.status(401)
-        res.json({message:'Authorization Token Invalid'})
+        res.json({ message:'Authorization Token Invalid' })
       }
     })
-  }else{
+  } else {
     res.status(401)
-    res.json({message: 'Authorization Token Required'})
+    res.json({ message: 'Authorization Token Required' })
   }
 }
 
@@ -47,13 +46,13 @@ const authorization = function(req, res, next){
 app.get('/api/user',
 authorization,
 function(req, response){
-  response.json({user: req.currentUser})
+  response.json({ user: req.currentUser })
 })
 
 // Lists all the users will edit/remove later. DJH 2/21/18
 app.get('/api/users', (req, res) => {
   Users.findAll().then(users => {
-    res.json({users: users})
+    res.json({ users: users })
   })
 })
 
@@ -62,7 +61,7 @@ app.get('/api/users', (req, res) => {
 */
 app.get('/api/shopping', (req, res) => {
   Items.findAll().then(items => {
-    res.json({items: items})
+    res.json({ items: items })
   })
 })
 
@@ -82,9 +81,9 @@ app.post('/api/login', (req, res) => {
     let auth = user.veryifyPassword(password)
 
     if(auth) {
-      res.json({user: user})
+      res.json({ user: user })
     } else {
-      res.json({message: "Invalid Password"})
+      res.json({ message: "Invalid Password" })
     }
   })
   .catch(e => {
@@ -145,32 +144,32 @@ app.post('/api/items/new', authorization, (req, res) => {
 // createItem
 // setItem(item)
 
+// SELECT * FROM "UserItems"
+// JOIN "items"
+// ON "UserItems".id = "items".id
+// WHERE "userId" = 34;
 
+// UserItems.findAll({
+//   where: {
+//     userId: user
+//   }
+// })
 
 
 app.get('/api/items/user', authorization, (req, res) => {
   let user = req.currentUser.id
-
-
   console.log("auth:", user)
 
-  UserItems.findAll({
-    where: {
-      userId: user
-    }
-  })
+  UserItems.sequelize.query(`
+  SELECT * FROM "UserItems"
+  JOIN "items"
+  ON "UserItems".id = "items".id
+  WHERE "userId" = ${user}
+  `)
   .then(items => {
     res.json({ items: items })
-    console.log(res.itemId)
   })
 })
-
-
-
-
-
-
-
 
 
 

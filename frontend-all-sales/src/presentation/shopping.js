@@ -23,29 +23,28 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
 
   handleFormSubmit = (id, label) => {
-     id.preventDefault();
+    id.preventDefault();
 
-
-     for (const checkbox of this.selectedCheckboxes) {
-       console.log(this.selectedCheckboxes, 'is selected.');
-     }
-     console.log(this.selectedCheckboxes);
-     let selected = [...this.selectedCheckboxes]
-     console.log(selected)
-         fetch(`${this.props.APIURL}api/items/new?authToken=9236b2f0-24bc-11e8-8d57-d5435fb00974`,
-           {
-             body: JSON.stringify(selected),
-             headers: {
-               'Content-Type': 'application/json'
-             },
-             method: "POST"
-           }
-         )
-         .then(res => {
-           console.log("res", res)
-           return res.json()
-         })
-         .catch(e => console.log("error----------", e))
+      for (const checkbox of this.selectedCheckboxes) {
+        console.log(this.selectedCheckboxes, 'is selected.');
+      }
+      console.log(this.selectedCheckboxes);
+      let selected = [...this.selectedCheckboxes]
+      console.log(selected)
+        fetch(`${this.props.APIURL}api/items/new?authToken=9236b2f0-24bc-11e8-8d57-d5435fb00974`,
+          {
+            body: JSON.stringify(selected),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: "POST"
+          }
+        )
+        .then(res => {
+          console.log("res", res)
+          return res.json()
+        })
+        .catch(e => console.log("error----------", e))
    }
 
 
@@ -60,8 +59,8 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
 
   createCheckboxes = () => (
-  this.props.items.map(this.createCheckbox)
-)
+    this.props.items.map(this.createCheckbox)
+  )
 
 
   createCheckbox = label => (
@@ -71,7 +70,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
       key={label.id}
       id={label.id}
     />
- )
+  )
 
 
     render() {

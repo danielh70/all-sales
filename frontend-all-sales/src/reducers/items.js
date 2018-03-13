@@ -1,5 +1,6 @@
 const initialState = {
-  all: []
+  all: [],
+  currentUser: []
 }
 
 export default (currentState=initialState, action) => {
@@ -13,6 +14,10 @@ export default (currentState=initialState, action) => {
       let items = currentState.all.slice()
       items.push(action.payload)
       newState = Object.assign({}, currentState, { all: items })
+      break
+    }
+    case("ADD_CURRENT_USER_ITEMS"): {
+      newState = Object.assign({}, currentState, { currentUser: action.payload })
       break
     }
     default:
