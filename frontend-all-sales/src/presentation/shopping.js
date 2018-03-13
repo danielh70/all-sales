@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items'
+import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
 import '../App.css';
@@ -20,6 +21,10 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   componentDidMount() {
     this.props.dispatch(getItems(this.props.APIURL))
     this.selectedCheckboxes = new Set();
+  }
+
+  componentWillMount() {
+    this.props.dispatch(setLoginStatus(this.props.APIURL))
   }
 
   componentWillReceiveProps(nextProps) {

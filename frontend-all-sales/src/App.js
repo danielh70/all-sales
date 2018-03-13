@@ -20,9 +20,9 @@ const mapStateToProps = (store) => {
 
 export default connect(mapStateToProps)(class App extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(setLoginStatus(this.props.APIURL))
-  }
+  // componentWillMount() {
+  //   this.props.dispatch(setLoginStatus(this.props.APIURL))
+  // }
 
     render() {
       return (
