@@ -21,8 +21,8 @@ class LoggedInNav extends Component {
             <NavItem eventKey={1} href="/shopping" className="shop-text">
               Shop
             </NavItem>
-            <NavItem eventKey={2} href="#">
-              Link
+            <NavItem eventKey={2} href="/cart">
+              Shopping Cart
             </NavItem>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Action</MenuItem>

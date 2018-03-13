@@ -27,18 +27,30 @@ export default connect(mapStateToProps)(class Cart extends Component {
   // componentDidMount() {
   //   this.listItems()
   // }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("nextProps:", nextProps);
-
-  }
-
-  // listItems = () => {
-  //   this.props.items.map(el => (
-  //       <h3>{el.itemId}</h3>
-  //     )
-  //   )
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("nextProps:", nextProps);
+  //
   // }
+
+  removeItem = (e) => {
+    let itemId = [e.target.value];
+    let token = this.props.authorized.authToken;
+
+    // console.log(parseInt(itemId))
+
+    fetch(`${this.props.APIURL}api/items/user/delete?authToken=${token}`,
+      {
+        body: JSON.stringify(itemId),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "DELETE"
+      }
+    )
+    .then(res => res.json())
+    .catch(e => console.log(e))
+  }
 
 
     render() {
@@ -50,6 +62,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
         <div>
           <NavBar />
           <h1>Welcome {this.props.authorized.user.firstName}!</h1>
+          { this.props.items.length === 0 ? <Loader /> : null }
           <h3>
             Current items in your cart:
           </h3>
@@ -60,19 +73,19 @@ export default connect(mapStateToProps)(class Cart extends Component {
             {
               this.props.items.map(el => {
                 return (
-                  <div>
-                  <tr className="margin-5 padding-5">
-                    <td className="margin-5 padding-5">
-                      ID: {el.itemId}
-                    </td>
-                    <td className="margin-5 padding-5">
-                      Name: {el.name}
-                    </td>
-                    <td>
-                      <Button className="margin-5" id="shop-button">Remove Item</Button>
-                    </td>
-                  </tr>
-                  </div>
+                  <tbody key={el.itemId}>
+                    <tr className="margin-5 padding-5">
+                      <td className="margin-5 padding-5" id={el.itemId}>
+                        ID: {el.itemId}
+                      </td>
+                      <td className="margin-5 padding-5">
+                        Name: {el.name}
+                      </td>
+                      <td>
+                        <Button onClick={this.removeItem} value={el.itemId} className="margin-5" id="shop-button">Remove Item</Button>
+                      </td>
+                    </tr>
+                  </tbody>
                 )
               })
             }

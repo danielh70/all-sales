@@ -163,13 +163,29 @@ app.get('/api/items/user', authorization, (req, res) => {
   UserItems.sequelize.query(`
   SELECT * FROM "UserItems"
   JOIN "items"
-  ON "UserItems".id = "items".id
+  ON "UserItems"."itemId" = "items".id
   WHERE "userId" = ${user}
   `)
   .then(items => {
     res.json({ items: items })
   })
 })
+
+app.delete('/api/items/user/delete', authorization, (req, res) => {
+  let user = req.currentUser.id
+  let item = req.body
+  console.log(...item)
+
+  Users.findById(user).then(user => {
+    user.removeItem(...item)
+  })
+
+})
+
+
+// Users.findById(34).then(user => {
+//   user.removeItem(1)
+// })
 
 
 
