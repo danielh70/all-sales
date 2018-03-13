@@ -45,7 +45,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
 
   handleFormSubmit = (id) => {
-    id.preventDefault();
+    id.preventDefault()
     let token = this.props.authorized
     console.log(token)
 
