@@ -78,6 +78,7 @@ export function setLoginStatus(APIURL) {
           type: "USER_STATUS",
           payload: res.user
         })
+        return
       } else {
         dispatch({
           type: "LOG_OUT"
