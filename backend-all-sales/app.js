@@ -126,17 +126,17 @@ app.post('/api/items/new', authorization, (req, res) => {
   let items = req.body
   console.log("items ------------:", items);
 
-  // Users.findOne({
-  //   where: {
-  //     id: user
-  //   }
-  // })
-  // .then(user => {
-  //     user.addItems([3,5])
-  // })
-  // .catch(e => {
-  //   console.log("error!", e)
-  // })
+  Users.findOne({
+    where: {
+      id: user
+    }
+  })
+  .then(user => {
+      user.addItems([...items])
+  })
+  .catch(e => {
+    console.log("error!", e)
+  })
 })
 
 
