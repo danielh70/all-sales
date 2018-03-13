@@ -90,7 +90,6 @@ export default connect(mapStateToProps)(class Shopping extends Component {
       return (
         <div>
           <NavBar />
-          { this.loader() }
 
           <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}

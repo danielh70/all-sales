@@ -68,7 +68,6 @@ export default connect(mapStateToProps)(class Cart extends Component {
         <div>
           <NavBar />
           <h1>Welcome {this.props.authorized.user.firstName}!</h1>
-          { this.loader() }
           <h3>
             Current items in your cart:
           </h3>
