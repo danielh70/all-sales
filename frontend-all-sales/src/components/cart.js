@@ -52,6 +52,12 @@ export default connect(mapStateToProps)(class Cart extends Component {
     .catch(e => console.log(e))
   }
 
+  loader() {
+    while (this.props.items.length === 0) {
+      return <Loader />
+    }
+  }
+
 
     render() {
       console.log("STATUS:", this.props.authorized.authToken)
@@ -62,7 +68,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
         <div>
           <NavBar />
           <h1>Welcome {this.props.authorized.user.firstName}!</h1>
-          { this.props.items.length === 0 ? <Loader /> : null }
+          { this.loader() }
           <h3>
             Current items in your cart:
           </h3>

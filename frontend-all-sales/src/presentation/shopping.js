@@ -17,7 +17,7 @@ const mapStateToProps = (store) => {
 
 export default connect(mapStateToProps)(class Shopping extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(getItems(this.props.APIURL))
     this.selectedCheckboxes = new Set();
   }
@@ -65,6 +65,11 @@ export default connect(mapStateToProps)(class Shopping extends Component {
     this.props.items.map(this.createCheckbox)
   )
 
+  loader() {
+    while (this.props.items.length === 0) {
+      return <Loader />
+    }
+  }
 
   createCheckbox = label => (
     <Checkbox
@@ -80,10 +85,12 @@ export default connect(mapStateToProps)(class Shopping extends Component {
     const { items } = this.props
     console.log("items:", this.props.items)
 
+
+
       return (
         <div>
           <NavBar />
-          { items.length === 0 && <Loader /> }
+          { this.loader() }
 
           <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
