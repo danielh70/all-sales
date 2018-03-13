@@ -6,12 +6,9 @@ import { Loader } from './Loader'
 import '../App.css';
 import Checkbox from '../components/checkbox';
 
-const items = [
-  'One',
-  'Two',
-  'Three',
-];
-
+// post to database the ID's of the selected items
+// WHERE user id = current user id
+// backend "add" the item ids
 
 const mapStateToProps = (store) => {
   return {
@@ -35,30 +32,33 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
   handleFormSubmit = e => {
      e.preventDefault();
+     console.log(this.selectedCheckboxes);
 
      for (const checkbox of this.selectedCheckboxes) {
-       console.log(checkbox, 'is selected.');
+       console.log(this.selectedCheckboxes, 'is selected.');
      }
    }
 
 
-  toggleCheckbox = label => {
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
+  toggleCheckbox = (label, id) => {
+    console.log("label id:", id);
+    if (this.selectedCheckboxes.has(id)) {
+      this.selectedCheckboxes.delete(id);
     } else {
-      this.selectedCheckboxes.add(label);
+      this.selectedCheckboxes.add(id);
     }
   }
 
   createCheckboxes = () => (
-    this.props.items.map(this.createCheckbox)
-  )
+  this.props.items.map(this.createCheckbox)
+)
 
   createCheckbox = label => (
     <Checkbox
       label={label.name}
       handleCheckboxChange={this.toggleCheckbox}
       key={label.id}
+      id={label.id}
     />
  )
 

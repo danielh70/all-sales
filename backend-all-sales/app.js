@@ -120,9 +120,22 @@ app.post('/api/users', function(req, res){
   })
 })
 
-// app.post('/api/items/new', (req, res) => {
-//
-// })
+app.post('/api/items/new', (req, res) => {
+  let user = req.currentUser.id
+  let items = req.body.items
+
+  Users.findOne({
+    where: {
+      id: user
+    }
+  })
+  .then(user => {
+      user.addItems(...items)
+  })
+  .catch(e => {
+    console.log(e)
+  })
+})
 
 
 // removeItems
@@ -130,17 +143,7 @@ app.post('/api/users', function(req, res){
 // createItem
 // setItem(item)
 
-// Users.findOne({
-//   where: {
-//     id: 3
-//   }
-// })
-// .then(user => {
-//     user.addItems([1,2,3])
-// })
-// .catch(e => {
-//   console.log(e)
-// })
+
 
 
 app.get('/api/items/user', authorization, (req, res) => {
