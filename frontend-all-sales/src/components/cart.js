@@ -6,6 +6,7 @@ import { Loader } from '../presentation/Loader'
 import '../App.css';
 import { setLoginStatus } from '../actions/userForm'
 import { getUserItems } from '../actions/items'
+import { Button, Col } from 'react-bootstrap';
 
 
 const mapStateToProps = (store) => {
@@ -52,13 +53,31 @@ export default connect(mapStateToProps)(class Cart extends Component {
           <h3>
             Current items in your cart:
           </h3>
-          {
-            this.props.items.map(el => {
-              return (
-                el.itemId
-              )
-            })
-          }
+          <center>
+
+          <table id="cart-table" className="margin-5">
+
+            {
+              this.props.items.map(el => {
+                return (
+                  <div>
+                  <tr className="margin-5 padding-5">
+                    <td className="margin-5 padding-5">
+                      ID: {el.itemId}
+                    </td>
+                    <td className="margin-5 padding-5">
+                      Name: {el.name}
+                    </td>
+                    <td>
+                      <Button className="margin-5" id="shop-button">Remove Item</Button>
+                    </td>
+                  </tr>
+                  </div>
+                )
+              })
+            }
+          </table>
+          </center>
         </div>
       )
     }
