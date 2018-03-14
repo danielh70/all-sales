@@ -2,9 +2,25 @@
   text-align: center;
 }
 
+#loader-header-move {
+  text-align: center;
+  position: static;
+  bottom: 230px;
+}
+
 html, body {
   height: 100%;
   background-image: linear-gradient(to top, #94b6eb, #86a8dc, #789acd, #6b8cbe, #5d7eb0);
+}
+
+.s2 {
+  position: absolute;
+  bottom: 60px;
+}
+
+.s1 {
+  position: absolute;
+  bottom: 60px;
 }
 
 .center {

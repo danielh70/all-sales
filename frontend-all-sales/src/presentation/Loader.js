@@ -3,7 +3,7 @@ import '../Loader.css';
 
 export const Loader = () => {
   return (
-    <div className="main">
+    <div className="main move-left">
       <h2 id="loader-header-move">Loading</h2>
     <div className="s1">
       <div className="s b sb1"></div>
