@@ -32,9 +32,9 @@ export function getUserItems(APIURL) {
         type: "ADD_CURRENT_USER_ITEMS",
         payload: res.items[0]
       })
-      console.log("RESPONSE:", res)
+      // console.log("RESPONSE:", res)
     })
-    .catch(e => console.log("BIG ERROR", e))
+    .catch(e => console.log(e))
   }
 }
 

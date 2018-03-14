@@ -37,7 +37,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
     let itemId = [e.target.value];
     let token = this.props.authorized.authToken;
 
-    console.log("button id", itemId);
+    // console.log("button id", itemId);
 
     fetch(`${this.props.APIURL}api/items/user/delete?authToken=${token}`,
       {

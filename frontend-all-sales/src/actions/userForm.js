@@ -49,13 +49,13 @@ export function login(e){
       }
     )
     .then(res => {
-      console.log("res", res)
+      // console.log("res", res)
       return res.json()
     })
     .then(res => {
         if(res.status !== 400) {
         localStorage.setItem("authToken", res.user.authToken)
-        console.log("2nd res", res)
+        // console.log("2nd res", res)
       }
     })
     .then(res => {

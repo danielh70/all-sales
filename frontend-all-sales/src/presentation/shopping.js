@@ -95,8 +95,6 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
     render() {
     const { items } = this.props
-    console.log("items:", this.props.items.all)
-
 
 
       return (

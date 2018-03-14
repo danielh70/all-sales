@@ -6,10 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import reducer from './reducers/index'
 
 // const middleware = [logger, thunk]
-var initialState = {}
+// var initialState = {}
+//
+// export default createStore(
+//     reducer,
+//     initialState,
+//     composeWithDevTools(applyMiddleware(thunk, logger))
+//   )
 
-export default createStore(
-    reducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(thunk, logger))
-  )
+
+//production
+export default createStore(reducer, applyMiddleware(thunk))
