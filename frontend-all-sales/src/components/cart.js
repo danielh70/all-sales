@@ -21,9 +21,9 @@ export default connect(mapStateToProps)(class Cart extends Component {
 
   componentWillMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
-    .then(this.props.dispatch(getUserItems(this.props.APIURL)))
+    this.props.dispatch(getUserItems(this.props.APIURL))
   }
-
+  //
   // componentDidMount() {
   //
   // }
@@ -70,33 +70,39 @@ export default connect(mapStateToProps)(class Cart extends Component {
           <NavBar />
 
           <h1>Welcome {this.props.authorized.user.firstName}!</h1>
-          <h3>
+          {
+            this.props.authorized.loggedIn && <h3>
             Current items in your cart:
           </h3>
+          }
+
+          {
+            !this.props.authorized.loggedIn &&
+            <h3>Please log in to use the shopping cart feature.</h3>
+          }
+
           <center>
-
-          <table id="cart-table" className="margin-5">
-
-            {
-              this.props.items.map(el => {
-                return (
-                  <tbody key={el.itemId}>
-                    <tr className="margin-5 padding-5">
-                      <td className="margin-5 padding-5" id={el.itemId}>
-                        ID: {el.itemId}
-                      </td>
-                      <td className="margin-5 padding-5">
-                        Name: {el.name}
-                      </td>
-                      <td>
-                        <Button onClick={this.removeItem} value={el.itemId} className="margin-5" id="shop-button">Remove Item</Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                )
-              })
-            }
-          </table>
+            <table id="cart-table" className="margin-5">
+              {
+                this.props.items.map(el => {
+                  return (
+                    <tbody key={el.itemId}>
+                      <tr className="margin-5 padding-5">
+                        <td className="margin-5 padding-5" id={el.itemId}>
+                          ID: {el.itemId}
+                        </td>
+                        <td className="margin-5 padding-5">
+                          Name: {el.name}
+                        </td>
+                        <td>
+                          <Button onClick={this.removeItem} value={el.itemId} className="margin-5" id="shop-button">Remove Item</Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  )
+                })
+              }
+            </table>
           </center>
         </div>
       )

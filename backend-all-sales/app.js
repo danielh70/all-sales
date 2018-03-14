@@ -133,6 +133,9 @@ app.post('/api/items/new', authorization, (req, res) => {
   .then(user => {
       user.addItems([...items])
   })
+  .then(user => {
+    res.json({ message: "Items added to cart" })
+  })
   .catch(e => {
     console.log("error!", e)
   })

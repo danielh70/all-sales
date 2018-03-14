@@ -48,7 +48,14 @@ export default connect(mapStateToProps)(class Shopping extends Component {
             method: "POST"
           }
         )
-        .then(this.redirect())
+        .then(res => {
+          return res.json()
+        })
+        .then(res => {
+          if(res) {
+            this.redirect()
+          }
+        })
         .catch(e => console.log("error----------", e))
    }
 
