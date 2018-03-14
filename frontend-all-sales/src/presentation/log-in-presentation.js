@@ -33,7 +33,7 @@ export default connect(mapStateToProps)(class LogInPage extends Component {
 
             <LogInForm />
 
-            {this.props.authorized && <Redirect to="/home" />}
+            {this.props.authorized && <Redirect to="/shopping" />}
         </div>
       )
     }

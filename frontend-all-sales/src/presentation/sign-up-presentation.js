@@ -28,7 +28,7 @@ export default connect(mapStateToProps)(class SignUpPage extends Component {
           <NavBar />
           <SignUpForm />
 
-            {this.props.authorized && <Redirect to="/home" />}
+            {this.props.authorized && <Redirect to="/shopping" />}
         </div>
       )
     }
