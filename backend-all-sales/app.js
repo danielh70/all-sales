@@ -82,12 +82,10 @@ app.post('/api/login', (req, res) => {
 
     if(auth) {
       res.json({ user: user })
-    } else {
-      res.json({ message: "Invalid Password" })
     }
   })
   .catch(e => {
-    console.log(e)
+    res.json({ message: "Invalid" })
   })
 })
 

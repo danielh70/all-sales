@@ -49,12 +49,12 @@ export function login(e){
       }
     )
     .then(res => {
-      // console.log("res", res)
+      console.log("res", res)
       return res.json()
     })
     .then(res => {
       localStorage.setItem("authToken", res.user.authToken)
-      // console.log("2nd res", res)
+      console.log("2nd res", res)
     })
     .then(res => {
       window.location.reload()
