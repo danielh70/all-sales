@@ -29,13 +29,13 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          name: 'Fifth Item',
+          name: 'ONE BILLION DOLLARS',
           price: 500,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Sixth Item',
+          name: 'Winning Lottery Ticket',
           price: 777,
           createdAt: new Date(),
           updatedAt: new Date()
