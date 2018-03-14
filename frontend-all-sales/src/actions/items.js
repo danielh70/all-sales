@@ -1,6 +1,6 @@
 export function getItems(APIURL) {
   return (dispatch) => {
-    return fetch(`http://localhost:3000/api/shopping`)
+    return fetch(`${APIURL}api/shopping`)
     .then(res => {
       return res.json()
     })
