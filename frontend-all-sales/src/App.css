@@ -14,8 +14,25 @@
   padding: 20px;
 }
 
-#shop-button {
+#checkbox {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 150px;
+}
 
+#checkbox-form-button {
+  position: relative;
+  right: 10px;
+  margin: 40px;
+  background: linear-gradient(to bottom, rgb(13, 194, 181) 0%, rgb(6, 144, 185) 100%);
+  width: 200px;
+  height: 45px;
+  border-radius: 15px;
+  -webkit-transition-duration: 0.5s;
+  /* Safari */
+  transition-duration: 0.5s;
 }
 
 #cart-table {

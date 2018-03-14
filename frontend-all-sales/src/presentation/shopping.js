@@ -4,9 +4,10 @@ import { getItems, redirect } from '../actions/items'
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
-import '../App.css';
 import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import '../App.css';
 
 
 const mapStateToProps = (store) => {
@@ -77,12 +78,18 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   )
 
   createCheckbox = label => (
-    <Checkbox
-      label={label.name}
-      handleCheckboxChange={this.toggleCheckbox}
-      key={label.id}
-      id={label.id}
-    />
+    <table>
+      <row>
+        <td id="checkbox">
+          <Checkbox
+            label={label.name}
+            handleCheckboxChange={this.toggleCheckbox}
+            key={label.id}
+            id={label.id}
+          />
+        </td>
+      </row>
+    </table>
   )
 
 
@@ -98,17 +105,18 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
           { this.props.items.all.length === 0 && <Loader /> }
 
-
-          <form onSubmit={this.handleFormSubmit}>
+          <center>
+          <form onSubmit={this.handleFormSubmit} id="checkbox-form">
               {this.createCheckboxes()}
 
             {
             this.selectedCheckboxes &&
-            <button className="btn btn-default" type="submit">Save</button>
+            <button bsStyle="primary" id="checkbox-form-button" type="submit">Save</button>
             }
 
             { this.props.items.redirect && <Redirect to="/cart" /> }
             </form>
+            </center>
         </div>
       )
     }
