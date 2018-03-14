@@ -37,3 +37,10 @@ export function getUserItems(APIURL) {
     .catch(e => console.log("BIG ERROR", e))
   }
 }
+
+export function removeCartItem(APIURL, id) {
+  return {
+    type: "REMOVE_CART_ITEM",
+    payload: id
+  }
+}

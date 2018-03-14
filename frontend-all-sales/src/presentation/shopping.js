@@ -26,35 +26,14 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   }
 
 
-  // componentWillReceiveProps(nextProps) {
-  //
-  //
-  //
-  // }
-  //
-  // componentWillMount() {
-  //this.props.dispatch(setLoginStatus(this.props.APIURL))
-  // }
-  //
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("next props:", nextProps)
-  //   if (!nextProps.items) {
-  //
-  //   }
-  // }
-
 
   handleFormSubmit = (id) => {
     id.preventDefault()
     let token = this.props.authorized
-    console.log(token)
-
-      for (const checkbox of this.selectedCheckboxes) {
-        console.log(this.selectedCheckboxes, 'is selected.');
-      }
       console.log(this.selectedCheckboxes);
       let selected = [...this.selectedCheckboxes]
       console.log(selected)
+      
         fetch(`${this.props.APIURL}api/items/new?authToken=${token}`,
           {
             body: JSON.stringify(selected),
@@ -105,6 +84,9 @@ export default connect(mapStateToProps)(class Shopping extends Component {
       return (
         <div>
           <NavBar />
+
+          { this.props.items.length === 0 && <Loader /> }
+
 
           <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
