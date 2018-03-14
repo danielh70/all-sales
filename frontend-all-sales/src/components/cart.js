@@ -49,9 +49,13 @@ export default connect(mapStateToProps)(class Cart extends Component {
       }
     )
     .then(res => {
-      return res
+      return res.json()
     })
-    .then(this.props.dispatch(getUserItems(this.props.APIURL)))
+    .then(res => {
+      if(res) {
+        this.props.dispatch(getUserItems(this.props.APIURL))
+      }
+    })
     .catch(e => console.log(e))
   }
 

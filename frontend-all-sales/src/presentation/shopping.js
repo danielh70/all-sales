@@ -13,8 +13,6 @@ const mapStateToProps = (store) => {
     APIURL: store.appState.APIURL,
     authorized: store.authorized.authToken,
     items: store.items.all
-
-
   }
 }
 
@@ -24,7 +22,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
     .then(res => this.props.dispatch(getItems(this.props.APIURL)))
     this.selectedCheckboxes = new Set();
-    
+
   }
 
 

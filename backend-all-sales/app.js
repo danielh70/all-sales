@@ -179,6 +179,9 @@ app.delete('/api/items/user/delete', authorization, (req, res) => {
   Users.findById(user).then(user => {
     user.removeItem(...item)
   })
+  .then(item => {
+    res.json({ message: "Item deleted" })
+  })
 })
 
 
