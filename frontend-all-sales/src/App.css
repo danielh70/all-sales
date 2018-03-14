@@ -83,11 +83,17 @@ body {
   background-color: lightgray;
 }
 
-input.sign-up {
+/* input.sign-up {
   width: 400px;
   height: 44px;
   margin: 5px;
+} */
+
+input.sign-up {
+  width: 300px;
+  height: 40px;
 }
+
 
 div.flex-test {
   justify-content: space-between;

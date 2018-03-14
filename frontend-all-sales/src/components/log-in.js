@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form'
 import { login } from '../actions/userForm'
 import validate from './validate'
 import { connect } from 'react-redux'
-
+import { Col } from 'react-bootstrap'
 
 const createRenderer = render => ({ input, meta, label, ...rest }) =>
   <div
@@ -33,7 +33,7 @@ const RenderInput = createRenderer((input, label, { type }) =>
 let LoginForm = ({ handleSubmit, submitting }) =>
 
 <div className="flex-test flex-container">
-    <center>
+
         <form onSubmit={handleSubmit(login)}>
           <Field name="email" label="Email" type="text" component={RenderInput} /> <br />
           <Field name="password" label="Password" type="password" component={RenderInput} />
@@ -42,8 +42,7 @@ let LoginForm = ({ handleSubmit, submitting }) =>
             Log In
           </button>
         </form>
-    </center>
-
+    
 </div>
 LoginForm = reduxForm({
   form: 'UserLogin',

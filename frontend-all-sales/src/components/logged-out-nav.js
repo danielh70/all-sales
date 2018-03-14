@@ -23,9 +23,8 @@ class LoggedOutNav extends Component {
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1}>Authored</MenuItem>
               <MenuItem eventKey={3.2}>By</MenuItem>
-              <MenuItem eventKey={3.3}>Daniel</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey={3.3}>Hook!</MenuItem>
+              <MenuItem eventKey={3.3}>Daniel Hook!</MenuItem>
             </NavDropdown>
           </Nav>
           <Nav pullRight>
