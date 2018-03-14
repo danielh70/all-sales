@@ -80,11 +80,14 @@ app.post('/api/login', (req, res) => {
   .then(user => {
     let auth = user.veryifyPassword(password)
 
-    if(auth) {
+    if(user && auth) {
       res.json({ user: user })
+    } else {
+      throw new Error
     }
   })
   .catch(e => {
+    res.status(400)
     res.json({ message: "Invalid" })
   })
 })

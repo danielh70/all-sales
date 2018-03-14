@@ -39,7 +39,7 @@ export function addUser(APIURL, e){
 }
 
 export function login(e){
-    return fetch(`${APIURL}api/login`,
+     fetch(`${APIURL}api/login`,
       {
         body: JSON.stringify(e),
         headers: {
@@ -53,8 +53,10 @@ export function login(e){
       return res.json()
     })
     .then(res => {
-      localStorage.setItem("authToken", res.user.authToken)
-      console.log("2nd res", res)
+        if(res.status !== 400) {
+        localStorage.setItem("authToken", res.user.authToken)
+        console.log("2nd res", res)
+      }
     })
     .then(res => {
       window.location.reload()
