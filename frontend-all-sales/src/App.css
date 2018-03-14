@@ -27,6 +27,15 @@ html, body {
   width: 150px;
 }
 
+#user-name {
+  text-transform: capitalize;
+  text-shadow: 0 0 6px #ffffff, 0 0 1px #ffffff;
+}
+
+.white-text-shadow {
+  text-shadow: 2px 2px 4px #000000;
+}
+
 .checkbox-form-button {
   margin: 40px;
   background: linear-gradient(to bottom, rgb(13, 145, 191) 0%, rgb(6, 80, 185) 100%);
@@ -127,6 +136,11 @@ p, h3, h4, button {
   cursor: pointer;
   margin-bottom: 30px;
   margin: 10px;
+}
+
+.move-left {
+  position: relative;
+  right: 15px;
 }
 
 .delete-button:hover {

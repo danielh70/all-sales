@@ -14,7 +14,7 @@ import '../App.css';
 const mapStateToProps = (store) => {
   return {
     APIURL: store.appState.APIURL,
-    authorized: store.authorized.authToken,
+    authorized: store.authorized,
     items: store.items
   }
 }
@@ -36,7 +36,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
   handleFormSubmit = (id) => {
     id.preventDefault()
-    let token = this.props.authorized
+    let token = this.props.authorized.authToken
       console.log(this.selectedCheckboxes);
       let selected = [...this.selectedCheckboxes]
       console.log(selected)
@@ -103,6 +103,9 @@ export default connect(mapStateToProps)(class Shopping extends Component {
         <div>
           <NavBar />
 
+          <h1 className="move-left">Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
+          <h3 className="white-text-shadow move-left">Add items to your cart:</h3>
+
           { this.props.items.all.length === 0 && <Loader /> }
 
           <center>
@@ -111,7 +114,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
               {
               this.selectedCheckboxes &&
-                <button className="checkbox-form-button" type="submit">Add to cart</button>
+                <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
               }
 
               { this.props.items.redirect && <Redirect to="/cart" /> }

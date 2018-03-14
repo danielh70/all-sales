@@ -69,16 +69,16 @@ export default connect(mapStateToProps)(class Cart extends Component {
         <div>
           <NavBar />
 
-          <h1>Welcome <span id="user-name">{this.props.authorized.user.firstName}</span>!</h1>
+          <h1>Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
           {
             this.props.authorized.loggedIn && <h3>
-            Current items in your cart:
+            <span className="white-text-shadow">Current items in your cart:</span>
           </h3>
           }
 
           {
             !this.props.authorized.loggedIn &&
-            <h3>Please log in to use the shopping cart feature.</h3>
+            <h3 className="white-text-shadow">Please log in to use the shopping cart feature.</h3>
           }
 
           <center>
