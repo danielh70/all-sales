@@ -26,6 +26,10 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
   }
 
+  redirect = () => {
+   this.props.dispatch(redirect())
+  }
+
 
 
   handleFormSubmit = (id) => {
@@ -44,16 +48,11 @@ export default connect(mapStateToProps)(class Shopping extends Component {
             method: "POST"
           }
         )
-        .then(res => {
-          console.log("res", res)
-          return res.json()
-        })
+        .then(this.redirect())
         .catch(e => console.log("error----------", e))
    }
 
-   redirect = () => {
-    this.props.dispatch(redirect())
-   }
+
 
 
   toggleCheckbox = (label, id) => {
@@ -98,7 +97,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
             {
             this.selectedCheckboxes &&
-            <button className="btn btn-default" type="submit" onClick={this.redirect}>Save</button>
+            <button className="btn btn-default" type="submit">Save</button>
             }
 
             { this.props.items.redirect && <Redirect to="/cart" /> }
