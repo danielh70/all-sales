@@ -21,11 +21,14 @@ const validate = values => {
   if (!values.title || !values.title.trim()) {
     errors.title = '*'
   }
-  if (!values.price || values.price.trim()) {
+  if (!values.price || !values.price.trim()) {
     errors.price = '*'
   }
   if (!values.description || values.description.trim().length < 10) {
     errors.description = '*'
+  }
+  if (!values.condition) {
+    errors.condition = '*'
   }
   return errors
 }

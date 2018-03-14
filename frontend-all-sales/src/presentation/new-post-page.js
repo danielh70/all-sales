@@ -16,7 +16,7 @@ const mapStateToProps = (store) => {
 }
 
 
-export default connect(mapStateToProps)(class LogInPage extends Component {
+export default connect(mapStateToProps)(class NewPostPage extends Component {
 
   componentWillMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
@@ -34,3 +34,5 @@ export default connect(mapStateToProps)(class LogInPage extends Component {
     }
   }
 )
+
+// { !authorized && <Redirect to="/login" /> }

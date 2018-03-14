@@ -1,4 +1,5 @@
 let items = [
+  '-- select --',
   'New',
   'Lightly used',
   'Moderate',

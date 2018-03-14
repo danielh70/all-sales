@@ -1,9 +1,9 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { createUser } from '../actions/userForm'
 import validate from './validate'
 import items from './data/list-items'
-
+import showResults from '../actions/items'
+import { Redirect } from 'react-router-dom'
 
 const createRenderer = render => ({ input, meta, label, ...rest }) =>
   <div
@@ -40,15 +40,15 @@ const RenderSelect = createRenderer((input, label, { children }) =>
   </select>
 )
 
-let NewPostForm = ({ handleSubmit, submitting }) =>
 
+let NewPostForm = ({ handleSubmit, submitting, authorized }) =>
 <div className="flex-test flex-container">
     <center>
-        <form onSubmit={handleSubmit(createUser)}>
+        <form onSubmit={handleSubmit(showResults)}>
           <Field name="title" label="Title" type="text" component={RenderInput} /> <br />
           <Field name="price" label="Price" type="number" component={RenderInput} /> <br />
           <Field name="description" label="Description" type="text" component={RenderText} /> <br />
-          <Field name="select" label="Condition" component={RenderSelect}>
+          <Field name="condition" label="Condition" component={RenderSelect}>
           {items.map(item =>
             <option key={item} value={item}>
               {item}
@@ -61,9 +61,8 @@ let NewPostForm = ({ handleSubmit, submitting }) =>
           </button>
         </form>
     </center>
-
-
 </div>
+
 NewPostForm = reduxForm({
   form: 'NewPostForm',
   destroyOnUnmount: true,

@@ -73,15 +73,11 @@ html, body {
 #cart-table {
   border: 2px solid black;
   position: relative;
-  top: 20px;
-  width: 450px;
-  height: 450px;
-  border-radius: 5px;
+  
+  width:auto;
+  height: auto;
 }
 
-body {
-  background-color: lightgray;
-}
 
 /* input.sign-up {
   width: 400px;

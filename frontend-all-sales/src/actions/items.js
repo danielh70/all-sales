@@ -43,3 +43,8 @@ export function redirect() {
     type: "REDIRECT_FROM_ITEMS"
   }
 }
+
+
+export default (function showResults(values) {
+  window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+})
