@@ -94,6 +94,15 @@ input.sign-up {
   height: 40px;
 }
 
+textarea.sign-up {
+  width: 300px;
+}
+
+input.cost-field {
+  width: 100px;
+  height: 30px;
+}
+
 
 div.flex-test {
   justify-content: space-between;
@@ -106,6 +115,16 @@ div.flex-test {
 .error input {
   border-color: red;
   box-shadow: 2px;
+}
+
+.error textarea {
+  border-color: red;
+  box-shadow: 2px;
+}
+
+.error textarea, .error select, .error .choice-option{
+  background: #fff0f4;
+  color: #c51244;
 }
 
 .error .validation{

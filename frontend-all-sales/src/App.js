@@ -6,6 +6,7 @@ import SignUpPage from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
 import Cart from './components/cart';
 import Home from './presentation/home';
+import NewPostPage from './presentation/new-post-page';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { getItems } from './actions/items';
 import { setLoginStatus } from './actions/userForm';
@@ -53,6 +54,10 @@ export default connect(mapStateToProps)(class App extends Component {
 
               <Route exact path="/cart" render={props => (
                 <Cart />
+              )} />
+
+              <Route exact path="/newpost" render={props => (
+                <NewPostPage />
               )} />
 
             </div>
