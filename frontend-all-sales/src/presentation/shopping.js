@@ -24,7 +24,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
     .then(res => this.props.dispatch(getItems(this.props.APIURL)))
     this.selectedCheckboxes = new Set();
-    console.log(this.props.APIURL)
+    
   }
 
 

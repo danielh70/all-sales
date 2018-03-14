@@ -1,3 +1,5 @@
+const token = localStorage.getItem("authToken")
+
 export function getItems(APIURL) {
   return (dispatch) => {
     return fetch(`${APIURL}api/shopping`)
@@ -15,8 +17,6 @@ export function getItems(APIURL) {
 }
 
 export function getUserItems(APIURL) {
-  let token = localStorage.getItem("authToken")
-
   return (dispatch) => {
     return fetch(`${APIURL}api/items/user?authToken=${token}`,
     {
@@ -35,12 +35,5 @@ export function getUserItems(APIURL) {
       console.log("RESPONSE:", res)
     })
     .catch(e => console.log("BIG ERROR", e))
-  }
-}
-
-export function removeCartItem(APIURL, id) {
-  return {
-    type: "REMOVE_CART_ITEM",
-    payload: id
   }
 }

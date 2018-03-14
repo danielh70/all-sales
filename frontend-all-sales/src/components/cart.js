@@ -37,7 +37,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
     let itemId = [e.target.value];
     let token = this.props.authorized.authToken;
 
-    // console.log(parseInt(itemId))
+    console.log("button id", itemId);
 
     fetch(`${this.props.APIURL}api/items/user/delete?authToken=${token}`,
       {
@@ -48,14 +48,8 @@ export default connect(mapStateToProps)(class Cart extends Component {
         method: "DELETE"
       }
     )
-    .then(res => res.json())
+    .then(this.props.dispatch(getUserItems(this.props.APIURL)))
     .catch(e => console.log(e))
-  }
-
-  loader() {
-    while (this.props.items.length === 0) {
-      return <Loader />
-    }
   }
 
 
@@ -67,6 +61,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
       return (
         <div>
           <NavBar />
+
           <h1>Welcome {this.props.authorized.user.firstName}!</h1>
           <h3>
             Current items in your cart:

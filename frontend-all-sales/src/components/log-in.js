@@ -25,8 +25,8 @@ const createRenderer = render => ({ input, meta, label, ...rest }) =>
     {render(input, label, rest)}
   </div>
 
-const RenderInput = createRenderer((input, label) =>
-  <input {...input} placeholder={label} className="sign-up"/>
+const RenderInput = createRenderer((input, label, { type }) =>
+  <input {...input} placeholder={label} type={type} className="sign-up"/>
 )
 
 
@@ -35,8 +35,8 @@ let LoginForm = ({ handleSubmit, submitting }) =>
 <div className="flex-test flex-container">
     <center>
         <form onSubmit={handleSubmit(login)}>
-          <Field name="email" label="Email" component={RenderInput} /> <br />
-          <Field name="password" label="Password" component={RenderInput} />
+          <Field name="email" label="Email" type="text" component={RenderInput} /> <br />
+          <Field name="password" label="Password" type="password" component={RenderInput} />
           <br />
           <button type="submit" disabled={submitting}>
             Submit
