@@ -25,11 +25,11 @@ class LoggedInNav extends Component {
               Shopping Cart
             </NavItem>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
+              <MenuItem eventKey={3.1}>Authored</MenuItem>
+              <MenuItem eventKey={3.2}>By</MenuItem>
+              <MenuItem eventKey={3.3}>Daniel</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey={3.3}>Separated link</MenuItem>
+              <MenuItem eventKey={3.3}>Hook!</MenuItem>
             </NavDropdown>
           </Nav>
           <Nav pullRight>

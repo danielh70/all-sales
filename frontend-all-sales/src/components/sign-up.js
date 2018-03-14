@@ -40,8 +40,8 @@ let SignUpForm = ({ handleSubmit, submitting }) =>
           <Field name="email" label="Email" type="text" component={RenderInput} /> <br />
           <Field name="password" label="Password" type="password" component={RenderInput} />
           <br />
-          <button type="submit" disabled={submitting}>
-            Submit
+          <button type="submit" className="checkbox-form-button" disabled={submitting}>
+            Sign Up
           </button>
         </form>
     </center>

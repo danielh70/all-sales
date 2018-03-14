@@ -7,6 +7,7 @@ import { Loader } from './Loader'
 import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+// import bgImage from '../components/bgImage';
 import '../App.css';
 
 
@@ -78,17 +79,16 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   )
 
   createCheckbox = label => (
-    <table>
-      <row>
-        <td id="checkbox">
+    <table id="checkbox" key={label.id}>
+
+
           <Checkbox
             label={label.name}
             handleCheckboxChange={this.toggleCheckbox}
             key={label.id}
             id={label.id}
           />
-        </td>
-      </row>
+
     </table>
   )
 
@@ -106,16 +106,16 @@ export default connect(mapStateToProps)(class Shopping extends Component {
           { this.props.items.all.length === 0 && <Loader /> }
 
           <center>
-          <form onSubmit={this.handleFormSubmit} id="checkbox-form">
-              {this.createCheckboxes()}
+            <form onSubmit={this.handleFormSubmit} id="checkbox-form">
+                {this.createCheckboxes()}
 
-            {
-            this.selectedCheckboxes &&
-            <button bsStyle="primary" id="checkbox-form-button" type="submit">Save</button>
-            }
+              {
+              this.selectedCheckboxes &&
+                <button className="checkbox-form-button" type="submit">Add to cart</button>
+              }
 
-            { this.props.items.redirect && <Redirect to="/cart" /> }
-            </form>
+              { this.props.items.redirect && <Redirect to="/cart" /> }
+              </form>
             </center>
         </div>
       )

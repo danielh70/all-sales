@@ -40,7 +40,9 @@ export default connect(mapStateToProps)(class App extends Component {
               )} />
 
              <Route exact path="/shopping" render={props => (
+               <div className="App">
                 <Shopping />
+                </div>
               )} />
 
               <Route exact path="/signup" render={props => (

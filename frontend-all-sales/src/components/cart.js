@@ -69,7 +69,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
         <div>
           <NavBar />
 
-          <h1>Welcome {this.props.authorized.user.firstName}!</h1>
+          <h1>Welcome <span id="user-name">{this.props.authorized.user.firstName}</span>!</h1>
           {
             this.props.authorized.loggedIn && <h3>
             Current items in your cart:
@@ -95,7 +95,7 @@ export default connect(mapStateToProps)(class Cart extends Component {
                           Name: {el.name}
                         </td>
                         <td>
-                          <Button onClick={this.removeItem} value={el.itemId} className="margin-5" id="shop-button">Remove Item</Button>
+                          <button onClick={this.removeItem} value={el.itemId} className="delete-button">Remove Item</button>
                         </td>
                       </tr>
                     </tbody>
