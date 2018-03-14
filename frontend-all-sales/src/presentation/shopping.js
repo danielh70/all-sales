@@ -10,9 +10,10 @@ import Checkbox from '../components/checkbox';
 
 const mapStateToProps = (store) => {
   return {
+    APIURL: store.appState.APIURL,
     authorized: store.authorized.authToken,
-    items: store.items.all,
-    APIURL: store.appState.APIURL
+    items: store.items.all
+
 
   }
 }
@@ -23,6 +24,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
     .then(res => this.props.dispatch(getItems(this.props.APIURL)))
     this.selectedCheckboxes = new Set();
+    console.log(this.props.APIURL)
   }
 
 
@@ -33,7 +35,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
       console.log(this.selectedCheckboxes);
       let selected = [...this.selectedCheckboxes]
       console.log(selected)
-      
+
         fetch(`${this.props.APIURL}api/items/new?authToken=${token}`,
           {
             body: JSON.stringify(selected),
