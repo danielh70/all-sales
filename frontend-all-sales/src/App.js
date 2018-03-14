@@ -30,9 +30,7 @@ export default connect(mapStateToProps)(class App extends Component {
           <Router>
             <div>
               <Route exact path="/" render={props => (
-                <div>
-                  <NavBarHeader />
-                </div>
+                <Home />
               )} />
 
               <Route exact path="/home" render={props => (
