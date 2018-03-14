@@ -3,6 +3,7 @@ import NavBar from '../components/navbar';
 import LogInForm from '../components/log-in';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { setLoginStatus } from '../actions/userForm';
 
 
 
@@ -19,7 +20,11 @@ const mapStateToProps = (store) => {
 
 export default connect(mapStateToProps)(class LogInPage extends Component {
 
-  
+  componentWillMount() {
+    this.props.dispatch(setLoginStatus(this.props.APIURL))
+  }
+
+
     render() {
       console.log(this.props, this.props.authorized)
       return (
@@ -28,7 +33,7 @@ export default connect(mapStateToProps)(class LogInPage extends Component {
 
             <LogInForm />
 
-            {this.props.authorized && <Redirect to="/" />}
+            {this.props.authorized && <Redirect to="/home" />}
         </div>
       )
     }

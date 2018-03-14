@@ -48,6 +48,9 @@ export default connect(mapStateToProps)(class Cart extends Component {
         method: "DELETE"
       }
     )
+    .then(res => {
+      return res
+    })
     .then(this.props.dispatch(getUserItems(this.props.APIURL)))
     .catch(e => console.log(e))
   }
