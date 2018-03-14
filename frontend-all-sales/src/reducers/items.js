@@ -1,6 +1,7 @@
 const initialState = {
   all: [],
-  currentUser: []
+  currentUser: [],
+  redirect: false
 }
 
 export default (currentState=initialState, action) => {
@@ -18,6 +19,10 @@ export default (currentState=initialState, action) => {
     }
     case("ADD_CURRENT_USER_ITEMS"): {
       newState = Object.assign({}, currentState, { currentUser: action.payload })
+      break
+    }
+    case("REDIRECT_FROM_ITEMS"): {
+      newState = Object.assign({}, currentState, { redirect: true })
       break
     }
     default:

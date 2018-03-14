@@ -37,3 +37,9 @@ export function getUserItems(APIURL) {
     .catch(e => console.log("BIG ERROR", e))
   }
 }
+
+export function redirect() {
+  return {
+    type: "REDIRECT_FROM_ITEMS"
+  }
+}

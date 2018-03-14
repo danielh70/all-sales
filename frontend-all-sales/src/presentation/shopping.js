@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/items'
+import { getItems, redirect } from '../actions/items'
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
 import '../App.css';
 import Checkbox from '../components/checkbox';
+import { Redirect } from 'react-router-dom';
 
 
 const mapStateToProps = (store) => {
   return {
     APIURL: store.appState.APIURL,
     authorized: store.authorized.authToken,
-    items: store.items.all
+    items: store.items
   }
 }
 
@@ -50,6 +51,10 @@ export default connect(mapStateToProps)(class Shopping extends Component {
         .catch(e => console.log("error----------", e))
    }
 
+   redirect = () => {
+    this.props.dispatch(redirect())
+   }
+
 
   toggleCheckbox = (label, id) => {
     console.log("label id:", id);
@@ -62,7 +67,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
 
   createCheckboxes = () => (
-    this.props.items.map(this.createCheckbox)
+    this.props.items.all.map(this.createCheckbox)
   )
 
   createCheckbox = label => (
@@ -77,7 +82,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
     render() {
     const { items } = this.props
-    console.log("items:", this.props.items)
+    console.log("items:", this.props.items.all)
 
 
 
@@ -85,7 +90,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
         <div>
           <NavBar />
 
-          { this.props.items.length === 0 && <Loader /> }
+          { this.props.items.all.length === 0 && <Loader /> }
 
 
           <form onSubmit={this.handleFormSubmit}>
@@ -93,8 +98,10 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
             {
             this.selectedCheckboxes &&
-            <button className="btn btn-default" type="submit">Save</button>
+            <button className="btn btn-default" type="submit" onClick={this.redirect}>Save</button>
             }
+
+            { this.props.items.redirect && <Redirect to="/cart" /> }
             </form>
         </div>
       )
