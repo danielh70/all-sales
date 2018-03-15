@@ -12,28 +12,31 @@ export default (currentState=initialState, action) => {
   switch(action.type){
     case("USER_STATUS"):{
       const userName = { ...currentState.user, firstName: action.payload.firstName }
-      newState = Object.assign({}, currentState, { authToken: action.payload.authToken, user: userName, loggedIn: true })
+      newState = {
+        ...currentState,
+        authToken: action.payload.authToken,
+        user: userName,
+        loggedIn: true
+      }
       break
     }
     case("LOG_IN"): {
-      const userName = Object.assign({}, currentState.user, { firstName: action.payload.firstName })
-      newState = Object.assign({}, currentState, { authToken: action.payload.authToken, user: userName, loggedIn: true })
+      const userName = { ...currentState.user, firstName: action.payload.firstName }
+      newState = { ...currentState, authToken: action.payload.authToken, user: userName, loggedIn: true }
       break
     }
     case("USER_ADDED"):{
-      newState = Object.assign({}, currentState, { newUserSuccess: true })
+      newState =  { ...currentState, newUserSuccess: true }
       break
     }
     case("LOG_OUT"): {
-      const noUser = Object.assign({}, currentState.user, { firstName: '' })
-      newState = Object.assign({}, currentState, { authToken: null, user: noUser, loggedIn: false })
+      const noUser = { ...currentState.user, firstName: '' }
+      newState = { ...currentState, authToken: null, user: noUser, loggedIn: false }
       break
     }
 
     case("ERROR_ADDING_USER"):{
-      newState = Object.assign({}, currentState, {
-        errors: action.payload.validations
-      })
+      newState = { ...currentState, errors: action.payload.validations }
       break
     }
 

@@ -30,11 +30,11 @@ export default connect(mapStateToProps)(class Cart extends Component {
     let token = this.props.authorized.authToken;
     // console.log("item id:", itemIdNum);
 
-    let test = itemIdNum =>
-       this.props.items.filter(el => {
-        return el.id !== itemIdNum
-      })
-    this.props.dispatch(removeCartItem(test(itemIdNum)))
+    let removeThisItem = itemIdNum =>
+       this.props.items.filter(el =>
+          el.id !== itemIdNum
+      )
+    this.props.dispatch(removeCartItem(removeThisItem(itemIdNum)))
 
     fetch(`${this.props.APIURL}api/items/user/delete?authToken=${token}`,
       {
