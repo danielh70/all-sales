@@ -7,9 +7,9 @@ import {
   PageHeader,
   Row
 } from 'react-bootstrap'
-import reduxlogo from '../images/reduxlogo.svg'
-import reactlogo from '../images/reactlogo.svg'
-import graphqllogo from '../images/graphqllogo.svg'
+import reduxlogo from '../../images/reduxlogo.svg'
+import reactlogo from '../../images/reactlogo.svg'
+import graphqllogo from '../../images/graphqllogo.svg'
 import '../App.css';
 
 const mapStateToProps = (store) => {
@@ -35,6 +35,9 @@ export default connect(mapStateToProps)(class Home extends Component {
               </PageHeader>
             </Grid>
           </Row>
+          <img src={reduxlogo} className="redux-logo" alt="logo" />
+          <img src={reactlogo} className="react-logo" alt="logo" />
+          <img src={graphqllogo} className="graphql-logo" alt="logo" />
         </div>
       );
     }
