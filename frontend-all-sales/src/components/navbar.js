@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoggedInNav from './logged-in-nav';
 import LoggedOutNav from './logged-out-nav';
 import { connect } from 'react-redux';
-import { logout, setLoginStatus } from '../actions/userForm'
+import { logout } from '../actions/userForm'
 
 const mapStateToProps = (store) => {
   return {

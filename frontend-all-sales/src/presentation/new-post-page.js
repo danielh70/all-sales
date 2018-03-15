@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navbar';
 import NewPostForm from '../components/new-post-component';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setLoginStatus } from '../actions/userForm';
-
-
 
 
 const mapStateToProps = (store) => {
@@ -33,5 +30,3 @@ export default connect(mapStateToProps)(class NewPostPage extends Component {
     }
   }
 )
-
-// { !authorized && <Redirect to="/login" /> }

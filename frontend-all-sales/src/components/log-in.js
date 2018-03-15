@@ -2,8 +2,6 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { login } from '../actions/userForm'
 import validate from './validate'
-import { connect } from 'react-redux'
-import { Col } from 'react-bootstrap'
 
 const createRenderer = render => ({ input, meta, label, ...rest }) =>
   <div
@@ -42,7 +40,7 @@ let LoginForm = ({ handleSubmit, submitting }) =>
             Log In
           </button>
         </form>
-    
+
 </div>
 LoginForm = reduxForm({
   form: 'UserLogin',

@@ -3,7 +3,6 @@ import { reduxForm, Field } from 'redux-form'
 import validate from './validate'
 import items from './data/list-items'
 import showResults from '../actions/items'
-import { Redirect } from 'react-router-dom'
 
 const createRenderer = render => ({ input, meta, label, ...rest }) =>
   <div

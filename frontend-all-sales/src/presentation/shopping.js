@@ -6,8 +6,6 @@ import NavBar from '../components/navbar';
 import { Loader } from './Loader'
 import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-// import bgImage from '../components/bgImage';
 import '../App.css';
 
 
@@ -94,9 +92,6 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
 
     render() {
-    const { items } = this.props
-
-
       return (
         <div>
           <NavBar />

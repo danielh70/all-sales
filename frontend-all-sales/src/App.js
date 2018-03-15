@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NavBarHeader from './components/navbar';
 import Shopping from './presentation/shopping';
 import SignUpPage from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
 import Cart from './components/cart';
 import Home from './presentation/home';
 import NewPostPage from './presentation/new-post-page';
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
-import { getItems } from './actions/items';
-import { setLoginStatus } from './actions/userForm';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 

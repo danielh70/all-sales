@@ -2,7 +2,6 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { createUser } from '../actions/userForm'
 import validate from './validate'
-import { Col } from 'react-bootstrap'
 
 
 const createRenderer = render => ({ input, meta, label, ...rest }) =>

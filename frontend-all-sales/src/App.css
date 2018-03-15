@@ -73,7 +73,7 @@ html, body {
 #cart-table {
   border: 2px solid black;
   position: relative;
-  
+
   width:auto;
   height: auto;
 }
@@ -228,3 +228,94 @@ p, h3, h4, button {
   margin-bottom: 50px;
   margin: 10px;
 } */
+
+
+/**
+* REDUX LOGO
+*/
+.redux-logo {
+  animation: redux-logo-spin infinite 20s linear;
+  height: 180px;
+  opacity: .4;
+  z-index: -1;
+}
+
+.redux-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.redux-title {
+  font-size: 1.5em;
+}
+
+.redux-intro {
+  font-size: large;
+}
+
+@keyframes redux-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/**
+* REACT LOGO
+*/
+.react-logo {
+  animation: react-logo-spin infinite 20s linear;
+  height: 180px;
+  opacity: .4;
+  z-index: -1;
+}
+
+.react-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.react-title {
+  font-size: 1.5em;
+}
+
+.react-intro {
+  font-size: large;
+}
+
+@keyframes react-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/**
+* GRAPHQL LOGO
+*/
+.graphql-logo {
+  animation: graphql-logo-spin infinite 20s linear;
+  height: 180px;
+  opacity: .4;
+  z-index: -1;
+}
+
+.graphql-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.graphql-title {
+  font-size: 1.5em;
+}
+
+.graphql-intro {
+  font-size: large;
+}
+
+@keyframes graphql-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

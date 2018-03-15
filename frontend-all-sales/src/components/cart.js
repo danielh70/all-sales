@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/items'
 import NavBar from '../components/navbar';
-import { Loader } from '../presentation/Loader'
 import '../App.css';
 import { setLoginStatus } from '../actions/userForm'
 import { getUserItems, removeCartItem } from '../actions/items'
-import { Button, Col } from 'react-bootstrap';
 
 
 const mapStateToProps = (store) => {
