@@ -7,9 +7,9 @@ import {
   PageHeader,
   Row
 } from 'react-bootstrap'
-import reduxlogo from '../public/images/reduxlogo.svg'
-import reactlogo from '../public/images/reactlogo.svg'
-import graphqllogo from '../public/images/graphqllogo.svg'
+import reduxlogo from './public/images/reduxlogo.svg'
+import reactlogo from './public/images/reactlogo.svg'
+import graphqllogo from './public/images/graphqllogo.svg'
 import '../App.css';
 
 const mapStateToProps = (store) => {
