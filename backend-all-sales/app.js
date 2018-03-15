@@ -10,6 +10,7 @@ let path = require('path')
 var sequelize = require('sequelize');
 
 app.use(express.static('public'))
+app.use(express.static(path.resolve(__dirname, '../frontend-all-sales/build')));
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
@@ -194,7 +195,7 @@ app.delete('/api/items/user/delete', authorization, (req, res) => {
 // })
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './public', 'index.html')); });
+  res.sendFile(path.resolve(__dirname, './public/images', 'index.html')); });
 
 
 app.get('*', (req, res) => {
