@@ -16,7 +16,14 @@ export function getItems(APIURL) {
   }
 }
 
-export function getUserItems(APIURL) {
+export function removeCartItem(e) {
+  return {
+    type: "REMOVE_CART_ITEM",
+    payload: e
+  }
+}
+
+export function getUserItems(APIURL, arr) {
   return (dispatch) => {
     return fetch(`${APIURL}api/items/user?authToken=${token}`,
     {
@@ -37,6 +44,18 @@ export function getUserItems(APIURL) {
     .catch(e => console.log(e))
   }
 }
+
+//
+// export function getUserItems() {
+//   let cartItems = localStorage.getItem("cartItems")
+//   let items = JSON.parse(cartItems)
+//
+//     return {
+//       type: "GET_CART_ITEMS",
+//       payload: items
+//     }
+//   }
+
 
 export function redirect() {
   return {

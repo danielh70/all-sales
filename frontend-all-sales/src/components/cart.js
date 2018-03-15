@@ -5,7 +5,7 @@ import NavBar from '../components/navbar';
 import { Loader } from '../presentation/Loader'
 import '../App.css';
 import { setLoginStatus } from '../actions/userForm'
-import { getUserItems } from '../actions/items'
+import { getUserItems, removeCartItem } from '../actions/items'
 import { Button, Col } from 'react-bootstrap';
 
 
@@ -23,21 +23,18 @@ export default connect(mapStateToProps)(class Cart extends Component {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
     this.props.dispatch(getUserItems(this.props.APIURL))
   }
-  //
-  // componentDidMount() {
-  //
-  // }
-  //
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("nextProps:", nextProps);
-  //
-  // }
 
   removeItem = (e) => {
     let itemId = [e.target.value];
+    let itemIdNum = parseInt(itemId)
     let token = this.props.authorized.authToken;
+    // console.log("item id:", itemIdNum);
 
-    // console.log("button id", itemId);
+    let test = itemIdNum =>
+       this.props.items.filter(el => {
+        return el.id !== itemIdNum
+      })
+    this.props.dispatch(removeCartItem(test(itemIdNum)))
 
     fetch(`${this.props.APIURL}api/items/user/delete?authToken=${token}`,
       {
@@ -51,19 +48,13 @@ export default connect(mapStateToProps)(class Cart extends Component {
     .then(res => {
       return res.json()
     })
-    .then(res => {
-      if(res) {
-        this.props.dispatch(getUserItems(this.props.APIURL))
-      }
-    })
     .catch(e => console.log(e))
   }
 
 
-    render() {
-      console.log("STATUS:", this.props.authorized.authToken)
-      console.log("CURRENT USER ITEMS:", this.props.items)
 
+    render() {
+      console.log("CURRENT USER ITEMS:", this.props.items)
 
       return (
         <div>

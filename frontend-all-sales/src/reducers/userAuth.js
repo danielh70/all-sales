@@ -11,7 +11,7 @@ export default (currentState=initialState, action) => {
   let newState
   switch(action.type){
     case("USER_STATUS"):{
-      const userName = Object.assign({}, currentState.user, { firstName: action.payload.firstName })
+      const userName = { ...currentState.user, firstName: action.payload.firstName }
       newState = Object.assign({}, currentState, { authToken: action.payload.authToken, user: userName, loggedIn: true })
       break
     }
