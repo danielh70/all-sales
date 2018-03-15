@@ -37,9 +37,9 @@ export default connect(mapStateToProps)(class Shopping extends Component {
   handleFormSubmit = (id) => {
     id.preventDefault()
     let token = this.props.authorized.authToken
-      console.log(this.selectedCheckboxes);
+      // console.log(this.selectedCheckboxes);
       let selected = [...this.selectedCheckboxes]
-      console.log(selected)
+      // console.log(selected)
 
         fetch(`${this.props.APIURL}api/items/new?authToken=${token}`,
           {
@@ -65,7 +65,7 @@ export default connect(mapStateToProps)(class Shopping extends Component {
 
 
   toggleCheckbox = (label, id) => {
-    console.log("label id:", id);
+    // console.log("label id:", id);
     if (this.selectedCheckboxes.has(id)) {
       this.selectedCheckboxes.delete(id);
     } else {

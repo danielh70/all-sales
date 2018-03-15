@@ -3,7 +3,7 @@ import isValidEmail from 'sane-email-validation'
 const validate = values => {
 
   const errors = {}
-  console.log("errors:", errors)
+  // console.log("errors:", errors)
   if (!values.firstName || !values.firstName.trim()) {
     errors.firstName = '*'
   }

@@ -24,7 +24,6 @@ export default connect(mapStateToProps)(class NewPostPage extends Component {
 
 
     render() {
-      console.log(this.props, this.props.authorized)
       return (
         <div>
           <NavBar />
