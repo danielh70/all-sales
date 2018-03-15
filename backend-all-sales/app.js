@@ -10,7 +10,6 @@ let path = require('path')
 var sequelize = require('sequelize');
 
 app.use(express.static('public'))
-app.use(express.static(path.resolve(__dirname, '../frontend-all-sales/build')));
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
