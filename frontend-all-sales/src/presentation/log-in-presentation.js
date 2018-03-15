@@ -6,17 +6,12 @@ import { connect } from 'react-redux';
 import { setLoginStatus } from '../actions/userForm';
 
 
-
-
 const mapStateToProps = (store) => {
   return {
     APIURL: store.appState.APIURL,
     authorized: store.authorized.loggedIn
   }
 }
-
-
-
 
 export default connect(mapStateToProps)(class LogInPage extends Component {
 

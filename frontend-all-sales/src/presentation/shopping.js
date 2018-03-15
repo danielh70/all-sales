@@ -17,7 +17,7 @@ const mapStateToProps = (store) => {
   }
 }
 
-export class Shopping extends Component {
+class Shopping extends Component {
 
   componentDidMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
@@ -60,8 +60,6 @@ export class Shopping extends Component {
    }
 
 
-
-
   toggleCheckbox = (label, id) => {
     // console.log("label id:", id);
     if (this.selectedCheckboxes.has(id)) {
@@ -70,7 +68,6 @@ export class Shopping extends Component {
       this.selectedCheckboxes.add(id);
     }
   }
-
 
   createCheckboxes = () => (
     this.props.items.all.map(this.createCheckbox)
@@ -91,30 +88,33 @@ export class Shopping extends Component {
   )
 
 
-    render() {
-      return (
-        <div>
-          <NavBar />
+  render() {
+    return (
+      <div>
+        <NavBar />
 
-          <h1 className="move-left">Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
-          <h3 className="white-text-shadow move-left">Add items to your cart:</h3>
+        <h1 className="move-left">Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
+        <h3 className="white-text-shadow move-left">Add items to your cart:</h3>
 
-          { this.props.items.all.length === 0 && <Loader /> }
+        { this.props.items.all.length === 0 && <Loader /> }
 
-          <center>
-            <form onSubmit={this.handleFormSubmit} id="checkbox-form">
-                {this.createCheckboxes()}
+        <center>
+          <form onSubmit={this.handleFormSubmit} id="checkbox-form">
+              {this.createCheckboxes()}
 
-              {
-              this.selectedCheckboxes &&
-                <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
-              }
+            {
+            this.selectedCheckboxes &&
+              <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
+            }
 
-              { this.props.items.redirect && <Redirect to="/cart" /> }
-              </form>
-            </center>
-        </div>
-      )
-    }
+            { this.props.items.redirect && <Redirect to="/cart" /> }
+            </form>
+          </center>
+      </div>
+    )
   }
-export default connect(mapStateToProps)(Shopping)
+}
+
+export default connect(
+  mapStateToProps
+)(Shopping)
