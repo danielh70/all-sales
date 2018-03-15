@@ -11,8 +11,7 @@ const mapStateToProps = (store) => {
   }
 }
 
-
-export default connect(mapStateToProps)(class NavBarHeader extends Component {
+class NavBarHeader extends Component {
 
   logout = () => {
     localStorage.removeItem("authToken")
@@ -41,4 +40,7 @@ export default connect(mapStateToProps)(class NavBarHeader extends Component {
     )
   }
 }
-)
+
+export default connect(
+  mapStateToProps
+)(NavBarHeader)

@@ -35,6 +35,7 @@ export function addUser(APIURL, e){
         })
       }
     })
+    .catch(e => console.log(e))
   }
 }
 
@@ -120,5 +121,5 @@ export function createUser(e) {
     .then(res => {
       window.location.reload()
     })
-    .catch(e => console.log(e))
+    // .catch(e => console.log(e))
 }

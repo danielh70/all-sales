@@ -14,7 +14,7 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps)(class Cart extends Component {
+class Cart extends Component {
 
   componentWillMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
@@ -50,50 +50,53 @@ export default connect(mapStateToProps)(class Cart extends Component {
 
 
 
-    render() {
-      console.log("CURRENT USER ITEMS:", this.props.items)
+  render() {
+    console.log("CURRENT USER ITEMS:", this.props.items)
 
-      return (
-        <div>
-          <NavBar />
+    return (
+      <div>
+        <NavBar />
 
-          <h1>Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
-          {
-            this.props.authorized.loggedIn && <h3>
-            <span className="white-text-shadow">Current items in your cart:</span>
-          </h3>
-          }
+        <h1>Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
+        {
+          this.props.authorized.loggedIn && <h3>
+          <span className="white-text-shadow">Current items in your cart:</span>
+        </h3>
+        }
 
-          {
-            !this.props.authorized.loggedIn &&
-            <h3 className="white-text-shadow">Please log in to use the shopping cart feature.</h3>
-          }
+        {
+          !this.props.authorized.loggedIn &&
+          <h3 className="white-text-shadow">Please log in to use the shopping cart feature.</h3>
+        }
 
-          <center>
-            <table id="cart-table" className="margin-5">
-              {
-                this.props.items.map(el => {
-                  return (
-                    <tbody key={el.itemId}>
-                      <tr className="margin-5 padding-5">
-                        <td className="margin-5 padding-5" id={el.itemId}>
-                          ID: {el.itemId}
-                        </td>
-                        <td className="margin-5 padding-5">
-                          Name: {el.name}
-                        </td>
-                        <td>
-                          <button onClick={this.removeItem} value={el.itemId} className="delete-button">Remove Item</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  )
-                })
-              }
-            </table>
-          </center>
-        </div>
-      )
-    }
+        <center>
+          <table id="cart-table" className="margin-5">
+            {
+              this.props.items.map(el => {
+                return (
+                  <tbody key={el.itemId}>
+                    <tr className="margin-5 padding-5">
+                      <td className="margin-5 padding-5" id={el.itemId}>
+                        ID: {el.itemId}
+                      </td>
+                      <td className="margin-5 padding-5">
+                        Name: {el.name}
+                      </td>
+                      <td>
+                        <button onClick={this.removeItem} value={el.itemId} className="delete-button">Remove Item</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                )
+              })
+            }
+          </table>
+        </center>
+      </div>
+    )
   }
-)
+}
+
+  export default connect(
+    mapStateToProps
+  )(Cart)

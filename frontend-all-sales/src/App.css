@@ -8,7 +8,7 @@
   bottom: 230px;
 }
 
-html {
+html, body {
   height: 100%;
   background-image: linear-gradient(to top, #94b6eb, #86a8dc, #789acd, #6b8cbe, #5d7eb0);
 }

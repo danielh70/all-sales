@@ -56,8 +56,3 @@ SignUpForm = reduxForm({
 
 
 export default SignUpForm;
-// const RenderSelect = createRenderer((input, label, { children }) =>
-//   <select {...input}>
-//     {children}
-//   </select>
-// )

@@ -1,13 +1,17 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-// import App from '../App';
+// import ConnectedApp, { App } from '../App'
 // import { mount } from 'enzyme'
 // import Enzyme from 'enzyme';
 // import Adapter from 'enzyme-adapter-react-16';
 // import NavBar from '../components/navbar';
 // import SignUpForm from '../components/sign-up';
-// import { connect } from 'react-redux'
-// import store from '../store'
+// import configureMockStore from 'redux-mock-store'
+//
+// import jsdom from 'jsdom'
+// const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
+// global.document = doc
+// global.window = doc.defaultView
 //
 //
 // Enzyme.configure({ adapter: new Adapter() });

@@ -18,7 +18,7 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps)(class Home extends Component {
+class Home extends Component {
 
   componentWillMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
@@ -42,4 +42,7 @@ export default connect(mapStateToProps)(class Home extends Component {
       );
     }
   }
-)
+
+  export default connect(
+    mapStateToProps
+  )(Home)
