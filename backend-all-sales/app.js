@@ -193,9 +193,9 @@ app.delete('/api/items/user/delete', authorization, (req, res) => {
 //   user.removeItem(1)
 // })
 
-app.get('/api', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './public/images', 'index.html')); });
-
+// app.get('/api', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './public/images', 'index.html')); });
+//
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend-all-sales/build', 'index.html')); });
