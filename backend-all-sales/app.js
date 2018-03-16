@@ -196,9 +196,9 @@ app.delete('/api/items/user/delete', authorization, (req, res) => {
 app.get('/api/home', (req, res) => {
   res.sendFile(path.resolve(__dirname, './public/images', 'index.html')); });
 
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend-all-sales/build', 'index.html')); });
+//
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../frontend-all-sales/build', 'index.html')); });
 
 
 module.exports = app

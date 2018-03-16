@@ -63,6 +63,25 @@ html, body {
   transition-duration: 0.5s;
 }
 
+.graphql-query {
+  margin: 40px;
+  background: linear-gradient(to bottom, rgb(200, 53, 171) 0%, rgb(229, 53, 171) 100%);
+  width: 200px;
+  height: 45px;
+  border-radius: 15px;
+  -webkit-transition-duration: 0.5s;
+  /* Safari */
+  transition-duration: 0.5s;
+}
+
+.graphql-query:hover {
+    margin: 40px;
+    background: white;
+    border: rgb(229, 53, 171) 2px solid;
+    color: rgb(229, 53, 171);
+}
+
+
 .checkbox-form-button:hover {
     margin: 40px;
     background: white;
@@ -236,7 +255,7 @@ p, h3, h4, button {
 .redux-logo {
   animation: redux-logo-spin infinite 20s linear;
   height: 180px;
-  opacity: .4;
+  opacity: .5;
   z-index: -1;
 }
 
@@ -266,7 +285,7 @@ p, h3, h4, button {
 .react-logo {
   animation: react-logo-spin infinite 20s linear;
   height: 180px;
-  opacity: .4;
+  opacity: .5;
   z-index: -1;
 }
 
@@ -296,7 +315,7 @@ p, h3, h4, button {
 .graphql-logo {
   animation: graphql-logo-spin infinite 20s linear;
   height: 180px;
-  opacity: .4;
+  opacity: .5;
   z-index: -1;
 }
 

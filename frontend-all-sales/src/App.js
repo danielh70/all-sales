@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import gql from 'graphql-tag';
 import Shopping from './presentation/shopping';
 import SignUpPage from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
@@ -8,6 +13,12 @@ import Home from './presentation/home';
 import NewPostPage from './presentation/new-post-page';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+
+const client = new ApolloClient({
+  link: new HttpLink({ uri: 'http://localhost:5000/graphql' }),
+  cache: new InMemoryCache()
+});
+
 
 
 const mapStateToProps = (store) => {
@@ -32,7 +43,9 @@ class App extends Component {
               )} />
 
               <Route exact path="/home" render={props => (
-                <Home />
+                <ApolloProvider client={client}>
+                  <Home />
+                </ApolloProvider>
               )} />
 
              <Route exact path="/shopping" render={props => (
@@ -63,7 +76,7 @@ class App extends Component {
       );
     }
   }
-  
+
 export default connect(
   mapStateToProps
 )(App)
