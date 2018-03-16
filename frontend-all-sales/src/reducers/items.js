@@ -1,37 +1,35 @@
-const initialState = {
+import {
+  ITEMS_FETCHED, ADD_CURRENT_USER_ITEMS,
+  REDIRECT_FROM_ITEMS, REMOVE_CART_ITEM
+} from '../actions/items';
+
+
+const INITIAL_STATE = {
   all: [],
   currentUser: [],
   redirect: false
 }
 
-export default (currentState=initialState, action) => {
-  let newState
+export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    case("ITEMS_FETCHED"): {
-      newState = { ...currentState, all: action.payload }
-      break
-    }
-    case("ITEM_ADDED"): {
-      let items = currentState.all.slice()
-      items.push(action.payload)
-      newState = { ...currentState, all: items }
-      break
-    }
-    case("ADD_CURRENT_USER_ITEMS"): {
-      newState = { ...currentState, currentUser: action.payload }
-      break
-    }
-    case("REDIRECT_FROM_ITEMS"): {
-      newState = { ...currentState, redirect: true }
-      break
-    }
-    case("REMOVE_CART_ITEM"): {
-      console.log("action payload", action.payload)
-      newState = { ...currentState, currentUser: action.payload }
-      break
-    }
+
+    case ITEMS_FETCHED:
+      return state = { ...state, all: action.payload }
+    case ADD_CURRENT_USER_ITEMS:
+      return state = { ...state, currentUser: action.payload }
+    case REDIRECT_FROM_ITEMS:
+      return state = { ...state, redirect: true }
+    case REMOVE_CART_ITEM:
+      return state = { ...state, currentUser: action.payload }
     default:
-      newState = initialState
+      return state
   }
-  return newState
 }
+
+
+// case 'ITEM_ADDED': {
+//   let items = state.all.slice()
+//   items.push(action.payload)
+//   state = { ...state, all: items }
+//   break
+// }

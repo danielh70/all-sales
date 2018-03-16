@@ -5,6 +5,11 @@ var APIURL;
     APIURL = "http://localhost:3000/"
   }
 
+export const ERROR_ADDING_USER = 'ERROR_ADDING_USER';
+export const USER_ADDED = 'USER_ADDED';
+export const USER_STATUS = 'USER_STATUS';
+export const LOG_OUT = 'LOG_OUT';
+
 
 export function addUser(APIURL, e){
   return (dispatch) => {
@@ -25,12 +30,12 @@ export function addUser(APIURL, e){
       // console.log("2nd res", res);
       if(res.errors) {
         dispatch({
-          type: 'ERROR_ADDING_USER',
+          type: ERROR_ADDING_USER,
           payload: res.errors
         })
       } else {
         dispatch({
-          type: 'USER_ADDED',
+          type: USER_ADDED,
           payload: res.user
         })
       }
@@ -78,13 +83,13 @@ export function setLoginStatus(APIURL) {
         // console.log("LOGIN STATUS RESPONSE", res)
         if(res.status !== 401) {
         dispatch({
-          type: "USER_STATUS",
+          type: USER_STATUS,
           payload: res.user
         })
         return
       } else {
         dispatch({
-          type: "LOG_OUT"
+          type: LOG_OUT
         })
       }
     })
@@ -95,7 +100,7 @@ export function setLoginStatus(APIURL) {
 export function logout() {
   localStorage.removeItem("authToken")
   return ({
-    type: "LOG_OUT"
+    type: LOG_OUT
   })
 }
 

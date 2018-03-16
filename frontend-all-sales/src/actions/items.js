@@ -1,5 +1,10 @@
 const token = localStorage.getItem("authToken")
 
+export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+export const ITEMS_FETCHED = 'ITEMS_FETCHED';
+export const ADD_CURRENT_USER_ITEMS = 'ADD_CURRENT_USER_ITEMS';
+export const REDIRECT_FROM_ITEMS = 'REDIRECT_FROM_ITEMS';
+
 export function getItems(APIURL) {
   return (dispatch) => {
     return fetch(`${APIURL}api/shopping`)
@@ -9,7 +14,7 @@ export function getItems(APIURL) {
     .then(res => {
       // console.log(res);
       dispatch({
-        type: "ITEMS_FETCHED",
+        type: ITEMS_FETCHED,
         payload: res.items
       })
     })
@@ -18,7 +23,7 @@ export function getItems(APIURL) {
 
 export function removeCartItem(e) {
   return {
-    type: "REMOVE_CART_ITEM",
+    type: REMOVE_CART_ITEM,
     payload: e
   }
 }
@@ -36,7 +41,7 @@ export function getUserItems(APIURL, arr) {
     })
     .then(res => {
       dispatch({
-        type: "ADD_CURRENT_USER_ITEMS",
+        type: ADD_CURRENT_USER_ITEMS,
         payload: res.items[0]
       })
       // console.log("RESPONSE:", res)
@@ -59,7 +64,7 @@ export function getUserItems(APIURL, arr) {
 
 export function redirect() {
   return {
-    type: "REDIRECT_FROM_ITEMS"
+    type: REDIRECT_FROM_ITEMS
   }
 }
 
