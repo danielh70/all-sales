@@ -31,9 +31,6 @@ const mapStateToProps = (store) => {
 }
 
 class Home extends Component {
-  state = {
-    items: []
-  }
 
   componentWillMount() {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
@@ -41,13 +38,14 @@ class Home extends Component {
 
   gQuery = () => {
     client.query({ query: gql` {
-      allItems(first: 4) {
+      allItems(first: 3) {
         nodes {
           id name
         }
       }
     }`
-  }).then(res => alert(JSON.stringify(res.data.allItems)))
+  })
+  .then(res => window.alert(`You submitted:\n\n${JSON.stringify(res.data, null, 2)}`))
   }
 
     render() {
