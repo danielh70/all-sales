@@ -20,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
     case REDIRECT_FROM_ITEMS:
       return state = { ...state, redirect: true }
     case REMOVE_CART_ITEM:
+    console.log("payload", action.payload)
       return state = { ...state, currentUser: action.payload }
     default:
       return state

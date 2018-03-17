@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, redirect } from '../actions/items'
+import { getItems, redirect, submitItems } from '../actions/items'
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
@@ -9,54 +9,47 @@ import { Redirect } from 'react-router-dom';
 import '../App.css';
 
 
-const mapStateToProps = (store) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    APIURL: store.appState.APIURL,
-    authorized: store.authorized,
-    items: store.items
+    setLoginStatus: () => {
+      dispatch(setLoginStatus()).then(res => {
+        dispatch(getItems())
+      })
+    },
+    submitItems: (selected) => {
+      dispatch(submitItems(selected))
+    },
+    redirect: () => dispatch(redirect())
+    }
+  }
+
+
+function mapStateToProps(state) {
+  return {
+    authorized: state.authorized,
+    items: state.items
   }
 }
 
 class Shopping extends Component {
 
-  componentDidMount() {
-    this.props.dispatch(setLoginStatus(this.props.APIURL))
-    .then(res => this.props.dispatch(getItems(this.props.APIURL)))
+  componentWillMount() {
+    this.props.setLoginStatus();
     this.selectedCheckboxes = new Set();
 
   }
 
   redirect = () => {
-   this.props.dispatch(redirect())
+   this.props.redirect()
   }
-
-
 
   handleFormSubmit = (id) => {
     id.preventDefault()
     let token = this.props.authorized.authToken
-      // console.log(this.selectedCheckboxes);
-      let selected = [...this.selectedCheckboxes]
-      // console.log(selected)
+    let selected = [...this.selectedCheckboxes]
 
-        fetch(`${this.props.APIURL}api/items/new?authToken=${token}`,
-          {
-            body: JSON.stringify(selected),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: "POST"
-          }
-        )
-        .then(res => {
-          return res.json()
-        })
-        .then(res => {
-          if(res) {
-            this.redirect()
-          }
-        })
-        .catch(e => console.log("error----------", e))
+    this.props.submitItems(selected)
+    this.redirect()
    }
 
 
@@ -75,15 +68,12 @@ class Shopping extends Component {
 
   createCheckbox = label => (
     <table id="checkbox" key={label.id}>
-
-
-          <Checkbox
-            label={label.name}
-            handleCheckboxChange={this.toggleCheckbox}
-            key={label.id}
-            id={label.id}
-          />
-
+      <Checkbox
+        label={label.name}
+        handleCheckboxChange={this.toggleCheckbox}
+        key={label.id}
+        id={label.id}
+      />
     </table>
   )
 
@@ -116,5 +106,6 @@ class Shopping extends Component {
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Shopping)

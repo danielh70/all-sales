@@ -1,3 +1,9 @@
+
+export const ERROR_ADDING_USER = 'ERROR_ADDING_USER';
+export const USER_ADDED = 'USER_ADDED';
+export const USER_STATUS = 'USER_STATUS';
+export const LOG_OUT = 'LOG_OUT';
+
 var APIURL;
   if(process.env.NODE_ENV === 'production') {
     APIURL = "/"
@@ -5,13 +11,8 @@ var APIURL;
     APIURL = "http://localhost:3000/"
   }
 
-export const ERROR_ADDING_USER = 'ERROR_ADDING_USER';
-export const USER_ADDED = 'USER_ADDED';
-export const USER_STATUS = 'USER_STATUS';
-export const LOG_OUT = 'LOG_OUT';
 
-
-export function addUser(APIURL, e){
+export function addUser(e){
   return (dispatch) => {
     return fetch(`${APIURL}api/users`,
       {
@@ -71,7 +72,7 @@ export function login(e){
 }
 
 
-export function setLoginStatus(APIURL) {
+export function setLoginStatus() {
   let token = localStorage.getItem("authToken")
 
   return (dispatch) => {

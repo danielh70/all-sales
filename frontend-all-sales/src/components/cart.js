@@ -2,23 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavBar from '../components/navbar';
 import '../App.css';
-import { setLoginStatus } from '../actions/userForm'
-import { getUserItems, removeCartItem } from '../actions/items'
+import { setLoginStatus } from '../actions/userForm';
+import { getUserItems, removeCartItem } from '../actions/items';
 
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeCartItem: (e, nextState) => {
+        dispatch(removeCartItem(e, nextState))
+      },
+      setLoginStatus: () => {
+        dispatch(setLoginStatus()).then(res => {
+          dispatch(getUserItems())
+        })
+      }
+    }
+  }
 
 const mapStateToProps = (store) => {
   return {
-    APIURL: store.appState.APIURL,
-    authorized: store.authorized,
-    items: store.items.currentUser
+    items: store.items.currentUser,
+    authorized: store.authorized
   }
 }
 
 class Cart extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(setLoginStatus(this.props.APIURL))
-    this.props.dispatch(getUserItems(this.props.APIURL))
+  componentDidMount() {
+    this.props.setLoginStatus()
   }
 
   removeItem = (e) => {
@@ -27,25 +39,15 @@ class Cart extends Component {
     let token = this.props.authorized.authToken;
     // console.log("item id:", itemIdNum);
 
+
     let removeThisItem = itemIdNum =>
        this.props.items.filter(el =>
           el.id !== itemIdNum
       )
-    this.props.dispatch(removeCartItem(removeThisItem(itemIdNum)))
 
-    fetch(`${this.props.APIURL}api/items/user/delete?authToken=${token}`,
-      {
-        body: JSON.stringify(itemId),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "DELETE"
-      }
-    )
-    .then(res => {
-      return res.json()
-    })
-    .catch(e => console.log(e))
+      console.log(removeThisItem(2));
+
+      this.props.removeCartItem(itemIdNum, removeThisItem(itemIdNum))
   }
 
 
@@ -98,5 +100,6 @@ class Cart extends Component {
 }
 
   export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
   )(Cart)

@@ -1,11 +1,18 @@
-const token = localStorage.getItem("authToken")
-
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
 export const ITEMS_FETCHED = 'ITEMS_FETCHED';
 export const ADD_CURRENT_USER_ITEMS = 'ADD_CURRENT_USER_ITEMS';
 export const REDIRECT_FROM_ITEMS = 'REDIRECT_FROM_ITEMS';
 
-export function getItems(APIURL) {
+var APIURL;
+  if (process.env.NODE_ENV === 'production') {
+    APIURL = "/"
+  } else {
+    APIURL = "http://localhost:3000/"
+  }
+
+const token = localStorage.getItem("authToken")
+
+export function getItems() {
   return (dispatch) => {
     return fetch(`${APIURL}api/shopping`)
     .then(res => {
@@ -21,14 +28,14 @@ export function getItems(APIURL) {
   }
 }
 
-export function removeCartItem(e) {
-  return {
-    type: REMOVE_CART_ITEM,
-    payload: e
-  }
-}
+// export function removeCartItem(e) {
+//   return {
+//     type: REMOVE_CART_ITEM,
+//     payload: e
+//   }
+// }
 
-export function getUserItems(APIURL, arr) {
+export function getUserItems(arr) {
   return (dispatch) => {
     return fetch(`${APIURL}api/items/user?authToken=${token}`,
     {
@@ -50,6 +57,31 @@ export function getUserItems(APIURL, arr) {
   }
 }
 
+export function removeCartItem(e, nextState) {
+  console.log("e", e);
+  return (dispatch) => {
+    return fetch(`${APIURL}api/items/user/delete?authToken=${token}`,
+      {
+        body: JSON.stringify([e]),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "DELETE"
+      }
+    )
+    .then(res => {
+      return res.json()
+    })
+    .then(res => {
+      dispatch({
+        type: REMOVE_CART_ITEM,
+        payload: nextState
+      })
+    })
+    .catch(err => console.log("error", err))
+  }
+}
+
 //
 // export function getUserItems() {
 //   let cartItems = localStorage.getItem("cartItems")
@@ -60,6 +92,29 @@ export function getUserItems(APIURL, arr) {
 //       payload: items
 //     }
 //   }
+
+export function submitItems(selected) {
+  return (dispatch) => {
+    return fetch(`${APIURL}api/items/new?authToken=${token}`,
+      {
+        body: JSON.stringify(selected),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST"
+      }
+    )
+    .then(res => {
+      return res
+    })
+    .then(res => {
+      dispatch({
+        type: ITEMS_FETCHED,
+        payload: res
+      })
+    })
+  }
+}
 
 
 export function redirect() {

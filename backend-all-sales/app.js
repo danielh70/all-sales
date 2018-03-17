@@ -178,7 +178,7 @@ app.get('/api/items/user', authorization, (req, res) => {
 app.delete('/api/items/user/delete', authorization, (req, res) => {
   let user = req.currentUser.id
   let item = req.body
-  console.log(...item)
+  console.log("item:", item)
 
   Users.findById(user).then(user => {
     user.removeItem(...item)

@@ -21,7 +21,7 @@ const mapStateToProps = (store) => {
 class Home extends Component {
 
   componentWillMount() {
-    this.props.dispatch(setLoginStatus(this.props.APIURL))
+    this.props.dispatch(setLoginStatus())
   }
 
     render() {
