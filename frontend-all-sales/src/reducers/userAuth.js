@@ -17,16 +17,13 @@ export default (state = INITIAL_STATE, action) => {
   switch(action.type){
 
     case USER_STATUS:
-      const userName = { ...state.user, firstName: action.payload.firstName }
-      return state = { ...state, authToken: action.payload.authToken, user: userName, loggedIn: true }
+      return state = { ...state, authToken: action.payload.authToken, user: { firstName: action.payload.firstName }, loggedIn: true }
     case USER_ADDED:
       return state =  { ...state, newUserSuccess: true }
     case LOG_OUT:
-      const noUser = { ...state.user, firstName: '' }
-      return state = { ...state, authToken: null, user: noUser, loggedIn: false }
+      return state = { ...state, authToken: null, user: { firstName: '' }, loggedIn: false }
     case ERROR_ADDING_USER:
-      state = { ...state, errors: action.payload.validations }
-
+      return state = { ...state, errors: action.payload.validations }
     default:
       return state
   }

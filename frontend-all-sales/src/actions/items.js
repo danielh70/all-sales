@@ -2,6 +2,8 @@ export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
 export const ITEMS_FETCHED = 'ITEMS_FETCHED';
 export const ADD_CURRENT_USER_ITEMS = 'ADD_CURRENT_USER_ITEMS';
 export const REDIRECT_FROM_ITEMS = 'REDIRECT_FROM_ITEMS';
+export const LOADING_STOP = 'LOADING_STOP';
+export const LOADING_START = 'LOADING_START';
 
 var APIURL;
   if (process.env.NODE_ENV === 'production') {
@@ -28,12 +30,17 @@ export function getItems() {
   }
 }
 
-// export function removeCartItem(e) {
-//   return {
-//     type: REMOVE_CART_ITEM,
-//     payload: e
-//   }
-// }
+export function startLoading() {
+  return {
+    type: LOADING_START
+  }
+}
+
+export function stopLoading() {
+  return {
+    type: LOADING_STOP
+  }
+}
 
 export function getUserItems(arr) {
   return (dispatch) => {

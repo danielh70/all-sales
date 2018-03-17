@@ -1,18 +1,24 @@
 import {
   ITEMS_FETCHED, ADD_CURRENT_USER_ITEMS,
-  REDIRECT_FROM_ITEMS, REMOVE_CART_ITEM
+  REDIRECT_FROM_ITEMS, REMOVE_CART_ITEM,
+  LOADING_START, LOADING_STOP
 } from '../actions/items';
 
 
 const INITIAL_STATE = {
   all: [],
   currentUser: [],
-  redirect: false
+  redirect: false,
+  loading: false
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-
+    
+    case LOADING_START:
+      return state = { ...state, loading: true }
+    case LOADING_STOP:
+      return state = { ...state, loading: false }
     case ITEMS_FETCHED:
       return state = { ...state, all: action.payload }
     case ADD_CURRENT_USER_ITEMS:
@@ -20,7 +26,6 @@ export default (state = INITIAL_STATE, action) => {
     case REDIRECT_FROM_ITEMS:
       return state = { ...state, redirect: true }
     case REMOVE_CART_ITEM:
-    console.log("payload", action.payload)
       return state = { ...state, currentUser: action.payload }
     default:
       return state
