@@ -8,8 +8,9 @@ import { setLoginStatus } from '../actions/userForm';
 
 const mapStateToProps = (store) => {
   return {
-    APIURL: store.appState.APIURL,
-    authorized: store.authorized.loggedIn
+    APIURL:     store.appState.APIURL,
+    authorized: store.authorized.loggedIn,
+    loading:    store.items.loading
   }
 }
 
@@ -21,7 +22,7 @@ export default connect(mapStateToProps)(class LogInPage extends Component {
 
 
     render() {
-      console.log(this.props, this.props.authorized)
+      console.log(this.props.loading)
       return (
         <div>
           <NavBar />

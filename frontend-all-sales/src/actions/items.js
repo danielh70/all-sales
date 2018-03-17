@@ -1,33 +1,25 @@
-export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
-export const ITEMS_FETCHED = 'ITEMS_FETCHED';
+export const REMOVE_CART_ITEM       = 'REMOVE_CART_ITEM';
+export const ITEMS_FETCHED          = 'ITEMS_FETCHED';
 export const ADD_CURRENT_USER_ITEMS = 'ADD_CURRENT_USER_ITEMS';
-export const REDIRECT_FROM_ITEMS = 'REDIRECT_FROM_ITEMS';
-export const LOADING_STOP = 'LOADING_STOP';
-export const LOADING_START = 'LOADING_START';
+export const REDIRECT_FROM_ITEMS    = 'REDIRECT_FROM_ITEMS';
+export const LOADING_STOP           = 'LOADING_STOP';
+export const LOADING_START          = 'LOADING_START';
 
-var APIURL;
-  if (process.env.NODE_ENV === 'production') {
-    APIURL = "/"
-  } else {
-    APIURL = "http://localhost:3000/"
-  }
+let APIURL; process.env.NODE_ENV === 'production' ? APIURL = "/" : APIURL = "http://localhost:3000/";
+const TOKEN = localStorage.getItem("authToken");
 
-const token = localStorage.getItem("authToken")
 
 export function getItems() {
-  return (dispatch) => {
-    return fetch(`${APIURL}api/shopping`)
+  return dispatch =>
+  fetch(`${APIURL}api/shopping`)
+    .then(res => res.json())
     .then(res => {
-      return res.json()
-    })
-    .then(res => {
-      // console.log(res);
       dispatch({
         type: ITEMS_FETCHED,
         payload: res.items
       })
     })
-  }
+  .catch(e => console.log(e))
 }
 
 export function startLoading() {
@@ -42,51 +34,38 @@ export function stopLoading() {
   }
 }
 
-export function getUserItems(arr) {
-  return (dispatch) => {
-    return fetch(`${APIURL}api/items/user?authToken=${token}`,
+export function getUserItems() {
+  return dispatch =>
+    fetch(`${APIURL}api/items/user?authToken=${TOKEN}`,
     {
-      headers: {
-        "Content-Type": 'application/json'
-      }
+      headers: { "Content-Type": 'application/json' }
     })
-    .then(res => {
-      return res.json()
-    })
+    .then(res => res.json())
     .then(res => {
       dispatch({
         type: ADD_CURRENT_USER_ITEMS,
         payload: res.items[0]
       })
-      // console.log("RESPONSE:", res)
     })
-    .catch(e => console.log(e))
-  }
+  .catch(e => console.log(e))
 }
 
 export function removeCartItem(e, nextState) {
-  console.log("e", e);
-  return (dispatch) => {
-    return fetch(`${APIURL}api/items/user/delete?authToken=${token}`,
+  return dispatch =>
+    fetch(`${APIURL}api/items/user/delete?authToken=${TOKEN}`,
       {
         body: JSON.stringify([e]),
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: "DELETE"
-      }
-    )
-    .then(res => {
-      return res.json()
-    })
+      })
+    .then(res => res.json())
     .then(res => {
       dispatch({
         type: REMOVE_CART_ITEM,
         payload: nextState
       })
     })
-    .catch(err => console.log("error", err))
-  }
+  .catch(err => console.log("error", err))
 }
 
 //
@@ -101,35 +80,27 @@ export function removeCartItem(e, nextState) {
 //   }
 
 export function submitItems(selected) {
-  return (dispatch) => {
-    return fetch(`${APIURL}api/items/new?authToken=${token}`,
+  return dispatch =>
+    fetch(`${APIURL}api/items/new?authToken=${TOKEN}`,
       {
         body: JSON.stringify(selected),
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: "POST"
-      }
-    )
-    .then(res => {
-      return res
-    })
+      })
     .then(res => {
       dispatch({
         type: ITEMS_FETCHED,
         payload: res
       })
     })
-  }
+  .catch(e => console.log(e))
 }
-
 
 export function redirect() {
   return {
     type: REDIRECT_FROM_ITEMS
   }
 }
-
 
 export default (function showResults(values) {
   window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)

@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   },
   authToken: '',
   errors: []
-}
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type){
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state
   }
-}
+};
 
 // case("LOG_IN"): {
 //   const userName = { ...state.user, firstName: action.payload.firstName }

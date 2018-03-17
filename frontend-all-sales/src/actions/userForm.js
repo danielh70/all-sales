@@ -1,34 +1,24 @@
 
 export const ERROR_ADDING_USER = 'ERROR_ADDING_USER';
-export const USER_ADDED = 'USER_ADDED';
-export const USER_STATUS = 'USER_STATUS';
-export const LOG_OUT = 'LOG_OUT';
+export const USER_ADDED        = 'USER_ADDED';
+export const USER_STATUS       = 'USER_STATUS';
+export const LOG_OUT           = 'LOG_OUT';
 
-var APIURL;
-  if(process.env.NODE_ENV === 'production') {
-    APIURL = "/"
-  } else {
-    APIURL = "http://localhost:3000/"
-  }
+let APIURL; process.env.NODE_ENV === 'production' ? APIURL = "/" : APIURL = "http://localhost:3000/";
+const TOKEN = localStorage.getItem("authToken")
 
-
-export function addUser(e){
-  return (dispatch) => {
-    return fetch(`${APIURL}api/users`,
+export function addUser(e) {
+  return dispatch =>
+    fetch(`${APIURL}api/users`,
       {
         body: JSON.stringify(e),
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST"
-      }
-    )
+      })
+    .then(res => res.json())
     .then(res => {
-      // console.log("res", res);
-      return res.json()
-    })
-    .then(res => {
-      // console.log("2nd res", res);
       if(res.errors) {
         dispatch({
           type: ERROR_ADDING_USER,
@@ -41,11 +31,10 @@ export function addUser(e){
         })
       }
     })
-    .catch(e => console.log(e))
-  }
+  .catch(e => console.log(e))
 }
 
-export function login(e){
+export function login(e) {
      fetch(`${APIURL}api/login`,
       {
         body: JSON.stringify(e),
@@ -53,35 +42,23 @@ export function login(e){
           'Content-Type': 'application/json'
         },
         method: "POST"
-      }
-    )
-    .then(res => {
-      // console.log("res", res)
-      return res.json()
-    })
+      })
+    .then(res => res.json())
     .then(res => {
         if(res.status !== 400) {
         localStorage.setItem("authToken", res.user.authToken)
-        // console.log("2nd res", res)
       }
     })
-    .then(res => {
-      window.location.reload()
-    })
-    .catch(e => console.log(e))
+    .then(res => window.location.reload())
+  .catch(e => console.log(e))
 }
 
 
 export function setLoginStatus() {
-  let token = localStorage.getItem("authToken")
-
-  return (dispatch) => {
-    return fetch(`${APIURL}api/user?authToken=${token}`)
+  return dispatch =>
+    fetch(`${APIURL}api/user?authToken=${TOKEN}`)
+      .then(res => res.json())
       .then(res => {
-        return res.json()
-      })
-      .then(res => {
-        // console.log("LOGIN STATUS RESPONSE", res)
         if(res.status !== 401) {
         dispatch({
           type: USER_STATUS,
@@ -94,8 +71,7 @@ export function setLoginStatus() {
         })
       }
     })
-    .catch(e => console.log(e))
-  }
+  .catch(e => console.log(e))
 }
 
 export function logout() {
@@ -104,7 +80,6 @@ export function logout() {
     type: LOG_OUT
   })
 }
-
 
 export function createUser(e) {
     return fetch(`${APIURL}api/users`,
@@ -116,16 +91,11 @@ export function createUser(e) {
         method: "POST"
       }
     )
-    .then(res => {
-      // console.log("res", res)
-      return res.json()
-    })
-    .then(res => {
-      localStorage.setItem("authToken", res.authToken)
-      // console.log("2nd res", res)
-    })
-    .then(res => {
-      window.location.reload()
-    })
-    // .catch(e => console.log(e))
+    .then(res =>
+      res.json())
+    .then(res =>
+      localStorage.setItem("authToken", res.authToken))
+    .then(res =>
+      window.location.reload())
+  .catch(e => console.log(e))
 }
