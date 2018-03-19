@@ -20,10 +20,14 @@ export default connect(mapStateToProps)(class LogInPage extends Component {
     this.props.dispatch(setLoginStatus(this.props.APIURL))
   }
 
+  componentDidMount() {
+    localStorage.removeItem("errarar")
+  }
+
 
     render() {
       let errz = localStorage.getItem("errarar")
-      
+
       return (
         <div>
           <NavBar />

@@ -7,6 +7,7 @@ import Cart from './components/cart';
 import Home from './presentation/home';
 import NewPostPage from './presentation/new-post-page';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ImageUpload from './components/image-upload';
 import './App.css';
 
 
@@ -57,13 +58,17 @@ class App extends Component {
                 <NewPostPage />
               )} />
 
+              <Route exact path="/upload" render={props => (
+                <ImageUpload />
+              )} />
+
             </div>
           </Router>
         </div>
       );
     }
   }
-  
+
 export default connect(
   mapStateToProps
 )(App)

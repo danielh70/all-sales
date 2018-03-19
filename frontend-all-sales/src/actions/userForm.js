@@ -49,7 +49,6 @@ export function login(e) {
       }
       if(res.status !== 400) {
       localStorage.setItem("authToken", res.user.authToken)
-      localStorage.removeItem('errarar')
       }
     })
     .then(res => window.location.reload())
