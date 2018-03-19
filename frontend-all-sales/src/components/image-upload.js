@@ -1,25 +1,88 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, FormGroup, Col, Row, ControlLabel } from 'react-bootstrap';
+import Dropzone from 'react-dropzone'
 import '../App.css';
 
-
-
-
-
-
+const APIURL = 'http://localhost:3000/';
+const upload = require('superagent')
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
-    this.state = {file: '',imagePreviewUrl: ''};
+    this.state = {
+      file: '',
+      imagePreviewUrl: '',
+      image: {
+        name: '',
+        data: '',
+        extension: ''
+      }
+    }
   }
 
-  _handleSubmit(e) {
+  uploadImage(imageFile) {
+  return new Promise((resolve, reject) => {
+    let imageFormData = new FormData();
+
+    imageFormData.append('imageFile', imageFile);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('post', '/upload', true);
+
+    xhr.onload = function () {
+      if (this.status == 200) {
+        resolve(this.response);
+      } else {
+        reject(this.statusText);
+      }
+    };
+
+    xhr.send(imageFormData);
+
+  });
+}
+
+  handleSubmit = (e) => {
     e.preventDefault();
     // TODO: do something with -> this.state.file
     console.log('handle uploading-', this.state.file);
+
   }
 
-  _handleImageChange(e) {
+  onDrop = (acceptedFiles, rejectedFiles) => {
+         const { form } = this.state
+         acceptedFiles.forEach(file => {
+           console.log(file);
+           let { name, type } = file
+
+           type = type.split('/')[1]
+           console.log("name:", name, " type:", type)
+
+           let image = {
+             extension: type,
+             name: name,
+           }
+
+           const reader = new FileReader()
+
+           reader.onload = () => {
+             image.data = reader.result
+
+             this.setState({
+               form: Object.assign({}, form, {
+                 image: image,
+               })
+             })
+           }
+
+           reader.onabort = () => console.log('image reading was aborted')
+           reader.onerror = () => console.log('image reading has failed')
+
+           reader.readAsDataURL(file)
+         })
+     }
+
+  handleImageChange = (e) => {
     e.preventDefault();
 
     let reader = new FileReader();
@@ -35,31 +98,98 @@ class ImageUpload extends Component {
     reader.readAsDataURL(file)
   }
 
+  handleNewActivity = () => {
+    fetch(`${APIURL}api/upload`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.form),
+    }).then((resp) => {
+        return resp.json()
+    }).then(resp => {
+      console.log("response", resp);
+    })
+}
+
   render() {
-    let {imagePreviewUrl} = this.state;
+    let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
+
     if (imagePreviewUrl) {
       $imagePreview = (<img src={imagePreviewUrl} />);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
+    console.log(this.state);
+
     return (
       <div className="previewComponent">
-        <form onSubmit={(e)=>this._handleSubmit(e)}>
-          <input className="fileInput"
-            type="file"
-            onChange={(e)=>this._handleImageChange(e)} />
-          <Button className="submitButton"
-            type="submit"
-            onClick={(e)=>this._handleSubmit(e)}>Upload Image</Button>
-        </form>
-        <div className="imgPreview">
-          {$imagePreview}
-        </div>
+
+        <Row>
+       <Col xs={10} >
+         <FormGroup
+           id = "image-form-group"
+           >
+           <ControlLabel id="image">Image</ControlLabel>
+
+           <div className="image-upload-div">
+             <Dropzone
+                 className='dropzone'
+               accept='image/*'
+               onDrop={(files) => {
+                 this.onDrop(files)
+               }}
+             >
+               <div className='dropzone-text'>
+                 <p>Try dropping some image files here, or click me to select files to upload.</p>
+             <br/>
+         <p>By uploading you are agreeing that you either own the image yourself, or are using an image with written permissions to share it.</p>
+               </div>
+             </Dropzone>
+           </div>
+           <br/>
+           <div>
+             File Preview:
+             {this.state.image.name !== '' &&
+               <div>
+                 <pre>{JSON.stringify(this.state.form.image)}</pre>
+                 <img src={this.state.image.data} className="image-preview" alt="preview" />
+                 <p>{this.state.image.name}.{this.state.image.extension}</p>
+                 <br/>
+               </div>
+             }
+           </div>
+
+
+         </FormGroup>
+       </Col>
+     </Row>
+
+     <button onClick={this.handleNewActivity}>click</button>
       </div>
     )
   }
 }
 
 export default ImageUpload
+//
+// <Dropzone
+//   className='dropzone'
+//   accept='image/*'
+//   onDrop={(files) => {
+//     this.onDrop(files)
+//   }}
+// />
+// <form onSubmit={this.handleSubmit}>
+//   <input className="fileInput"
+//     type="file"
+//     onChange={this.handleImageChange} />
+//   <Button className="submitButton"
+//     type="submit"
+//     onClick={this.handleNewActivity}>Upload Image</Button>
+// </form>
+// <div className="imgPreview">
+//   {$imagePreview}
+// </div>

@@ -1,12 +1,9 @@
-import validate from '../components/validate'
-
-
 export const ERROR_ADDING_USER = 'ERROR_ADDING_USER';
 export const USER_ADDED        = 'USER_ADDED';
 export const USER_STATUS       = 'USER_STATUS';
 export const LOG_OUT           = 'LOG_OUT';
 
-let APIURL; process.env.NODE_ENV === 'production' ? APIURL = "/" : APIURL = "http://localhost:3000/";
+const APIURL = process.env.NODE_ENV === 'production' ? "/" : "http://localhost:3000/";
 const TOKEN = localStorage.getItem("authToken")
 
 export function addUser(e) {

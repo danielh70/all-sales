@@ -6,19 +6,37 @@ let Users = require('./models').users
 let Items = require('./models').items
 let UserItems = require('./models').UserItems
 let cors = require('cors')
+const crypto = require('crypto')
+const fs = require ('fs')
 let path = require('path')
+let aws = require('aws-sdk')
+let multer = require('multer')
+let multerS3 = require('multer-s3');
 var sequelize = require('sequelize');
 
-app.use(express.static('public'))
-app.use(bodyParser.json())
-app.use(validator())
-app.use(cors())
+aws.config.region = 'us-west-1';
+const s3 = new aws.S3();
+const BUCKETNAME = process.env.S3_BUCKET;
 
+
+
+// secret access key: efv7C1su73XgdGuqkujzIudIvk/ocoiwEDY3YbOU
+// access key ID: AKIAII5JYWPP67QNER2A
+
+app.use(express.static('public'))
 app.use(express.static(path.resolve(__dirname, '../frontend-all-sales/build')));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(validator());
+app.use(cors());
+
+
 
 app.get('/', (req, res) => {
   res.json({message: 'Server running =\')'})
 });
+
+const router = new express.Router();
 
 const authorization = function(req, res, next) {
   const token = req.query.authToken || req.body.authToken
@@ -119,6 +137,85 @@ app.post('/api/users', function(req, res){
     })
   })
 })
+
+
+
+
+
+
+app.post('/api/upload', (req, res) => {
+
+    const { title, description, name, image } = req.body
+    let { data, extension } = image
+
+    let fileprefix = crypto.createHash('md5').update(data).digest('hex')
+
+    let filename = `${fileprefix}.${extension}`
+
+    data = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""),'base64')
+
+    const s3params = {
+      Bucket: 'all-sales',
+      Key: filename,
+      Body: data,
+      ACL: 'public-read',
+      ContentEncoding: 'base64',
+      ContentType: `image/${extension}`
+    }
+
+    console.log('s3params:', s3params);
+
+    s3.putObject(s3params, (err, data) => {
+      // if (err) {return console.log(err) }
+      // console.log('Image successfully uploaded.');
+
+      console.log("data:", data);
+      console.log("error:", err);
+    })
+  })
+
+  //
+  //   const awsUrl = 'https://all-sales.s3.us-east-1.amazonaws.com/'
+  //
+  //   Items.create({
+  //       title: title,
+  //       description: description,
+  //       location: location,
+  //       cost: cost,
+  //       imageName: awsUrl + filename,
+  //   }).then((activity) => {
+  //       res.status(201)
+  //       res.json({activity: activity})
+  //       // Takes the tag checkbox from our form
+  //       tags = req.body.tags
+  //       let tagArr = []
+  //       // Pushes Id of newly made activity and any tag selected to an array to use for our ActivityTag Table
+  //       for (var property in tags) {
+  //           let val = {
+  //               ActivityId: activity.id,
+  //               TagId: property,
+  //           }
+  //           // Checks if a tag is checked or not
+  //           tags[property] === true
+  //               ? tagArr.push(val)
+  //               : ''
+  //       }
+  //       // Takes the array with new ActivityId and selected TagId and pushes them to our join table (ActivityTag)
+  //       ActivityTag.bulkCreate(tagArr).then(() => {
+  //           return ActivityTag.findAll();
+  //       })
+  //   })
+  // })
+
+
+
+
+
+
+
+
+
+
 
 app.post('/api/items/new', authorization, (req, res) => {
   console.log("req", req.body)

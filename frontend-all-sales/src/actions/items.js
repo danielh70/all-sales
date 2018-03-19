@@ -5,7 +5,7 @@ export const REDIRECT_FROM_ITEMS    = 'REDIRECT_FROM_ITEMS';
 export const LOADING_STOP           = 'LOADING_STOP';
 export const LOADING_START          = 'LOADING_START';
 
-let APIURL; process.env.NODE_ENV === 'production' ? APIURL = "/" : APIURL = "http://localhost:3000/";
+const APIURL = process.env.NODE_ENV === 'production' ? "/" : "http://localhost:3000/";
 const TOKEN = localStorage.getItem("authToken");
 
 
