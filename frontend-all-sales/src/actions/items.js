@@ -51,6 +51,7 @@ export function getUserItems() {
 }
 
 export function removeCartItem(e, nextState) {
+  // localStorage.setItem("items", JSON.stringify(nextState)) // TODO: use this for storage operations.
   return dispatch =>
     fetch(`${APIURL}api/items/user/delete?authToken=${TOKEN}`,
       {

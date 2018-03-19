@@ -88,7 +88,7 @@ app.post('/api/login', (req, res) => {
   })
   .catch(e => {
     res.status(400)
-    res.json({ message: "Invalid" })
+    res.json({ message: "Invalid email or password" })
   })
 })
 

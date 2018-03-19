@@ -6,7 +6,6 @@ import { setLoginStatus } from '../actions/userForm';
 import { getUserItems, removeCartItem } from '../actions/items';
 
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
     removeCartItem: (e, nextState) => {

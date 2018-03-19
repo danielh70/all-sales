@@ -1,3 +1,5 @@
+import validate from '../components/validate'
+
 
 export const ERROR_ADDING_USER = 'ERROR_ADDING_USER';
 export const USER_ADDED        = 'USER_ADDED';
@@ -12,9 +14,7 @@ export function addUser(e) {
     fetch(`${APIURL}api/users`,
       {
         body: JSON.stringify(e),
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: "POST"
       })
     .then(res => res.json())
@@ -38,19 +38,24 @@ export function login(e) {
      fetch(`${APIURL}api/login`,
       {
         body: JSON.stringify(e),
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: "POST"
       })
     .then(res => res.json())
     .then(res => {
-        if(res.status !== 400) {
-        localStorage.setItem("authToken", res.user.authToken)
+      if (res.message) {
+          localStorage.setItem("errarar", res.message)
+          window.location.reload()
+      }
+      if(res.status !== 400) {
+      localStorage.setItem("authToken", res.user.authToken)
+      localStorage.removeItem('errarar')
       }
     })
     .then(res => window.location.reload())
-  .catch(e => console.log(e))
+  .catch(res => {
+    console.log("LOGGING RESPONSE", res)
+  })
 }
 
 
@@ -85,9 +90,7 @@ export function createUser(e) {
     return fetch(`${APIURL}api/users`,
       {
         body: JSON.stringify(e),
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         method: "POST"
       }
     )

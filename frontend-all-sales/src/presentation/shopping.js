@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, redirect, submitItems } from '../actions/items'
+import { getItems, redirect, submitItems, startLoading, stopLoading } from '../actions/items'
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import { Loader } from './Loader'
@@ -19,7 +19,13 @@ const mapDispatchToProps = (dispatch) => {
     submitItems: (selected) => {
       dispatch(submitItems(selected))
     },
-    redirect: () => dispatch(redirect())
+    redirect: () => {
+      dispatch(redirect())
+    },
+    startLoading: () => {
+      dispatch(startLoading())
+    },
+    stopLoading: () => dispatch(stopLoading())
     }
   }
 
@@ -34,9 +40,14 @@ function mapStateToProps(state) {
 class Shopping extends Component {
 
   componentWillMount() {
+    this.props.startLoading();
     this.props.setLoginStatus();
     this.selectedCheckboxes = new Set();
 
+  }
+
+  componentDidMount() {
+    this.props.stopLoading();
   }
 
   redirect = () => {
@@ -79,6 +90,8 @@ class Shopping extends Component {
 
 
   render() {
+    const { items } = this.props
+
     return (
       <div>
         <NavBar />
@@ -86,18 +99,18 @@ class Shopping extends Component {
         <h1 className="move-left">Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
         <h3 className="white-text-shadow move-left">Add items to your cart:</h3>
 
-        { this.props.items.all.length === 0 && <Loader /> }
+        { (items.loading || items.all.length === 0) && <Loader /> }
 
         <center>
           <form onSubmit={this.handleFormSubmit} id="checkbox-form">
-              {this.createCheckboxes()}
+              { this.createCheckboxes() }
 
             {
             this.selectedCheckboxes &&
               <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
             }
 
-            { this.props.items.redirect && <Redirect to="/cart" /> }
+            { items.redirect && <Redirect to="/cart" /> }
             </form>
           </center>
       </div>

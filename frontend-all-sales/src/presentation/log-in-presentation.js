@@ -22,10 +22,12 @@ export default connect(mapStateToProps)(class LogInPage extends Component {
 
 
     render() {
-      console.log(this.props.loading)
+      let errz = localStorage.getItem("errarar")
+      
       return (
         <div>
           <NavBar />
+          <h3 style={{color: 'red'}}> { errz } </h3>
 
             <LogInForm />
 
