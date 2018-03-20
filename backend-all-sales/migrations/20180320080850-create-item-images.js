@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       itemId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      imgUrl: {
-        type: Sequelize.STRING
+      imageId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -6,6 +6,7 @@ let Users = require('./models').users
 let Items = require('./models').items
 let UserItems = require('./models').UserItems
 let ItemImages = require('./models').ItemImages
+let Images = require('./models').images
 let cors = require('cors')
 const crypto = require('crypto')
 const fs = require ('fs')
@@ -140,12 +141,9 @@ app.post('/api/users', function(req, res){
 
 
 app.post('/api/upload', (req, res) => {
-
     const { title, description, name, image } = req.body
     let { data, extension } = image
-
     let fileprefix = crypto.createHash('md5').update(data).digest('hex')
-
     let filename = `${fileprefix}.${extension}`
 
     data = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""),'base64')
@@ -173,65 +171,55 @@ app.post('/api/upload', (req, res) => {
     })
   })
 
-  //
 
-  //
-  //   Items.create({
-  //       title: title,
-  //       description: description,
-  //       location: location,
-  //       cost: cost,
-  //       imageName: awsUrl + filename,
-  //   }).then((activity) => {
-  //       res.status(201)
-  //       res.json({activity: activity})
-  //       // Takes the tag checkbox from our form
-  //       tags = req.body.tags
-  //       let tagArr = []
-  //       // Pushes Id of newly made activity and any tag selected to an array to use for our ActivityTag Table
-  //       for (var property in tags) {
-  //           let val = {
-  //               ActivityId: activity.id,
-  //               TagId: property,
-  //           }
-  //           // Checks if a tag is checked or not
-  //           tags[property] === true
-  //               ? tagArr.push(val)
-  //               : ''
-  //       }
-  //       // Takes the array with new ActivityId and selected TagId and pushes them to our join table (ActivityTag)
-  //       ActivityTag.bulkCreate(tagArr).then(() => {
-  //           return ActivityTag.findAll();
-  //       })
-  //   })
-  // })
+  app.post('/api/posting/new', authorization, (req, res) => {
+    console.log("req", req.body)
+    let user = req.currentUser.id
+    let items = req.body
+    let images = req.body
+    // console.log("items ------------:", items);
 
-
-
-
-
-
-
-
-
-
-
-app.post('/api/items/new', authorization, (req, res) => {
-  console.log("req", req.body)
-  let user = req.currentUser.id
-  let items = req.body
-  console.log("items ------------:", items);
-
-  Users.findOne({
-    where: {
-      id: user
-    }
-  })
-  .then(user => {
+    Users.findOne({
+      where: {
+        id: user
+      }
+    })
+    .then(user => {
       user.addItems(items)
+    })
+    .then(user => {
+      res.json({ message: "Items added to cart" })
+    })
+    .catch(e => {
+      console.log("error!", e)
+    })
   })
-  .then(user => {
-    res.json({ message: "Items added to cart" })
+
+
+
+// POSTING NEW ITEM WITH IMAGES
+app.post('/api/items/new', (req, res) => {
+
+  let testData = ['https://s3-us-west-2.amazonaws.com/all-sales/cf090c62416aae104bc6f9a06c4d6899.png', 'test']
+  const { name, price } = req.body
+
+
+  Items.create({
+    name: 'testcrap',
+    price: 3434
+  })
+  .then(item => {
+    Images.bulkCreate([
+        {url: 'test1'},
+        {url: 'test2'},
+        {url: 'TESTURL'}
+
+    ], { returning: true})
+    .then(res => {
+        res.forEach(el => {
+          item.addImages([el.id])
+        })
+    })
   })
   .catch(e => {
     console.log("error!", e)
@@ -239,21 +227,7 @@ app.post('/api/items/new', authorization, (req, res) => {
 })
 
 
-// removeItems
-// addItems
-// createItem
-// setItem(item)
 
-// SELECT * FROM "UserItems"
-// JOIN "items"
-// ON "UserItems".id = "items".id
-// WHERE "userId" = 34;
-
-// UserItems.findAll({
-//   where: {
-//     userId: user
-//   }
-// })
 
 
 app.get('/api/items/user', authorization, (req, res) => {
@@ -285,9 +259,6 @@ app.delete('/api/items/user/delete', authorization, (req, res) => {
 })
 
 
-// Users.findById(34).then(user => {
-//   user.removeItem(1)
-// })
 
 app.get('/api/home', (req, res) => {
   res.sendFile(path.resolve(__dirname, './public/images', 'index.html')); });
@@ -298,3 +269,64 @@ app.get('*', (req, res) => {
 
 
 module.exports = app
+
+//
+
+//
+//   Items.create({
+//       title: title,
+//       description: description,
+//       location: location,
+//       cost: cost,
+//       imageName: awsUrl + filename,
+//   }).then((activity) => {
+
+//       res.json({activity: activity})
+//       // Takes the tag checkbox from our form
+//       tags = req.body.tags
+//       let tagArr = []
+//       // Pushes Id of newly made activity and any tag selected to an array to use for our ActivityTag Table
+//       for (var property in tags) {
+//           let val = {
+//               ActivityId: activity.id,
+//               TagId: property,
+//           }
+//           // Checks if a tag is checked or not
+//           tags[property] === true
+//               ? tagArr.push(val)
+//               : ''
+//       }
+//       // Takes the array with new ActivityId and selected TagId and pushes them to our join table (ActivityTag)
+//       ActivityTag.bulkCreate(tagArr).then(() => {
+//           return ActivityTag.findAll();
+//       })
+//   })
+// })
+
+// Users.findById(34).then(user => {
+//   user.removeItem(1)
+// })
+
+
+// removeItems
+// addItems
+// createItem
+// setItem(item)
+
+// SELECT * FROM "UserItems"
+// JOIN "items"
+// ON "UserItems".id = "items".id
+// WHERE "userId" = 34;
+
+// UserItems.findAll({
+//   where: {
+//     userId: user
+//   }
+// })
+
+
+// If you need to join a table twice you can double join the same table
+// Team.hasOne(Game, {as: 'HomeTeam', foreignKey : 'homeTeamId'});
+// Team.hasOne(Game, {as: 'AwayTeam', foreignKey : 'awayTeamId'});
+//
+// Game.belongsTo(Team);
