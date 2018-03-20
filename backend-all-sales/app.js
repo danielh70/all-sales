@@ -23,10 +23,6 @@ const s3 = new aws.S3({
 const BUCKETNAME = process.env.S3_BUCKET;
 
 
-
-// secret access key: efv7C1su73XgdGuqkujzIudIvk/ocoiwEDY3YbOU
-// access key ID: AKIAII5JYWPP67QNER2A
-
 app.use(express.static('public'))
 app.use(express.static(path.resolve(__dirname, '../frontend-all-sales/build')));
 app.use(bodyParser.json({limit: '50mb'}));
@@ -144,9 +140,6 @@ app.post('/api/users', function(req, res){
 
 
 
-
-
-
 app.post('/api/upload', (req, res) => {
 
     const { title, description, name, image } = req.body
@@ -175,11 +168,14 @@ app.post('/api/upload', (req, res) => {
 
       console.log("data:", data);
       console.log("error:", err);
+
+      const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/'
+      console.log("link to pic", awsUrl + filename);
     })
   })
 
   //
-  //   const awsUrl = 'https://all-sales.s3.us-east-1.amazonaws.com/'
+
   //
   //   Items.create({
   //       title: title,
