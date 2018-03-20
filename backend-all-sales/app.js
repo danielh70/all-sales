@@ -5,6 +5,7 @@ var app = express()
 let Users = require('./models').users
 let Items = require('./models').items
 let UserItems = require('./models').UserItems
+let ItemImages = require('./models').ItemImages
 let cors = require('cors')
 const crypto = require('crypto')
 const fs = require ('fs')
@@ -16,8 +17,6 @@ var sequelize = require('sequelize');
 
 aws.config.loadFromPath('./config/config.json');
 const s3 = new aws.S3({
-  accessKeyId: "AKIAJFX3PBB4WXKB7FCQ",
-  secretAccessKey: "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",
   Bucket: "all-sales"
 });
 const BUCKETNAME = process.env.S3_BUCKET;
