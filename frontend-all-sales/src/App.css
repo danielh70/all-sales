@@ -8,10 +8,31 @@
   bottom: 230px;
 }
 
+.image-upload-div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 250px;
+}
+.image-preview {
+    width: 300px;
+}
+
 html, body {
   height: 100%;
   background-image: linear-gradient(to top, #94b6eb, #86a8dc, #789acd, #6b8cbe, #5d7eb0);
 }
+
+.dropzone {
+    width: 40%;
+    height: 100%;
+    border: 3px dashed white;
+}
+.previewCard {
+    margin: 0;
+    padding: 0;
+}
+
 
 .s2 {
   position: absolute;

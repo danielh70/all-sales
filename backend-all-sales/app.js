@@ -14,8 +14,12 @@ let multer = require('multer')
 let multerS3 = require('multer-s3');
 var sequelize = require('sequelize');
 
-aws.config.region = 'us-west-1';
-const s3 = new aws.S3();
+aws.config.loadFromPath('./config/config.json');
+const s3 = new aws.S3({
+  accessKeyId: "AKIAJFX3PBB4WXKB7FCQ",
+  secretAccessKey: "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",
+  Bucket: "all-sales"
+});
 const BUCKETNAME = process.env.S3_BUCKET;
 
 

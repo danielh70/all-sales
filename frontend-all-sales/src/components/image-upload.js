@@ -11,10 +11,12 @@ class ImageUpload extends Component {
     this.state = {
       file: '',
       imagePreviewUrl: '',
-      image: {
-        name: '',
-        data: '',
-        extension: ''
+      form: {
+        image: {
+          name:      '',
+          data:      '',
+          extension: ''
+        }
       }
     }
   }
@@ -52,7 +54,7 @@ class ImageUpload extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
          const { form } = this.state
          acceptedFiles.forEach(file => {
-           console.log(file);
+           console.log("file", file);
            let { name, type } = file
 
            type = type.split('/')[1]
@@ -126,48 +128,43 @@ class ImageUpload extends Component {
 
     return (
       <div className="previewComponent">
-
         <Row>
-       <Col xs={10} >
-         <FormGroup
-           id = "image-form-group"
-           >
-           <ControlLabel id="image">Image</ControlLabel>
+          <Col xs={10} >
+            <FormGroup id = "image-form-group">
+            <ControlLabel id="image">Image</ControlLabel>
 
-           <div className="image-upload-div">
-             <Dropzone
-                 className='dropzone'
-               accept='image/*'
-               onDrop={(files) => {
-                 this.onDrop(files)
-               }}
-             >
-               <div className='dropzone-text'>
-                 <p>Try dropping some image files here, or click me to select files to upload.</p>
-             <br/>
-         <p>By uploading you are agreeing that you either own the image yourself, or are using an image with written permissions to share it.</p>
-               </div>
-             </Dropzone>
-           </div>
-           <br/>
-           <div>
+              <div className="image-upload-div">
+                <Dropzone
+                  className='dropzone'
+                  accept='image/*'
+                  onDrop={(files) => {
+                  this.onDrop(files)
+                 }}
+                >
+                  <div className='dropzone-text'>
+                    <p>Try dropping some image files here, or click me to select files to upload.</p>
+                    <br/>
+                    <p>By uploading you are agreeing that you either own the image yourself, or are using an image with written permissions to share it.</p>
+                  </div>
+                </Dropzone>
+              </div>
+            <br/>
+            <div>
              File Preview:
-             {this.state.image.name !== '' &&
-               <div>
-                 <pre>{JSON.stringify(this.state.form.image)}</pre>
-                 <img src={this.state.image.data} className="image-preview" alt="preview" />
-                 <p>{this.state.image.name}.{this.state.image.extension}</p>
-                 <br/>
-               </div>
-             }
-           </div>
+              {this.state.form.image.name !== '' &&
+                <div>
+                  <pre>{JSON.stringify(this.state.form.image)}</pre>
+                  <img src={this.state.form.image.data} className="image-preview" alt="preview" />
+                  <p>{this.state.form.image.name}.{this.state.form.image.extension}</p>
+                  <br/>
+                </div>
+              }
+            </div>
+          </FormGroup>
+        </Col>
+      </Row>
 
-
-         </FormGroup>
-       </Col>
-     </Row>
-
-     <button onClick={this.handleNewActivity}>click</button>
+     <Button onClick={this.handleNewActivity}>click</Button>
       </div>
     )
   }
