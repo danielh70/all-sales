@@ -172,7 +172,7 @@ app.post('/api/upload', (req, res) => {
   })
 
 
-  app.post('/api/posting/new', authorization, (req, res) => {
+  app.post('/api/items/new', authorization, (req, res) => {
     console.log("req", req.body)
     let user = req.currentUser.id
     let items = req.body
@@ -198,7 +198,7 @@ app.post('/api/upload', (req, res) => {
 
 
 // POSTING NEW ITEM WITH IMAGES
-app.post('/api/items/new', (req, res) => {
+app.post('/api/posting/new', (req, res) => {
 
   let testData = ['https://s3-us-west-2.amazonaws.com/all-sales/cf090c62416aae104bc6f9a06c4d6899.png', 'test']
   const { name, price } = req.body

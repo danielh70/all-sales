@@ -41,8 +41,8 @@ const RenderSelect = createRenderer((input, label, { children }) =>
 
 
 let NewPostForm = ({ handleSubmit, submitting, authorized }) =>
-<div className="flex-test flex-container">
-    <center>
+<div>
+
         <form onSubmit={handleSubmit(showResults)}>
           <Field name="title" label="Title" type="text" component={RenderInput} /> <br />
           <Field name="price" label="Price" type="number" component={RenderInput} /> <br />
@@ -59,7 +59,7 @@ let NewPostForm = ({ handleSubmit, submitting, authorized }) =>
             Create Post
           </button>
         </form>
-    </center>
+
 </div>
 
 NewPostForm = reduxForm({

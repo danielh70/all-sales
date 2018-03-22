@@ -106,9 +106,30 @@ html, body {
 } */
 
 input.sign-up {
-  width: 300px;
+  /* width: 300px; */
   height: 40px;
+  width: 100%;
 }
+
+.grid {
+
+  display: grid;
+  border: 2px black solid;
+  height: 900px;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
+
+.box.a {
+  color: red;
+  align-self: center;
+}
+
+/* .box {
+  background-color: beige;
+  color: black;
+  border-radius: 5px;
+  border: 2px dodgerblue solid;
+} */
 
 textarea.sign-up {
   width: 300px;

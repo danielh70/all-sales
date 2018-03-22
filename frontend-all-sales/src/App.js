@@ -8,6 +8,7 @@ import Home from './presentation/home';
 import NewPostPage from './presentation/new-post-page';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ImageUpload from './components/image-upload';
+import Test from './presentation/test';
 import './App.css';
 
 
@@ -60,6 +61,10 @@ class App extends Component {
 
               <Route exact path="/upload" render={props => (
                 <ImageUpload />
+              )} />
+
+              <Route exact path="/test" render={props => (
+                <Test />
               )} />
 
             </div>
