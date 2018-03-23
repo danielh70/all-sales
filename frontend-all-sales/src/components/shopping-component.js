@@ -18,6 +18,7 @@ import '../App.css';
   componentWillMount() {
     this.selectedCheckboxes = new Set();
     this.props.setLoginStatus();
+    console.log("all items****************************", this.props.items);
   }
 
   redirect = () => {
@@ -60,6 +61,7 @@ import '../App.css';
 
 
   render() {
+
     return (
       <div>
         <NavBar />

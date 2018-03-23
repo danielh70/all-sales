@@ -77,8 +77,35 @@ app.get('/api/users', (req, res) => {
 /**
 * Lists all the items
 */
+// app.get('/api/shopping', (req, res) => {
+//   Items.findAll().then(items => {
+//     res.json({ items: items })
+//   })
+// })
+
 app.get('/api/shopping', (req, res) => {
-  Items.findAll().then(items => {
+  Items.sequelize.query(`
+    SELECT * FROM "items"
+      INNER JOIN "ItemImages"
+      ON "ItemImages"."itemId" = "items".id
+      INNER JOIN "images" ON "imageId" = "images".id;
+  `)
+  .then(items => {
+    res.json({ items: items })
+  })
+})
+
+app.get('/api/items/user', authorization, (req, res) => {
+  let user = req.currentUser.id
+  console.log("auth:", user)
+
+  UserItems.sequelize.query(`
+  SELECT * FROM "UserItems"
+    INNER JOIN "items"
+    ON "UserItems"."itemId" = "items".id
+    WHERE "userId" = ${user}
+  `)
+  .then(items => {
     res.json({ items: items })
   })
 })
@@ -141,7 +168,7 @@ app.post('/api/users', function(req, res){
 
 
 app.post('/api/upload', (req, res) => {
-    const { title, description, name, image } = req.body
+    const { title, description, name, image, price } = req.body
     let { data, extension } = image
     let fileprefix = crypto.createHash('md5').update(data).digest('hex')
     let filename = `${fileprefix}.${extension}`
@@ -167,7 +194,26 @@ app.post('/api/upload', (req, res) => {
       console.log("error:", err);
 
       const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/'
-      console.log("link to pic", awsUrl + filename);
+      // console.log("link to pic", awsUrl + filename);
+
+
+        Items.create({
+          name: 'testcrap',
+          price: 3434
+        })
+        .then(item => {
+          Images.bulkCreate([
+            { url: awsUrl + filename }
+          ], { returning: true })
+          .then(res => {
+              res.forEach(el => {
+                item.addImages([el.id])
+              })
+          })
+        })
+        .catch(e => {
+          console.log("error!", e)
+        })
     })
   })
 
@@ -214,7 +260,7 @@ app.post('/api/posting/new', (req, res) => {
         {url: 'test2'},
         {url: 'TESTURL'}
 
-    ], { returning: true})
+    ], { returning: true })
     .then(res => {
         res.forEach(el => {
           item.addImages([el.id])
@@ -226,22 +272,6 @@ app.post('/api/posting/new', (req, res) => {
   })
 })
 
-
-
-app.get('/api/items/user', authorization, (req, res) => {
-  let user = req.currentUser.id
-  console.log("auth:", user)
-
-  UserItems.sequelize.query(`
-  SELECT * FROM "UserItems"
-  JOIN "items"
-  ON "UserItems"."itemId" = "items".id
-  WHERE "userId" = ${user}
-  `)
-  .then(items => {
-    res.json({ items: items })
-  })
-})
 
 app.delete('/api/items/user/delete', authorization, (req, res) => {
   let user = req.currentUser.id

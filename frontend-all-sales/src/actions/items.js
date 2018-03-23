@@ -16,7 +16,7 @@ export function getItems() {
     .then(res => {
       dispatch({
         type: ITEMS_FETCHED,
-        payload: res.items
+        payload: res.items[0]
       })
     })
   .catch(e => console.log(e))

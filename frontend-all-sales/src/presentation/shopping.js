@@ -91,6 +91,7 @@ class Shopping extends Component {
 
   render() {
     const { items } = this.props
+        console.log("all items****************************", this.props.items);
 
     return (
       <div>
@@ -103,7 +104,9 @@ class Shopping extends Component {
 
         <center>
           <form onSubmit={this.handleFormSubmit} id="checkbox-form">
-              { this.createCheckboxes() }
+               { this.createCheckboxes() }
+               <img src={this.props.items.all.url} />
+
 
             {
             this.selectedCheckboxes &&

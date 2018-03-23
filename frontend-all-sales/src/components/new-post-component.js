@@ -16,7 +16,7 @@ class NewPostForm extends Component {
     super(props)
     this.state = {
       form: {
-        title:       '',
+        name:       '',
         description: '',
         price:       '',
         contact:     '',
@@ -101,8 +101,8 @@ class NewPostForm extends Component {
 
 
   render() {
-    const { title, price, description, image } = this.state.form
-    const { data, name, extension } = image
+    const { name, price, description, image } = this.state.form
+    const { data, extension } = image
 
     console.log("current state:", this.state);
     return (
@@ -116,7 +116,7 @@ class NewPostForm extends Component {
         </div>
         <form onChange={this.handleInputChange} onSubmit={this.handleSubmit}>
           <div className="new-post c">
-            <input type="text" name="title" placeholder="Title" value={title} />
+            <input type="text" name="name" placeholder="Name" value={name} />
             <br /> <br />
             <input type="number" name="price" placeholder="Price" value={price} />
             <br /> <br />
@@ -145,7 +145,7 @@ class NewPostForm extends Component {
              <div>
 
                <img src={data} className="image-preview" alt="preview" />
-               <p>{name}.{extension}</p>
+               <p>{image.name}.{extension}</p>
                <br/>
              </div>
            }

@@ -1,4 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+
+function mapStateToProps(state) {
+  return {
+    authorized: state.authorized,
+    items: state.items
+  }
+}
+
 
 class Checkbox extends Component {
   state = {
@@ -21,6 +31,7 @@ class Checkbox extends Component {
   }
 
   render() {
+    console.log(this.props.items.all.url)
     const { label, id } = this.props;
     const { isChecked } = this.state;
 
@@ -36,10 +47,14 @@ class Checkbox extends Component {
           />
           {label}
         </label>
+        <a href={this.props.items.all[9].url}>link</a>
       </div>
     );
   }
 }
 
 
-export default Checkbox;
+export default connect(mapStateToProps)(Checkbox);
+
+
+{/* <img src={this.props.items.all.url} /> */}
