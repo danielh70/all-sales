@@ -1,72 +1,165 @@
-import React from 'react'
-import { reduxForm, Field } from 'redux-form'
-import validate from './validate'
-import items from './data/list-items'
-import showResults from '../actions/items'
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import validate from './validate';
+import items from './data/list-items';
+import showResults from '../actions/items';
+import ImageUpload from './image-upload';
+//
+// const mapStateToProps = (store) => {
+//
+// }
 
-const createRenderer = render => ({ input, meta, label, ...rest }) =>
-  <div
-    className={[
-      meta.error && meta.touched ? 'error' : '',
-      meta.active ? 'active' : '', 'sign-up',
+const APIURL = 'http://localhost:3000/';
 
-    ].join(' ')}
-  >
-    {meta.error &&
-      meta.touched &&
-      <span>
-        {meta.error}
-      </span>
+class NewPostForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      form: {
+        title:       '',
+        description: '',
+        price:       '',
+        contact:     '',
+        image: {
+          name:      '',
+          data:      '',
+          extension: ''
+        }
+      },
+      file: '',
+      imagePreviewUrl: ''
     }
-    <label>
-      {label}
-    </label> <br />
-    {render(input, label, rest)}
+  }
 
-  </div>
+  onDrop = (acceptedFiles, rejectedFiles) => {
+         const { form } = this.state
+         acceptedFiles.forEach(file => {
+           console.log("file", file);
+           let { name, type } = file
 
-const RenderInput = createRenderer((input, label, { type }) =>
-  <input {...input} placeholder={label} type={type} className="sign-up"/>
-)
+           type = type.split('/')[1]
+           console.log("name:", name, " type:", type)
 
-const RenderText = createRenderer((input, label) =>
-  <textarea {...input} placeholder={label} className="sign-up" />
-)
+           let image = {
+             extension: type,
+             name: name,
+           }
 
-const RenderSelect = createRenderer((input, label, { children }) =>
-  <select {...input}>
-    {children}
-  </select>
-)
+           const reader = new FileReader()
+
+           reader.onload = () => {
+             image.data = reader.result
+
+             this.setState({
+               form: Object.assign({}, form, {
+                 image: image,
+               })
+             })
+           }
+
+           reader.onabort = () => console.log('image reading was aborted')
+           reader.onerror = () => console.log('image reading has failed')
+
+           reader.readAsDataURL(file)
+         })
+     }
 
 
-let NewPostForm = ({ handleSubmit, submitting, authorized }) =>
-<div>
+  handleInputChange = (e) => {
+    const state = { ...this.state.form }
+    state[e.target.name] = e.target.value
+    this.setState({ form: state })
+  }
 
-        <form onSubmit={handleSubmit(showResults)}>
-          <Field name="title" label="Title" type="text" component={RenderInput} /> <br />
-          <Field name="price" label="Price" type="number" component={RenderInput} /> <br />
-          <Field name="description" label="Description" type="text" component={RenderText} /> <br />
-          <Field name="condition" label="Condition" component={RenderSelect}>
-          {items.map(item =>
-            <option key={item} value={item}>
-              {item}
-            </option>
-           )}
-         </Field>
-          <br />
-          <button type="submit" className="checkbox-form-button" disabled={submitting}>
-            Create Post
-          </button>
+  handleSubmit = (e) => {
+    e.preventDefault()
+    fetch(`${APIURL}api/upload`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.form),
+    }).then((resp) => {
+        return resp.json()
+    }).then(resp => {
+      console.log("response", resp);
+    })
+
+    console.log("Submitted:", this.state)
+  }
+
+  handleNewActivity = () => {
+
+  }
+
+  // handleImageChange = (e) => {
+  //
+  // }
+  //
+
+
+
+
+  render() {
+    const { title, price, description, image } = this.state.form
+    const { data, name, extension } = image
+
+    console.log("current state:", this.state);
+    return (
+      <div className="new-post-grid">
+
+        <div className="new-post a">
+
+        </div>
+        <div className="new-post b">
+
+        </div>
+        <form onChange={this.handleInputChange} onSubmit={this.handleSubmit}>
+          <div className="new-post c">
+            <input type="text" name="title" placeholder="Title" value={title} />
+            <br /> <br />
+            <input type="number" name="price" placeholder="Price" value={price} />
+            <br /> <br />
+            <textarea type="text" name="description" placeholder="Description" value={description} />
+          </div>
+
+          <div className="new-post d">
+            <button type='submit' className="checkbox-form-button">Submit form</button>
+          </div>
+          <div className="new-post e">
+
+          </div>
+          <div className="new-post f">
+            <ImageUpload
+              onDrop={this.onDrop}
+              handleNewActivity={this.handleNewActivity}
+            />
+          </div>
         </form>
+        <div className="new-post g">
 
-</div>
+        </div>
+        <div className="new-post h">
+          File Preview:
+           {this.state.form.image.name !== '' &&
+             <div>
 
-NewPostForm = reduxForm({
-  form: 'NewPostForm',
-  destroyOnUnmount: true,
-  validate
-})(NewPostForm)
+               <img src={data} className="image-preview" alt="preview" />
+               <p>{name}.{extension}</p>
+               <br/>
+             </div>
+           }
+        </div>
+        <div className="new-post i">
 
+        </div>
+        <div className="new-post j">
 
-export default NewPostForm;
+        </div>
+
+      </div>
+    )
+  }
+}
+
+export default NewPostForm

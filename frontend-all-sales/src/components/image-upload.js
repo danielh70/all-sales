@@ -52,37 +52,8 @@ class ImageUpload extends Component {
   }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
-         const { form } = this.state
-         acceptedFiles.forEach(file => {
-           console.log("file", file);
-           let { name, type } = file
-
-           type = type.split('/')[1]
-           console.log("name:", name, " type:", type)
-
-           let image = {
-             extension: type,
-             name: name,
-           }
-
-           const reader = new FileReader()
-
-           reader.onload = () => {
-             image.data = reader.result
-
-             this.setState({
-               form: Object.assign({}, form, {
-                 image: image,
-               })
-             })
-           }
-
-           reader.onabort = () => console.log('image reading was aborted')
-           reader.onerror = () => console.log('image reading has failed')
-
-           reader.readAsDataURL(file)
-         })
-     }
+    this.props.onDrop(acceptedFiles, rejectedFiles)
+  }
 
   handleImageChange = (e) => {
     e.preventDefault();
@@ -124,12 +95,11 @@ class ImageUpload extends Component {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
-    console.log(this.state);
+
 
     return (
-      <div className="previewComponent">
+      <div className="previewComponent imagepreview">
         <Row>
-          <Col xs={10} >
             <FormGroup id = "image-form-group">
             <ControlLabel id="image">Image</ControlLabel>
 
@@ -150,21 +120,20 @@ class ImageUpload extends Component {
               </div>
             <br/>
             <div>
-             File Preview:
-              {this.state.form.image.name !== '' &&
+             {/* File Preview: */}
+              {/* {this.state.form.image.name !== '' &&
                 <div>
-                  <pre>{JSON.stringify(this.state.form.image)}</pre>
+
                   <img src={this.state.form.image.data} className="image-preview" alt="preview" />
                   <p>{this.state.form.image.name}.{this.state.form.image.extension}</p>
                   <br/>
                 </div>
-              }
+              } */}
             </div>
           </FormGroup>
-        </Col>
+
       </Row>
 
-     <Button onClick={this.handleNewActivity}>click</Button>
       </div>
     )
   }

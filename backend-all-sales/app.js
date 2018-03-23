@@ -228,8 +228,6 @@ app.post('/api/posting/new', (req, res) => {
 
 
 
-
-
 app.get('/api/items/user', authorization, (req, res) => {
   let user = req.currentUser.id
   console.log("auth:", user)

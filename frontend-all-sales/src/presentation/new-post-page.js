@@ -24,12 +24,12 @@ class NewPostPage extends Component {
 
   render() {
     return (
-      <div className="grid">
+      <div>
         <NavBar />
 
         <NewPostForm />
-        <ImageUpload />
-    
+        
+
       </div>
     )
   }
