@@ -103,9 +103,13 @@ class Shopping extends Component {
         { (items.loading || items.all.length === 0) && <Loader /> }
 
         <center>
+          {this.props.items.all.map((el, i) => {
+            return (
+              <a href={el.url}> clicker here </a>
+            )
+          })}
           <form onSubmit={this.handleFormSubmit} id="checkbox-form">
                { this.createCheckboxes() }
-               <img src={this.props.items.all.url} />
 
 
             {

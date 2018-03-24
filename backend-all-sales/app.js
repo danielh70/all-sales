@@ -198,8 +198,8 @@ app.post('/api/upload', (req, res) => {
 
 
         Items.create({
-          name: 'testcrap',
-          price: 3434
+          name: name,
+          price: price
         })
         .then(item => {
           Images.bulkCreate([

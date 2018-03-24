@@ -47,7 +47,6 @@ class Checkbox extends Component {
           />
           {label}
         </label>
-        <a href={this.props.items.all[9].url}>link</a>
       </div>
     );
   }
