@@ -62,9 +62,8 @@ class Shopping extends Component {
     console.log(selected)
     this.props.submitItems(selected)
     this.redirect()
+
    }
-
-
 
 
   render() {
@@ -85,8 +84,7 @@ class Shopping extends Component {
         <div className="container">
           <div className="grid">
 
-            {items.all.length !== 0 &&
-              items.all.map((el, i) => {
+            { items.all.map((el, i) => {
               return (
 
                 <ItemCard
@@ -97,12 +95,14 @@ class Shopping extends Component {
                   description={el.description}
                   handleSubmit={this.handleFormSubmit}
                 />
-                
+
               )
             })}
 
           </div>
         </div>
+
+        { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
     )
   }

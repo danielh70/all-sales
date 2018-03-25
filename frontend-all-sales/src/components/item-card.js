@@ -20,7 +20,7 @@ class ItemCard extends Component {
               <p id="description">{description}</p>
               <p>
                 <Button id={id} bsStyle="primary" disabled>More Info</Button>&nbsp;
-                <Button id={id} onClick={this.props.handleSubmit} bsStyle="default">Add to Cart</Button>
+                <Button id={id} onClick={this.props.handleSubmit} href="/cart" bsStyle="default">Add to Cart</Button>
               </p>
               <br />
             </div>
