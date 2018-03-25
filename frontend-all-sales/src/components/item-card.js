@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import {
-    Thumbnail,
     Button,
-    Col,
-    Grid,
-    CardText,
-    Row,
+    CardText
 } from 'react-bootstrap';
 import '../App.css';
 
@@ -15,18 +11,22 @@ class ItemCard extends Component {
   render() {
     const { id, title, image, description } = this.props
       return (
-        <div className="item-card hvr-grow-shadow item-preview cell responsive-image">
 
-          <Thumbnail src={image} alt="242x200" className="responsive-image">
+        <div className="hvr-grow-shadow item-preview ">
+
+          <div className="shadow cell">
+            <img src={image} alt="testing"  className="itemPreview responsive-image"/>
             <h3 id="thumbnail-label">{title}</h3>
             <p id="description">{description}</p>
             <p>
               <Button id={id} bsStyle="primary" disabled>More Info</Button>&nbsp;
               <Button id={id} onClick={this.props.handleSubmit} bsStyle="default">Add to Cart</Button>
             </p>
-          </Thumbnail>
+            <br />
+          </div>
 
         </div>
+
     );
   }
 }

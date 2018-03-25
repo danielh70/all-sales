@@ -9,7 +9,7 @@ class LoggedInNav extends Component {
 
     return (
       <div>
-        <Navbar staticTop inverse collapseOnSelect >
+        <Navbar fixedTop inverse collapseOnSelect >
         <Navbar.Header>
           <Navbar.Brand>
             <a href="/home" className="header">All Sales</a>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getItems, redirect, submitItems, startLoading, stopLoading } from '../actions/items'
+import { Row, Col } from 'react-bootstrap';
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import ItemCard from '../components/item-card';
@@ -96,8 +97,10 @@ class Shopping extends Component {
                   description={el.description}
                   handleSubmit={this.handleFormSubmit}
                 />
+                
               )
             })}
+
           </div>
         </div>
       </div>
