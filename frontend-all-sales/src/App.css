@@ -381,7 +381,7 @@ h3 {
 /** ITEM CARDS **/
 
 .itemPreview {
-    width: 350px;
+    width: 300px;
     height: 300px;
     object-fit: cover;
     /* border-radius: 10px; */
@@ -409,7 +409,7 @@ h3 {
     top: 100%;
     left: 5%;
     height: 10px;
-    width: 90%;
+    width: 100%;
     opacity: 0;
     background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
     background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
@@ -432,6 +432,7 @@ h3 {
 .item-preview {
     margin: 5px;
     margin-bottom: 25px;
+    background-color: white;
 }
 
 #thumbnail-label {
