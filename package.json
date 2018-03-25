@@ -27,5 +27,5 @@
   "scripts": {
     "heroku-postbuild": "cd backend-all-sales && sequelize db:migrate && sequelize db:seed:undo:all && sequelize db:seed:all && cd .. && cd frontend-all-sales/ && yarn install && yarn build",
     "start": "node backend-all-sales/index.js"
-  },
+  }
 }
