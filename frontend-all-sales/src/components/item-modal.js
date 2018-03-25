@@ -12,7 +12,8 @@ class ItemModal extends Component {
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg"><span id="description">Modal heading</span></Modal.Title>
+          <Modal.Title id="contained-modal-title-lg"><span id="description">Modal heading {this.props.price}</span></Modal.Title>
+
         </Modal.Header>
           <Modal.Body>
             <div>

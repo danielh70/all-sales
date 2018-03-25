@@ -123,13 +123,6 @@ class Shopping extends Component {
         <br />
         <br />
 
-        <Button
-           bsStyle="primary"
-           onClick={this.showModal}
-        >
-           Launch large demo modal
-        </Button>
-
         <ItemModal show={this.props.items.modal} onHide={this.handleModal} />
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
