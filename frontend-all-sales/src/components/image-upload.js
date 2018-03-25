@@ -3,7 +3,7 @@ import { FormGroup, Row, ControlLabel } from 'react-bootstrap';
 import Dropzone from 'react-dropzone'
 import '../App.css';
 
-const APIURL = 'http://localhost:3000/';
+const APIURL = process.env.NODE_ENV === 'production' ? "/" : "http://localhost:3000/";
 
 class ImageUpload extends Component {
   constructor(props) {
