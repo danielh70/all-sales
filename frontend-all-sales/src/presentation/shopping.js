@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, redirect, submitItems, startLoading, stopLoading } from '../actions/items'
+import { getItems, redirect, submitItems, startLoading, stopLoading, showModal, hideModal } from '../actions/items'
 import { Row, Col } from 'react-bootstrap';
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import ItemCard from '../components/item-card';
+import ItemModal from '../components/item-modal';
 import { Loader } from './Loader';
 import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import '../App.css';
 
 
@@ -27,9 +29,17 @@ const mapDispatchToProps = (dispatch) => {
     startLoading: () => {
       dispatch(startLoading())
     },
-    stopLoading: () => dispatch(stopLoading())
+    stopLoading: () => {
+      dispatch(stopLoading())
+    },
+    showModal: () => {
+      dispatch(showModal())
+    },
+    hideModal: () => {
+      dispatch(hideModal())
     }
   }
+}
 
 
 function mapStateToProps(state) {
@@ -54,6 +64,14 @@ class Shopping extends Component {
    this.props.redirect()
   }
 
+  showModal = () => {
+    this.props.showModal()
+  }
+
+  hideModal = () => {
+    this.props.hideModal()
+  }
+
   handleFormSubmit = (e) => {
     e.preventDefault()
     let id = parseInt(e.target.id)
@@ -61,13 +79,16 @@ class Shopping extends Component {
     console.log(selected)
     this.props.submitItems(selected)
     this.redirect()
-
    }
+
 
 
   render() {
     const { items } = this.props
-      console.log("all items****************************", this.props.items);
+
+    let yes = true;
+
+    console.log("all items****************************", this.props.items);
 
     return (
       <div>
@@ -100,6 +121,16 @@ class Shopping extends Component {
 
           </div>
         </div>
+        <br />
+        <br />
+
+        <Button
+           bsStyle="primary"
+           onClick={this.showModal}
+        >
+           Launch large demo modal
+        </Button>
+
 
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
