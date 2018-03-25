@@ -31,13 +31,14 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 
-
 function mapStateToProps(state) {
   return {
     authorized: state.authorized,
     items: state.items
   }
 }
+// zzz
+
 
 class Shopping extends Component {
 
