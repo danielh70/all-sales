@@ -130,7 +130,7 @@ class Shopping extends Component {
            Launch large demo modal
         </Button>
 
-        <ItemModal show={this.props.items.modal} hide={this.handleModal} />
+        <ItemModal show={this.props.items.modal} onHide={this.handleModal} />
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
     )
