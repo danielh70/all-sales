@@ -10,7 +10,7 @@ import { Redirect } from 'react-router-dom';
 //
 // }
 
-const APIURL = 'http://localhost:3000/';
+const APIURL = process.env.NODE_ENV === 'production' ? "/" : "http://localhost:3000/";
 
 class NewPostForm extends Component {
   constructor(props) {
