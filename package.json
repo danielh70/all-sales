@@ -7,13 +7,9 @@
   "author": "Daniel Hook",
   "license": "MIT",
   "engines": {
-   "node": "9.3.0",
+   "node": "9.6.1",
    "yarn": "1.3.2"
  },
-  "scripts": {
-    "heroku-postbuild": "cd backend-all-sales && sequelize db:migrate && sequelize db:seed:undo:all && sequelize db:seed:all && cd .. && cd frontend-all-sales/ && yarn install && yarn build",
-    "start": "node backend-all-sales/index.js"
-  },
   "dependencies": {
     "aws-sdk": "^2.211.0",
     "fs": "^0.0.1-security",
@@ -27,5 +23,9 @@
     "pg": "6.1.5",
     "sequelize": "3.30.4",
     "sequelize-cli": "^4.0.0"
-  }
+  },
+  "scripts": {
+    "heroku-postbuild": "cd backend-all-sales && sequelize db:migrate && sequelize db:seed:undo:all && sequelize db:seed:all && cd .. && cd frontend-all-sales/ && yarn install && yarn build",
+    "start": "node backend-all-sales/index.js"
+  },
 }
