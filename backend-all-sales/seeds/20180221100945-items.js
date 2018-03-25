@@ -5,8 +5,8 @@ module.exports = {
     return queryInterface.bulkInsert('items',
       [
         {
-          name: 'First Item',
-          price: 8,
+          name: 'Mug',
+          price: 20,
           createdAt: new Date(),
           updatedAt: new Date()
         },
