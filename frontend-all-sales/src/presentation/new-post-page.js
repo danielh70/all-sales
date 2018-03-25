@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import NavBar from '../components/navbar';
 import NewPostForm from '../components/new-post-component';
-import ImageUpload from '../components/image-upload';
+// import ImageUpload from '../components/image-upload';
 import { connect } from 'react-redux';
 import { setLoginStatus } from '../actions/userForm';
-import { Col } from 'react-bootstrap'
 
 
 const mapStateToProps = (store) => {
@@ -28,7 +27,7 @@ class NewPostPage extends Component {
         <NavBar />
 
         <NewPostForm />
-        
+
 
       </div>
     )

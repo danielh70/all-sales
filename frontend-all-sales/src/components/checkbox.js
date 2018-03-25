@@ -57,3 +57,57 @@ export default connect(mapStateToProps)(Checkbox);
 
 
 {/* <img src={this.props.items.all.url} /> */}
+
+
+
+  // toggleCheckbox = (label, id) => {
+  //   // console.log("label id:", id);
+  //   if (this.selectedCheckboxes.has(id)) {
+  //     this.selectedCheckboxes.delete(id);
+  //   } else {
+  //     this.selectedCheckboxes.add(id);
+  //   }
+  // }
+
+  //
+  // handleFormSubmit = (id) => {
+  //   id.preventDefault()
+  //   let selected = [...this.selectedCheckboxes]
+  //
+  //   this.props.submitItems(selected)
+  //   this.redirect()
+  //  }
+
+  // createCheckboxes = () => {
+  //   this.props.items.all.map((el, i) => {
+  //     return (
+  //     this.createCheckbox
+  //     <a href={this.props.items.all[i].url}>link</a>
+  //   )
+  //   })
+  // }
+
+  // toggleCheckbox = (label, id) => {
+  //   // console.log("label id:", id);
+  //   if (this.selectedCheckboxes.has(id)) {
+  //     this.selectedCheckboxes.delete(id);
+  //   } else {
+  //     this.selectedCheckboxes.add(id);
+  //   }
+  // }
+  //
+  // createCheckbox = label => (
+  //   <table id="checkbox" key={label.id}>
+  //     <Checkbox
+  //       label={label.name}
+  //       handleCheckboxChange={this.toggleCheckbox}
+  //       key={label.id}
+  //       id={label.id}
+  //     />
+  //   </table>
+  // )
+  //
+  // createCheckboxes = () => (
+  //   this.props.items.all.map(this.createCheckbox)
+  // )
+  //

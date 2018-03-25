@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, Col, Row, ControlLabel } from 'react-bootstrap';
+import { FormGroup, Row, ControlLabel } from 'react-bootstrap';
 import Dropzone from 'react-dropzone'
 import '../App.css';
 
 const APIURL = 'http://localhost:3000/';
-const upload = require('superagent')
+
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ class ImageUpload extends Component {
     xhr.open('post', '/upload', true);
 
     xhr.onload = function () {
-      if (this.status == 200) {
+      if (this.status === 200) {
         resolve(this.response);
       } else {
         reject(this.statusText);
@@ -90,7 +90,7 @@ class ImageUpload extends Component {
     let $imagePreview = null;
 
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
+      $imagePreview = (<img src={imagePreviewUrl} alt="uploaded preview" />);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }

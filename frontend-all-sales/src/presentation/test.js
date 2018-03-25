@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import NavBar from '../components/navbar';
-import '../App.css';
+import React from 'react';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap';
 
-export default class Test extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar />
-        <div className="grid">
-            <div class="box a">A</div>
-            <div class="box b">B</div>
-            <div class="box c">C</div>
-            <div class="box d">D</div>
-            <div class="box e">E</div>
-            <div class="box f">F</div>
-            <div class="box g">G</div>
-        </div>
-      </div>
-    );
-  }
-}
+const Test = (props) => {
+  return (
+    <div className="item-card">
+      <Card>
+        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+        <CardBody>
+          <CardTitle>Card title</CardTitle>
+          <CardSubtitle>Card subtitle</CardSubtitle>
+          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+          <Button>Button</Button>
+        </CardBody>
+      </Card>
+    </div>
+  );
+};
+
+export default Test;

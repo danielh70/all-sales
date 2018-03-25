@@ -204,7 +204,7 @@ div.flex-test {
   border: 1px solid #c51244 !important;
 }
 
-p, h3, h4, button {
+ p, h3, h4, button {
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
     font-size: 20 px;
     line-height: 25px;
@@ -374,4 +374,76 @@ h3 {
 @keyframes graphql-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+/** ITEM CARDS **/
+
+.item-card {
+  width: 300px;
+
+}
+
+.hvr-grow-shadow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.item-preview {
+    margin: 5px;
+    margin-bottom: 25px;
+
+}
+
+#thumbnail-label {
+  color: black;
+}
+
+#description {
+  color: black !important;
+}
+
+
+@media screen and (min-width: 600px) {
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+
+    }
+    .cell {
+        width: 50% - 2rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .cell {
+        width: calc((100% / 3) -2rem);
+    }
+}
+
+.thumbnails {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    /* border-radius: 10px 10px 0px 0px; */
+}
+
+.responsive-image {
+    max-width: 100%;
 }

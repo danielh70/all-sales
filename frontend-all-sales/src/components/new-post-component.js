@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import validate from './validate';
-import items from './data/list-items';
-import showResults from '../actions/items';
+// import { connect } from 'react-redux';
+// import validate from './validate';
+// import items from './data/list-items';
+// import showResults from '../actions/items';
 import ImageUpload from './image-upload';
 //
 // const mapStateToProps = (store) => {

@@ -35,7 +35,7 @@ class Cart extends Component {
   removeItem = (e) => {
     let itemId = [e.target.value];
     let itemIdNum = parseInt(itemId)
-    let token = this.props.authorized.authToken;
+    
     // console.log("item id:", itemIdNum);
 
 

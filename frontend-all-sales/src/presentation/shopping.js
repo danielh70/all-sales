@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { getItems, redirect, submitItems, startLoading, stopLoading } from '../actions/items'
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
-import { Loader } from './Loader'
+import ItemCard from '../components/item-card';
+import { Loader } from './Loader';
 import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
 import '../App.css';
@@ -42,7 +43,6 @@ class Shopping extends Component {
   componentWillMount() {
     this.props.startLoading();
     this.props.setLoginStatus();
-    this.selectedCheckboxes = new Set();
 
   }
 
@@ -54,39 +54,16 @@ class Shopping extends Component {
    this.props.redirect()
   }
 
-  handleFormSubmit = (id) => {
-    id.preventDefault()
-    let token = this.props.authorized.authToken
-    let selected = [...this.selectedCheckboxes]
 
+  handleFormSubmit = (e) => {
+    e.preventDefault()
+    let selected = [e.target.id]
+    console.log(selected)
     this.props.submitItems(selected)
     this.redirect()
    }
 
 
-  toggleCheckbox = (label, id) => {
-    // console.log("label id:", id);
-    if (this.selectedCheckboxes.has(id)) {
-      this.selectedCheckboxes.delete(id);
-    } else {
-      this.selectedCheckboxes.add(id);
-    }
-  }
-
-  createCheckboxes = () => (
-    this.props.items.all.map(this.createCheckbox)
-  )
-
-  createCheckbox = label => (
-    <table id="checkbox" key={label.id}>
-      <Checkbox
-        label={label.name}
-        handleCheckboxChange={this.toggleCheckbox}
-        key={label.id}
-        id={label.id}
-      />
-    </table>
-  )
 
 
   render() {
@@ -96,30 +73,33 @@ class Shopping extends Component {
     return (
       <div>
         <NavBar />
+        <h1 className="move-left">
+          Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span>
+        </h1>
 
-        <h1 className="move-left">Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span></h1>
         <h3 className="white-text-shadow move-left">Add items to your cart:</h3>
 
         { (items.loading || items.all.length === 0) && <Loader /> }
 
-        <center>
-          {this.props.items.all.map((el, i) => {
-            return (
-              <a href={el.url}> clicker here </a>
-            )
-          })}
-          <form onSubmit={this.handleFormSubmit} id="checkbox-form">
-               { this.createCheckboxes() }
+        <div className="container">
+          <div className="grid">
 
+            {items.all.length !== 0 &&
+              items.all.map((el, i) => {
+              return (
 
-            {
-            this.selectedCheckboxes &&
-              <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
-            }
-
-            { items.redirect && <Redirect to="/cart" /> }
-            </form>
-          </center>
+                <ItemCard
+                  key={el.id}
+                  id={el.id}
+                  image={el.url}
+                  title={el.name}
+                  description={el.description}
+                  handleSubmit={this.handleFormSubmit}
+                />
+              )
+            })}
+          </div>
+        </div>
       </div>
     )
   }
@@ -129,3 +109,23 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Shopping)
+
+
+{/* <center>
+  {this.props.items.all.map((el, i) => {
+    return (
+      <a href={el.url}> clicker here </a>
+    )
+  })}
+  <form onSubmit={this.handleFormSubmit} id="checkbox-form">
+       { this.createCheckboxes() }
+
+
+    {
+    this.selectedCheckboxes &&
+      <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
+    }
+
+    { items.redirect && <Redirect to="/cart" /> }
+    </form>
+  </center> */}
