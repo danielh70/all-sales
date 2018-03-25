@@ -11,13 +11,13 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          name: 'Second Item',
+          name: 'Redux',
           price: 20,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Third Item',
+          name: 'React',
           price: 50,
           createdAt: new Date(),
           updatedAt: new Date()
