@@ -9,7 +9,6 @@ let ItemImages = require('./models').ItemImages
 let Images = require('./models').images
 let cors = require('cors')
 const crypto = require('crypto')
-const fs = require ('fs')
 let path = require('path')
 let aws = require('aws-sdk')
 let multer = require('multer')
