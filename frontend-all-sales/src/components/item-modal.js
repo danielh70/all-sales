@@ -63,7 +63,7 @@ class ItemModal extends Component {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button onClick={this.props.hide}>Close</Button>
         </Modal.Footer>
       </Modal>
     );

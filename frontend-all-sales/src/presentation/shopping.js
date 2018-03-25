@@ -64,12 +64,10 @@ class Shopping extends Component {
    this.props.redirect()
   }
 
-  showModal = () => {
-    this.props.showModal()
-  }
+  handleModal = () => {
+    const { modal, showModal, hideModal, items } = this.props
 
-  hideModal = () => {
-    this.props.hideModal()
+    items.modal ? hideModal() : showModal()
   }
 
   handleFormSubmit = (e) => {
@@ -114,6 +112,7 @@ class Shopping extends Component {
                   title={el.name}
                   description={el.description}
                   handleSubmit={this.handleFormSubmit}
+                  handleModal={this.handleModal}
                 />
 
               )
@@ -131,7 +130,7 @@ class Shopping extends Component {
            Launch large demo modal
         </Button>
 
-
+        <ItemModal show={this.props.items.modal} hide={this.handleModal} />
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
     )
