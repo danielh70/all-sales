@@ -15,7 +15,7 @@ let multer = require('multer')
 let multerS3 = require('multer-s3');
 var sequelize = require('sequelize');
 
-aws.config.loadFromPath('./config/config.json');
+// aws.config.loadFromPath('./config/config.json');
 const s3 = new aws.S3({
   Bucket: "all-sales"
 });
