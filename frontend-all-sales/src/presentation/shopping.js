@@ -123,7 +123,12 @@ class Shopping extends Component {
         <br />
         <br />
 
-        <ItemModal show={this.props.items.modal} onHide={this.handleModal} />
+        <ItemModal
+          show={this.props.items.modal}
+          onHide={this.handleModal}
+          title={items.name}
+          price={items.price}
+         />
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
     )

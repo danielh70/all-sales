@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 class ItemModal extends Component {
   render() {
+    console.log('logging from modal', this.props);
     return (
       <Modal
         {...this.props}
