@@ -21,55 +21,11 @@ class ImageUpload extends Component {
     }
   }
 
-  uploadImage(imageFile) {
-  return new Promise((resolve, reject) => {
-    let imageFormData = new FormData();
-
-    imageFormData.append('imageFile', imageFile);
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('post', '/upload', true);
-
-    xhr.onload = function () {
-      if (this.status === 200) {
-        resolve(this.response);
-      } else {
-        reject(this.statusText);
-      }
-    };
-
-    xhr.send(imageFormData);
-
-  });
-}
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-
-  }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
     this.props.onDrop(acceptedFiles, rejectedFiles)
   }
 
-  handleImageChange = (e) => {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imagePreviewUrl: reader.result
-      });
-    }
-
-    reader.readAsDataURL(file)
-  }
 
   handleNewActivity = () => {
     fetch(`${APIURL}api/upload`, {
@@ -140,22 +96,3 @@ class ImageUpload extends Component {
 }
 
 export default ImageUpload
-//
-// <Dropzone
-//   className='dropzone'
-//   accept='image/*'
-//   onDrop={(files) => {
-//     this.onDrop(files)
-//   }}
-// />
-// <form onSubmit={this.handleSubmit}>
-//   <input className="fileInput"
-//     type="file"
-//     onChange={this.handleImageChange} />
-//   <Button className="submitButton"
-//     type="submit"
-//     onClick={this.handleNewActivity}>Upload Image</Button>
-// </form>
-// <div className="imgPreview">
-//   {$imagePreview}
-// </div>

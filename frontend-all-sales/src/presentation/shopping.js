@@ -56,7 +56,8 @@ class Shopping extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault()
-    let selected = [e.target.id]
+    let id = parseInt(e.target.id)
+    let selected = [id]
     console.log(selected)
     this.props.submitItems(selected)
     this.redirect()

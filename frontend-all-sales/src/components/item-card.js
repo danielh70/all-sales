@@ -35,15 +35,3 @@ class ItemCard extends Component {
 
 
 export default ItemCard
-
-
-
-
-{/* <Card>
-    <CardImg top width='100%' src={image} alt="Item Image" />
-    <CardBody>
-      <CardTitle className='cardTitle'>{title}</CardTitle>
-      <CardText>Testing card text</CardText>
-      <Button onClick={this.props.handleSubmit}>The Details</Button>
-    </CardBody>
-</Card> */}
