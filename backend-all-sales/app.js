@@ -211,6 +211,9 @@ app.post('/api/upload', (req, res) => {
               })
           })
         })
+        .then(finish => {
+          res.json({ message: "success" })
+        })
         .catch(e => {
           console.log("error!", e)
         })

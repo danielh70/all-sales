@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 // import items from './data/list-items';
 // import showResults from '../actions/items';
 import ImageUpload from './image-upload';
+import { Redirect } from 'react-router-dom';
 //
 // const mapStateToProps = (store) => {
 //
@@ -27,7 +28,8 @@ class NewPostForm extends Component {
         }
       },
       file: '',
-      imagePreviewUrl: ''
+      imagePreviewUrl: '',
+      success: false
     }
   }
 
@@ -54,6 +56,7 @@ class NewPostForm extends Component {
                form: Object.assign({}, form, {
                  image: image,
                })
+
              })
            }
 
@@ -79,17 +82,16 @@ class NewPostForm extends Component {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(this.state.form),
-    }).then((resp) => {
-        return resp.json()
-    }).then(resp => {
-      console.log("response", resp);
+    })
+    .then(res => {
+      this.redirect()
     })
 
     console.log("Submitted:", this.state)
   }
 
-  handleNewActivity = () => {
-
+  redirect = () => {
+    this.setState({ success: true })
   }
 
   // handleImageChange = (e) => {
@@ -116,11 +118,11 @@ class NewPostForm extends Component {
         </div>
         <form onChange={this.handleInputChange} onSubmit={this.handleSubmit}>
           <div className="new-post c">
-            <input type="text" name="name" placeholder="Name" value={name} />
+            <input type="text" name="name" placeholder="Name" value={name} className="sign-up" />
             <br /> <br />
-            <input type="number" name="price" placeholder="Price" value={price} />
+            <input type="number" name="price" placeholder="Price" value={price} className="sign-up" />
             <br /> <br />
-            <textarea type="text" name="description" placeholder="Description" value={description} />
+            <textarea type="text" name="description" placeholder="Description" value={description} className="sign-up" />
           </div>
 
           <div className="new-post d">
@@ -140,6 +142,9 @@ class NewPostForm extends Component {
 
         </div>
         <div className="new-post h">
+
+        </div>
+        <div className="new-post i">
           File Preview:
            {this.state.form.image.name !== '' &&
              <div>
@@ -150,13 +155,10 @@ class NewPostForm extends Component {
              </div>
            }
         </div>
-        <div className="new-post i">
-
-        </div>
         <div className="new-post j">
 
         </div>
-
+        { this.state.success && <Redirect to="/shopping" /> }
       </div>
     )
   }

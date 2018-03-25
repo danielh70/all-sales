@@ -12,9 +12,9 @@ class ItemCard extends Component {
     const { id, title, image, description } = this.props
       return (
         <div className="hvr-grow-shadow">
-          <div className=" item-preview shadow cell">
+          <div className=" item-preview shadow cell gradient">
 
-            <div className="cell">
+            <div className="">
               <img src={image} alt="testing"  className="itemPreview responsive-image"/>
               <h3 id="thumbnail-label">{title}</h3>
               <p id="description">{description}</p>

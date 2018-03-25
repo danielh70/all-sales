@@ -10,16 +10,16 @@
 
 .new-post-grid {
   display: grid;
-  border: 2px black solid;
+  /* border: 2px black solid; */
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: 1fr minmax(350px, 500px) 1fr;
   grid-gap: 5px;
 }
 
-.new-post {
+/* .new-post {
   border: 1px solid red;
 
-}
+} */
 
 .new-post.f {
   align-self: center;
@@ -129,9 +129,9 @@ html, body {
 } */
 
 input.sign-up {
-  /* width: 300px; */
+  width: 300px;
   height: 40px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 
@@ -386,6 +386,14 @@ h3 {
     object-fit: cover;
     /* border-radius: 10px; */
     /* border-radius: 0px 0px 0px 0px; */
+}
+
+.gradient {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,969696+100&0+45,0.65+100 */
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(68,68,68,0) 45%, rgba(150,150,150,0.65) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(68,68,68,0) 45%,rgba(150,150,150,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(68,68,68,0) 45%,rgba(150,150,150,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6969696',GradientType=0 ); /* IE6-9 */
 }
 
 

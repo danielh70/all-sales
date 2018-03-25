@@ -21,24 +21,6 @@ module.exports = {
           price: 50,
           createdAt: new Date(),
           updatedAt: new Date()
-        },
-        {
-          name: 'Another Item',
-          price: 1000,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          name: 'ONE BILLION DOLLARS',
-          price: 500,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          name: 'Winning Lottery Ticket',
-          price: 777,
-          createdAt: new Date(),
-          updatedAt: new Date()
         }
       ]
     )

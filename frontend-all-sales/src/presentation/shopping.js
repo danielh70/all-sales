@@ -44,7 +44,6 @@ class Shopping extends Component {
   componentWillMount() {
     this.props.startLoading();
     this.props.setLoginStatus();
-
   }
 
   componentDidMount() {
@@ -54,7 +53,6 @@ class Shopping extends Component {
   redirect = () => {
    this.props.redirect()
   }
-
 
   handleFormSubmit = (e) => {
     e.preventDefault()
