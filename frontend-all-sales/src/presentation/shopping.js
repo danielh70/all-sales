@@ -64,7 +64,7 @@ class Shopping extends Component {
 
   handleModal = (e) => {
     const { showModal, hideModal, items } = this.props
-    let id = parseInt(e.target.id)
+    let id = e ? parseInt(e.target.id) : null
 
     items.modal ? hideModal() : showModal(id)
   }
