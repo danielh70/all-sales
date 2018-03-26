@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, redirect, submitItems, startLoading, stopLoading } from '../actions/items'
-import { Row, Col } from 'react-bootstrap';
+import { getItems, redirect, submitItems, startLoading, stopLoading, showModal, hideModal } from '../actions/items';
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import ItemCard from '../components/item-card';
+import ItemModal from '../components/item-modal';
 import { Loader } from './Loader';
-import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
 import '../App.css';
 
@@ -27,9 +26,17 @@ const mapDispatchToProps = (dispatch) => {
     startLoading: () => {
       dispatch(startLoading())
     },
-    stopLoading: () => dispatch(stopLoading())
+    stopLoading: () => {
+      dispatch(stopLoading())
+    },
+    showModal: () => {
+      dispatch(showModal())
+    },
+    hideModal: () => {
+      dispatch(hideModal())
     }
   }
+}
 
 function mapStateToProps(state) {
   return {
@@ -55,6 +62,12 @@ class Shopping extends Component {
    this.props.redirect()
   }
 
+  handleModal = () => {
+    const { modal, showModal, hideModal, items } = this.props
+
+    items.modal ? hideModal() : showModal()
+  }
+
   handleFormSubmit = (e) => {
     e.preventDefault()
     let id = parseInt(e.target.id)
@@ -62,13 +75,14 @@ class Shopping extends Component {
     console.log(selected)
     this.props.submitItems(selected)
     this.redirect()
-
    }
+
 
 
   render() {
     const { items } = this.props
-        // console.log("all items****************************", this.props.items);
+
+    // console.log("all items****************************", items);
 
     return (
       <div>
@@ -86,7 +100,6 @@ class Shopping extends Component {
 
             { items.all.map((el, i) => {
               return (
-
                 <ItemCard
                   key={el.id}
                   id={el.id}
@@ -94,13 +107,22 @@ class Shopping extends Component {
                   title={el.name}
                   description={el.description}
                   handleSubmit={this.handleFormSubmit}
+                  handleModal={this.handleModal}
                 />
-
               )
             })}
 
           </div>
         </div>
+        <br />
+        <br />
+
+        <ItemModal
+          show={this.props.items.modal}
+          onHide={this.handleModal}
+          title={items.name}
+          price={items.all.price}
+         />
 
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
 import {
     Button,
     CardText
@@ -19,7 +18,7 @@ class ItemCard extends Component {
               <h3 id="thumbnail-label">{title}</h3>
               <p id="description">{description}</p>
               <p>
-                <Button id={id} bsStyle="primary" disabled>More Info</Button>&nbsp;
+                <Button id={id} onClick={this.props.handleModal} bsStyle="primary">More Info</Button>&nbsp;
                 <Button id={id} onClick={this.props.handleSubmit} href="/cart" bsStyle="default">Add to Cart</Button>
               </p>
               <br />

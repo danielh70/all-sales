@@ -4,6 +4,8 @@ export const ADD_CURRENT_USER_ITEMS = 'ADD_CURRENT_USER_ITEMS';
 export const REDIRECT_FROM_ITEMS    = 'REDIRECT_FROM_ITEMS';
 export const LOADING_STOP           = 'LOADING_STOP';
 export const LOADING_START          = 'LOADING_START';
+export const SHOW_MODAL             = 'SHOW_MODAL';
+export const HIDE_MODAL             = 'HIDE_MODAL';
 
 const APIURL = process.env.NODE_ENV === 'production' ? "/" : "http://localhost:3000/";
 const TOKEN = localStorage.getItem("authToken");
@@ -25,6 +27,18 @@ export function getItems() {
 export function startLoading() {
   return {
     type: LOADING_START
+  }
+}
+
+export function showModal() {
+  return {
+    type: SHOW_MODAL
+  }
+}
+
+export function hideModal() {
+  return {
+    type: HIDE_MODAL
   }
 }
 

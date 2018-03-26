@@ -1,7 +1,8 @@
 import {
   ITEMS_FETCHED, ADD_CURRENT_USER_ITEMS,
   REDIRECT_FROM_ITEMS, REMOVE_CART_ITEM,
-  LOADING_START, LOADING_STOP
+  LOADING_START, LOADING_STOP, HIDE_MODAL,
+  SHOW_MODAL
 } from '../actions/items';
 
 
@@ -9,12 +10,13 @@ const INITIAL_STATE = {
   all: [],
   currentUser: [],
   redirect: false,
-  loading: false
+  loading: false,
+  modal: false
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
-    
+
     case LOADING_START:
       return state = { ...state, loading: true }
     case LOADING_STOP:
@@ -27,6 +29,10 @@ export default (state = INITIAL_STATE, action) => {
       return state = { ...state, redirect: true }
     case REMOVE_CART_ITEM:
       return state = { ...state, currentUser: action.payload }
+    case SHOW_MODAL:
+      return state = { ...state, modal: true }
+    case HIDE_MODAL:
+      return state = { ...state, modal: false }
     default:
       return state
   }
