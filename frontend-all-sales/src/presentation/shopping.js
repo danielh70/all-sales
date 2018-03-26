@@ -6,9 +6,7 @@ import NavBar from '../components/navbar';
 import ItemCard from '../components/item-card';
 import ItemModal from '../components/item-modal';
 import { Loader } from './Loader';
-import Checkbox from '../components/checkbox';
 import { Redirect } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import '../App.css';
 
 
