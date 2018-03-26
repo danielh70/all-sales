@@ -81,7 +81,7 @@ class Shopping extends Component {
   render() {
     const { items } = this.props
 
-    console.log("all items****************************", items);
+    // console.log("all items****************************", items);
 
     return (
       <div>
