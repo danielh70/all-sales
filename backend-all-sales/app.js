@@ -1,19 +1,19 @@
-var express = require('express')
-var bodyParser = require('body-parser')
-var validator = require('express-validator')
-var app = express()
-let Users = require('./models').users
-let Items = require('./models').items
-let UserItems = require('./models').UserItems
-let ItemImages = require('./models').ItemImages
-let Images = require('./models').images
-let cors = require('cors')
+const express = require('express')
+const bodyParser = require('body-parser')
+const validator = require('express-validator')
+const app = express()
+const Users = require('./models').users
+const Items = require('./models').items
+const UserItems = require('./models').UserItems
+const ItemImages = require('./models').ItemImages
+const Images = require('./models').images
+const cors = require('cors')
 const crypto = require('crypto')
-let path = require('path')
-let aws = require('aws-sdk')
-let multer = require('multer')
-let multerS3 = require('multer-s3');
-var sequelize = require('sequelize');
+const path = require('path')
+const aws = require('aws-sdk')
+const multer = require('multer')
+const multerS3 = require('multer-s3');
+const sequelize = require('sequelize');
 
 const s3 = new aws.S3({
   Bucket: "all-sales"
@@ -197,7 +197,8 @@ app.post('/api/upload', (req, res) => {
 
         Items.create({
           name: name,
-          price: price
+          price: price,
+          description: description
         })
         .then(item => {
           Images.bulkCreate([

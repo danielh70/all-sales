@@ -16,6 +16,10 @@
   grid-gap: 5px;
 }
 
+#money {
+  color: green;
+}
+
 /* .new-post {
   border: 1px solid red;
 
