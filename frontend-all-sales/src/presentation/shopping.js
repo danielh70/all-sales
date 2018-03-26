@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getItems, redirect, submitItems, startLoading, stopLoading, showModal, hideModal } from '../actions/items'
-import { Row, Col } from 'react-bootstrap';
+import { getItems, redirect, submitItems, startLoading, stopLoading, showModal, hideModal } from '../actions/items';
 import { setLoginStatus } from '../actions/userForm'
 import NavBar from '../components/navbar';
 import ItemCard from '../components/item-card';
@@ -84,9 +83,7 @@ class Shopping extends Component {
   render() {
     const { items } = this.props
 
-    let yes = true;
-
-    console.log("all items****************************", this.props.items);
+    console.log("all items****************************", items);
 
     return (
       <div>
@@ -104,7 +101,6 @@ class Shopping extends Component {
 
             { items.all.map((el, i) => {
               return (
-
                 <ItemCard
                   key={el.id}
                   id={el.id}
@@ -114,7 +110,6 @@ class Shopping extends Component {
                   handleSubmit={this.handleFormSubmit}
                   handleModal={this.handleModal}
                 />
-
               )
             })}
 
@@ -127,8 +122,9 @@ class Shopping extends Component {
           show={this.props.items.modal}
           onHide={this.handleModal}
           title={items.name}
-          price={items.price}
+          price={items.all.price}
          />
+
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>
     )
