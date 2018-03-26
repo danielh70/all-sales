@@ -29,8 +29,8 @@ const mapDispatchToProps = (dispatch) => {
     stopLoading: () => {
       dispatch(stopLoading())
     },
-    showModal: () => {
-      dispatch(showModal())
+    showModal: (e) => {
+      dispatch(showModal(e))
     },
     hideModal: () => {
       dispatch(hideModal())
@@ -61,10 +61,11 @@ class Shopping extends Component {
    this.props.redirect()
   }
 
-  handleModal = () => {
+  handleModal = (e) => {
     const { modal, showModal, hideModal, items } = this.props
+    let id = parseInt(e.target.id)
 
-    items.modal ? hideModal() : showModal()
+    items.modal ? hideModal() : showModal(id)
   }
 
   handleFormSubmit = (e) => {
@@ -116,12 +117,13 @@ class Shopping extends Component {
         <br />
         <br />
 
-        <ItemModal
-          show={this.props.items.modal}
+        { items.modal &&
+          <ItemModal
+          show={items.modal}
           onHide={this.handleModal}
-          title={items.name}
-          price={items.all.price}
+          item={items.all[items.selectedItem - 1]}
          />
+       }
 
         { this.props.items.redirect && <Redirect to="/cart" /> }
       </div>

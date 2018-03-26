@@ -13,7 +13,7 @@ class ItemCard extends Component {
         <div className="hvr-grow-shadow">
           <div className=" item-preview shadow cell gradient">
 
-            <div className="">
+            <div>
               <img src={image} alt="testing"  className="itemPreview responsive-image"/>
               <h3 id="thumbnail-label">{title}</h3>
               <p id="description">{description}</p>

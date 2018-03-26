@@ -30,9 +30,10 @@ export function startLoading() {
   }
 }
 
-export function showModal() {
+export function showModal(e) {
   return {
-    type: SHOW_MODAL
+    type: SHOW_MODAL,
+    payload: e
   }
 }
 

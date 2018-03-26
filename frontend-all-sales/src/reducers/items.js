@@ -11,7 +11,8 @@ const INITIAL_STATE = {
   currentUser: [],
   redirect: false,
   loading: false,
-  modal: false
+  modal: false,
+  selectedItem: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,13 +31,15 @@ export default (state = INITIAL_STATE, action) => {
     case REMOVE_CART_ITEM:
       return state = { ...state, currentUser: action.payload }
     case SHOW_MODAL:
-      return state = { ...state, modal: true }
+      return state = { ...state, modal: true, selectedItem: action.payload }
     case HIDE_MODAL:
       return state = { ...state, modal: false }
     default:
       return state
   }
 }
+
+// state.all[action.payload - 1]
 
 
 // case 'ITEM_ADDED': {
