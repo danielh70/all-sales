@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 
 
@@ -7,7 +6,7 @@ import { Modal, Button } from 'react-bootstrap';
 class ItemModal extends Component {
   render() {
     const { price, name, description } = this.props.item
-    console.log('logging from modal', this.props);
+    // console.log('logging from modal', this.props);
     return (
       <Modal
         {...this.props}
