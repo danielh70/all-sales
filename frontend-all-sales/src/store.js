@@ -14,8 +14,7 @@ import reducer from './reducers/index'
 //     composeWithDevTools(applyMiddleware(...middleware))
 //   )
 
-
 // process.env = dev? push logger : null
-
+//
 //production
 export default createStore(reducer, applyMiddleware(thunk))
