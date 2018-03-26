@@ -15,8 +15,8 @@ class ItemCard extends Component {
 
             <div>
               <img src={image} alt="testing"  className="itemPreview responsive-image"/>
-              <h3 id="thumbnail-label">{title}</h3>
-              <p id="description">{description}</p>
+              <h3 id="thumbnail-label wrap-text" style={{width: 285}}>{title}</h3>
+
               <p>
                 <Button id={id} onClick={this.props.handleModal} bsStyle="primary">More Info</Button>&nbsp;
                 <Button id={id} onClick={this.props.handleSubmit} href="/cart" bsStyle="default">Add to Cart</Button>

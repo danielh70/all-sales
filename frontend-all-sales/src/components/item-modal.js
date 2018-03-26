@@ -20,20 +20,10 @@ class ItemModal extends Component {
         </Modal.Header>
           <Modal.Body>
             <div>
-            <h4 id="description">Price: <span>${price}</span></h4>
+            <h4 id="description">Price: <span id="money">${price}</span></h4>
             <p id="description">
-              Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
-              Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
-              Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
-              Placeholder Placeholder Placeholder Placeholder
+              {description}
             </p>
-            <p id="description">
-              Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
-              Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
-              Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
-              Placeholder Placeholder Placeholder Placeholder
-            </p>
-
           </div>
           </Modal.Body>
         <Modal.Footer>
