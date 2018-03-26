@@ -44,7 +44,6 @@ function mapStateToProps(state) {
     items: state.items
   }
 }
-// zzz
 
 
 class Shopping extends Component {
@@ -136,23 +135,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Shopping)
-
-
-{/* <center>
-  {this.props.items.all.map((el, i) => {
-    return (
-      <a href={el.url}> clicker here </a>
-    )
-  })}
-  <form onSubmit={this.handleFormSubmit} id="checkbox-form">
-       { this.createCheckboxes() }
-
-
-    {
-    this.selectedCheckboxes &&
-      <button className="checkbox-form-button move-left" type="submit">Add to cart</button>
-    }
-
-    { items.redirect && <Redirect to="/cart" /> }
-    </form>
-  </center> */}

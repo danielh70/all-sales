@@ -27,10 +27,15 @@ class NewPostForm extends Component {
           extension: ''
         }
       },
+      images: [],
       file: '',
       imagePreviewUrl: '',
       success: false
     }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("component will update", nextState);
   }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
@@ -46,11 +51,13 @@ class NewPostForm extends Component {
              extension: type,
              name: name,
            }
-
            const reader = new FileReader()
 
            reader.onload = () => {
              image.data = reader.result
+
+
+             // this.setState(multipleImg)
 
              this.setState({
                form: Object.assign({}, form, {
@@ -59,6 +66,8 @@ class NewPostForm extends Component {
 
              })
            }
+
+           this.state.images.push(image)
 
            reader.onabort = () => console.log('image reading was aborted')
            reader.onerror = () => console.log('image reading has failed')
