@@ -15,8 +15,10 @@ const multer = require('multer')
 const multerS3 = require('multer-s3');
 const sequelize = require('sequelize');
 
+console.log(aws.config.credentials.accessKeyId);
 const s3 = new aws.S3({
-  Bucket: "all-sales"
+  Bucket: "all-sales",
+  accessKeyId: aws.config.credentials.accessKeyId
 });
 const BUCKETNAME = process.env.S3_BUCKET;
 
