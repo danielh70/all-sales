@@ -8,7 +8,6 @@ import { setLoginStatus } from '../actions/userForm';
 
 const mapStateToProps = (store) => {
   return {
-    APIURL:     store.appState.APIURL,
     authorized: store.authorized.loggedIn,
     loading:    store.items.loading
   }
