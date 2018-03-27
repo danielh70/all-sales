@@ -27,10 +27,15 @@ class NewPostForm extends Component {
           extension: ''
         }
       },
+      images: [],
       file: '',
       imagePreviewUrl: '',
       success: false
     }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("component will update", nextState);
   }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
@@ -46,11 +51,13 @@ class NewPostForm extends Component {
              extension: type,
              name: name,
            }
-
            const reader = new FileReader()
 
            reader.onload = () => {
              image.data = reader.result
+
+
+             // this.setState(multipleImg)
 
              this.setState({
                form: Object.assign({}, form, {
@@ -59,6 +66,8 @@ class NewPostForm extends Component {
 
              })
            }
+
+           this.state.images.push(image)
 
            reader.onabort = () => console.log('image reading was aborted')
            reader.onerror = () => console.log('image reading has failed')
@@ -142,6 +151,12 @@ class NewPostForm extends Component {
 
         </div>
         <div className="new-post h">
+          { this.state.images[1] &&
+            <div>
+            <img src={this.state.images[1].data} className="image-preview" alt="preview" />
+            <p>{this.state.images[1].name}.{this.state.images[1].extension}</p>
+            </div>
+          }
 
         </div>
         <div className="new-post i">
@@ -149,13 +164,19 @@ class NewPostForm extends Component {
            {this.state.form.image.name !== '' &&
              <div>
 
-               <img src={data} className="image-preview" alt="preview" />
+               <img src={this.state.images[0].data} className="image-preview" alt="preview" />
                <p>{image.name}.{extension}</p>
                <br/>
              </div>
            }
         </div>
         <div className="new-post j">
+          { this.state.images[2] &&
+            <div>
+            <img src={this.state.images[2].data} className="image-preview" alt="preview" />
+            <p>{this.state.images[2].name}.{this.state.images[2].extension}</p>
+            </div>
+          }
 
         </div>
         { this.state.success && <Redirect to="/shopping" /> }

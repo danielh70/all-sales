@@ -8,17 +8,17 @@ import { setLoginStatus } from '../actions/userForm';
 
 const mapStateToProps = (store) => {
   return {
-    APIURL: store.appState.APIURL,
+    // APIURL: store.appState.APIURL,
     authorized: store.authorized.loggedIn
   }
 }
 
 
 class NewPostPage extends Component {
-
-  componentWillMount() {
-    this.props.dispatch(setLoginStatus(this.props.APIURL))
-  }
+  //
+  // componentWillMount() {
+  //   this.props.dispatch(setLoginStatus(this.props.APIURL))
+  // }
 
 
   render() {

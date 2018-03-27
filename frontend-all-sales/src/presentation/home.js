@@ -14,7 +14,7 @@ import '../App.css';
 
 const mapStateToProps = (store) => {
   return {
-    APIURL: store.appState.APIURL
+    // APIURL: store.appState.APIURL
   }
 }
 

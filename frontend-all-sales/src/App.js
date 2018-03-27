@@ -8,21 +8,11 @@ import Home from './presentation/home';
 import NewPostPage from './presentation/new-post-page';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ImageUpload from './components/image-upload';
-import Test from './presentation/test';
 import './App.css';
 
 
-const mapStateToProps = (store) => {
-  return {
-    APIURL: store.appState.APIURL
-  }
-}
 
 class App extends Component {
-
-  // componentWillMount() {
-  //   this.props.dispatch(setLoginStatus(this.props.APIURL))
-  // }
 
     render() {
       return (
@@ -63,10 +53,6 @@ class App extends Component {
                 <ImageUpload />
               )} />
 
-              <Route exact path="/test" render={props => (
-                <Test />
-              )} />
-
             </div>
           </Router>
         </div>
@@ -74,6 +60,4 @@ class App extends Component {
     }
   }
 
-export default connect(
-  mapStateToProps
-)(App)
+export default connect()(App)
