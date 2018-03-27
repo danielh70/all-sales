@@ -20,7 +20,7 @@ const s3 = new aws.S3({
   Bucket: "all-sales"
 });
 
-const BUCKETNAME = process.env.S3_BUCKET;
+// const BUCKETNAME = process.env.S3_BUCKET;
 
 
 app.use(express.static('public'))
