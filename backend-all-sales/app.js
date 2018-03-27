@@ -20,6 +20,7 @@ const s3 = new aws.S3({
   Bucket: "all-sales",
   accessKeyId: aws.config.credentials.accessKeyId
 });
+
 const BUCKETNAME = process.env.S3_BUCKET;
 
 
