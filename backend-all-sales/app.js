@@ -28,8 +28,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(validator());
 app.use(cors());
 
-
-
+//
 app.get('/', (req, res) => {
   res.json({message: 'Server running =\')'})
 });
