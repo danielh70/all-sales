@@ -130,7 +130,7 @@ class NewPostForm extends Component {
     const { name, price, description, image } = this.state.form
     const { data, extension } = image
 
-    console.log("current state:", this.state);
+    // console.log("current state:", this.state);
     return (
       <div className="new-post-grid">
 
