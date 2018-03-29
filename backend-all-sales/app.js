@@ -185,6 +185,7 @@ app.post('/api/upload', (req, res) => {
 
     console.log('s3params:', s3params);
 
+    if(name && description && data && extension && price) {
     s3.putObject(s3params, (err, data) => {
       // if (err) {return console.log(err) }
       // console.log('Image successfully uploaded.');
@@ -215,9 +216,14 @@ app.post('/api/upload', (req, res) => {
           res.json({ message: "success" })
         })
         .catch(e => {
-          console.log("error!", e)
+          res.json({ message: "error" })
+          // console.log("error!", e)
         })
     })
+  } else {
+    res.status(400)
+    res.json({ message: "error" })
+  }
   })
 
 

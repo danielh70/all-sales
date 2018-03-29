@@ -10,6 +10,8 @@ import {
 import reduxlogo from '../images/reduxlogo.svg'
 import reactlogo from '../images/reactlogo.svg'
 import graphqllogo from '../images/graphqllogo.svg'
+import ButtonLoader from '../components/button-loader'
+// import '../ButtonLoader.scss';
 import '../App.css';
 
 const mapStateToProps = (store) => {
@@ -38,6 +40,8 @@ class Home extends Component {
           <img src={reduxlogo} className="redux-logo" alt="logo" />
           <img src={reactlogo} className="react-logo" alt="logo" />
           <img src={graphqllogo} className="graphql-logo" alt="logo" />
+
+          <ButtonLoader />
         </div>
       );
     }

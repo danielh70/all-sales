@@ -7,7 +7,7 @@ module.exports = {
         {
           name: 'Mug',
           price: 20,
-          description: 'Brand new mug with "HUSTLE" printed on it. If you\'re a hard worker then you\'ll love this mug.',
+          description: 'Brand new mug with "HUSTLE" printed on it.',
           createdAt: new Date(),
           updatedAt: new Date()
         },

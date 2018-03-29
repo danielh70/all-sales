@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 // import showResults from '../actions/items';
 import ImageUpload from './image-upload';
 import { Redirect } from 'react-router-dom';
+import ButtonLoader from './button-loader';
 //
 // const mapStateToProps = (store) => {
 //
@@ -30,13 +31,11 @@ class NewPostForm extends Component {
       images: [],
       file: '',
       imagePreviewUrl: '',
-      success: false
+      success: false,
+      loading: false
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log("component will update", nextState);
-  }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
          const { form } = this.state
@@ -84,30 +83,46 @@ class NewPostForm extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    fetch(`${APIURL}api/upload`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state.form),
-    })
-    .then(res => {
-      this.redirect()
-    })
+    e.preventDefault();
+    this.startLoading();
 
-    console.log("Submitted:", this.state)
+      fetch(`${APIURL}api/upload`, {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.state.form),
+      })
+      .then(res => {
+        // console.log("res..", res);
+        if (res.status !== 400) {
+          this.redirect()
+          // console.log(res);
+        } else {
+          this.stopLoading()
+        }
+      })
+      .catch(res => {
+        if(res.status === 400){
+          this.stopLoading()
+        }
+      })
+      this.startLoading()
+      // console.log("Submitted:", this.state)
+
   }
 
   redirect = () => {
-    this.setState({ success: true })
+    this.setState({ success: true, loading: false })
   }
 
-  // handleImageChange = (e) => {
-  //
-  // }
-  //
+  startLoading = () => {
+    this.setState({ loading: true })
+  }
 
+  stopLoading = () => {
+    this.setState({ loading: false })
+  }
 
 
 
@@ -135,7 +150,8 @@ class NewPostForm extends Component {
           </div>
 
           <div className="new-post d">
-            <button type='submit' className="checkbox-form-button">Submit form</button>
+
+            { !this.state.loading ? <button type='submit' className="checkbox-form-button">Submit form</button> : <ButtonLoader /> }
           </div>
           <div className="new-post e">
 

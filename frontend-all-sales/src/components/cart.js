@@ -35,7 +35,7 @@ class Cart extends Component {
   removeItem = (e) => {
     let itemId = [e.target.value];
     let itemIdNum = parseInt(itemId)
-    
+
     // console.log("item id:", itemIdNum);
 
 
@@ -44,7 +44,7 @@ class Cart extends Component {
           el.id !== itemIdNum
       )
 
-      console.log(removeThisItem(2));
+      // console.log(removeThisItem(2));
 
       this.props.removeCartItem(itemIdNum, removeThisItem(itemIdNum))
   }
