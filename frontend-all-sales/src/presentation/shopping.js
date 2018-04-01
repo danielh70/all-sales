@@ -49,6 +49,7 @@ function mapStateToProps(state) {
 class Shopping extends Component {
 
   componentWillMount() {
+    console.log("PROPPY PROPS:", this.props);
     this.props.startLoading();
     this.props.setLoginStatus();
   }
@@ -131,7 +132,4 @@ class Shopping extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Shopping)
+export default connect(mapStateToProps, mapDispatchToProps)(Shopping)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Shopping from './presentation/shopping';
 import SignUpPage from './presentation/sign-up-presentation';
 import LogInPage from './presentation/log-in-presentation';
+import ShoppingContainer from './containers/shopping-container';
 import Cart from './components/cart';
 import Home from './presentation/home';
 import NewPostPage from './presentation/new-post-page';

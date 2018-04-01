@@ -167,25 +167,34 @@ app.post('/api/users', function(req, res){
 
 
 app.post('/api/upload', (req, res) => {
-    const { title, description, name, image, price } = req.body
+    const { title, description, name, image, price, images } = req.body
     let { data, extension } = image
     let fileprefix = crypto.createHash('md5').update(data).digest('hex')
     let filename = `${fileprefix}.${extension}`
 
     data = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""),'base64')
 
-    const s3params = {
-      Bucket: 'all-sales',
-      Key: filename,
-      Body: data,
-      ACL: 'public-read',
-      ContentEncoding: 'base64',
-      ContentType: `image/${extension}`
-    }
 
-    console.log('s3params:', s3params);
+
+    // console.log('s3params:', s3params);
 
     if(name && description && data && extension && price) {
+      let imgs = [];
+
+      for (var i = 0; i < images.length; i++) {
+        images[i] = image;
+        const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/'
+        imgs.push({ url: awsUrl + filename })
+
+        const s3params = {
+          Bucket: 'all-sales',
+          Key: filename,
+          Body: data,
+          ACL: 'public-read',
+          ContentEncoding: 'base64',
+          ContentType: `image/${extension}`
+        }
+
     s3.putObject(s3params, (err, data) => {
       // if (err) {return console.log(err) }
       // console.log('Image successfully uploaded.');
@@ -193,9 +202,13 @@ app.post('/api/upload', (req, res) => {
       console.log("data:", data);
       console.log("error:", err);
 
-      const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/'
+
       // console.log("link to pic", awsUrl + filename);
 
+
+    })
+
+  }
 
         Items.create({
           name: name,
@@ -203,8 +216,9 @@ app.post('/api/upload', (req, res) => {
           description: description
         })
         .then(item => {
+          console.log("imagggerrrr ==============", imgs);
           Images.bulkCreate([
-            { url: awsUrl + filename }
+            ...imgs
           ], { returning: true })
           .then(res => {
               res.forEach(el => {
@@ -219,7 +233,7 @@ app.post('/api/upload', (req, res) => {
           res.json({ message: "error" })
           // console.log("error!", e)
         })
-    })
+
   } else {
     res.status(400)
     res.json({ message: "error" })

@@ -33,7 +33,7 @@ class NavBarHeader extends Component {
     // console.log(authToken)
     return (
       <div>
-        {this.componentWillMount()}
+        { this.componentWillMount() }
       </div>
 
     )

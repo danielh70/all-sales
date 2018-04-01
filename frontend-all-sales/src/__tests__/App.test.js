@@ -18,6 +18,6 @@ test('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-test('', () => {
-  let cp = shallow(<Provider store={store}><App /></Provider>)
-})
+// test('', () => {
+//   let cp = shallow(<Provider store={store}><App /></Provider>)
+// })
