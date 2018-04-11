@@ -102,7 +102,7 @@ app.get('/api/items/user', authorization, (req, res) => {
   SELECT * FROM "UserItems"
     INNER JOIN "items"
     ON "UserItems"."itemId" = "items".id
-    WHERE "userId" = ${user}
+    WHERE "userId" = ${user};
   `)
   .then(items => {
     res.json({ items: items })
@@ -164,29 +164,34 @@ app.post('/api/users', function(req, res){
   })
 })
 
+let butFirst = (func) => {
+  return new Promise(res => {
+    res(func)
+  })
+}
 
 
 app.post('/api/upload', (req, res) => {
-    const { title, description, name, image, price, images } = req.body
+    let { title, description, name, image, price, images } = req.body
     let { data, extension } = image
     let fileprefix = crypto.createHash('md5').update(data).digest('hex')
     let filename = `${fileprefix}.${extension}`
 
     data = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""),'base64')
 
-
-
     // console.log('s3params:', s3params);
 
     if(name && description && data && extension && price) {
+      // variable used in the bulkCreate
       let imgs = [];
 
-      for (var i = 0; i < images.length; i++) {
-        images[i] = image;
-        const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/'
-        imgs.push({ url: awsUrl + filename })
+      // for each image, create a unique name and store on s3 bucket, and url into the database
+			images.forEach((el, i ) => {
+        const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/';
+        image = el[i];
+        console.log("FILENAME", filename);
 
-        const s3params = {
+        let s3params = {
           Bucket: 'all-sales',
           Key: filename,
           Body: data,
@@ -195,49 +200,44 @@ app.post('/api/upload', (req, res) => {
           ContentType: `image/${extension}`
         }
 
-    s3.putObject(s3params, (err, data) => {
-      // if (err) {return console.log(err) }
-      // console.log('Image successfully uploaded.');
+        // **SUPPOSED** to push each image, with a different filename.
+        imgs.push({ url: awsUrl + filename })
 
-      console.log("data:", data);
-      console.log("error:", err);
+      s3.putObject(s3params, (err, data) => {
+        // if (err) {return console.log(err) }
+        // console.log('Image successfully uploaded.');
+        console.log("data:", data);
+        console.log("error:", err);
 
-
-      // console.log("link to pic", awsUrl + filename);
-
-
-    })
-
-  }
-
-        Items.create({
-          name: name,
-          price: price,
-          description: description
-        })
-        .then(item => {
-          console.log("imagggerrrr ==============", imgs);
-          Images.bulkCreate([
-            ...imgs
-          ], { returning: true })
-          .then(res => {
-              res.forEach(el => {
-                item.addImages([el.id])
-              })
+        console.log("link to pic", awsUrl + filename);
+        console.log("imgs ===========", imgs);
+      })
+	  })
+      Items.create({
+        name: name,
+        price: price,
+        description: description
+      })
+      .then(item => {
+        // console.log("imagggerrrr ==============", imgs);
+        Images.bulkCreate(imgs, { returning: true })
+      .then(res => {
+          res.forEach(el => {
+            item.addImages([el.id])
           })
         })
-        .then(finish => {
-          res.json({ message: "success" })
-        })
-        .catch(e => {
-          res.json({ message: "error" })
-          // console.log("error!", e)
-        })
-
-  } else {
-    res.status(400)
-    res.json({ message: "error" })
-  }
+      })
+      .then(finish => {
+        res.json({ message: "success" })
+      })
+      .catch(e => {
+        res.json({ message: "error" })
+        // console.log("error!", e)
+      })
+    } else {
+      res.status(400)
+      res.json({ message: "error" })
+    }
   })
 
 

@@ -9,6 +9,7 @@ import '../App.css';
 class ItemCard extends Component {
   render() {
     const { id, title, image } = this.props
+    // console.log("image from card............", image);
       return (
         <div className="hvr-grow-shadow">
           <div className=" item-preview shadow cell gradient">
