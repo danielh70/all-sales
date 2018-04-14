@@ -172,25 +172,19 @@ let butFirst = (func) => {
 
 
 app.post('/api/upload', (req, res) => {
-
-
-
-
-
-
+        let { title, description, name, image, price, images } = req.body
+        let { data, extension } = image
+        data = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""),'base64')
 
     // console.log('s3params:', s3params);
 
-    if(name && description && data && extension && price) {
+    if(req.body) {
       // variable used in the bulkCreate
       let imgs = [];
 
       // for each image, create a unique name and store on s3 bucket, and url into the database
 			images.forEach((el, i ) => {
-        let { title, description, name, image, price, images } = req.body
-        let { data, extension } = image
         image = el[i];
-        data = new Buffer(data.replace(/^data:image\/\w+;base64,/, ""),'base64')
         let fileprefix = crypto.createHash('md5').update(data).digest('hex')
         let filename = `${fileprefix[i]}.${extension[i]}`
         const awsUrl = 'https://s3-us-west-2.amazonaws.com/all-sales/';
