@@ -15,7 +15,7 @@ class ItemCard extends Component {
           <div className=" item-preview shadow cell gradient">
 
             <div>
-              <img src={image} alt="testing"  className="itemPreview responsive-image"/>
+              <img src={image} alt="testing" className="itemPreview responsive-image"/>
               <h3 id="thumbnail-label" style={{width: 285}}>{title}</h3>
               <p>
                 <Button id={id} onClick={this.props.handleModal} bsStyle="primary">More Info</Button>&nbsp;

@@ -33,6 +33,7 @@ class Home extends Component {
               <PageHeader>
                 Authored by <span id="user-name">Daniel Hook</span>
               </PageHeader>
+
             </Grid>
           </Row>
           <img src={reduxlogo} className="redux-logo" alt="logo" />

@@ -12,16 +12,20 @@ const TOKEN = localStorage.getItem("authToken");
 
 
 export function getItems() {
-  return dispatch =>
-  fetch(`${APIURL}api/shopping`)
-    .then(res => res.json())
-    .then(res => {
+  return async dispatch => {
+    try {
+      const getItems = await fetch(`${APIURL}api/shopping`)
+      const toJson = await getItems.json()
+      const disp = await toJson
+
       dispatch({
         type: ITEMS_FETCHED,
-        payload: res.items[0]
+        payload: disp.items[0]
       })
-    })
-  .catch(e => console.log(e))
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export function startLoading() {

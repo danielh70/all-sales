@@ -7,6 +7,7 @@ import ItemCard from '../components/item-card';
 import ItemModal from '../components/item-modal';
 import { Loader } from './Loader';
 import { Redirect } from 'react-router-dom';
+import CustomLoader from '../components/custom-loader';
 import '../App.css';
 
 
@@ -45,7 +46,6 @@ function mapStateToProps(state) {
   }
 }
 
-
 class Shopping extends Component {
 
   componentWillMount() {
@@ -75,7 +75,7 @@ class Shopping extends Component {
     let selected = [id]
     console.log(selected)
     this.props.submitItems(selected)
-    this.redirect()
+    // this.redirect()
    }
 
 
@@ -86,12 +86,15 @@ class Shopping extends Component {
     // console.log("all items****************************", items);
     console.log(items.all);
 
+
+
     return (
       <div>
         <NavBar />
         <h1 className="move-left">
           Welcome <span id="user-name">{this.props.authorized.user.firstName}!</span>
         </h1>
+
 
         <h3 className="white-text-shadow move-left">Add items to your cart:</h3>
 
@@ -110,6 +113,7 @@ class Shopping extends Component {
                   description={el.description}
                   handleSubmit={this.handleFormSubmit}
                   handleModal={this.handleModal}
+
                 />
               )
             })}

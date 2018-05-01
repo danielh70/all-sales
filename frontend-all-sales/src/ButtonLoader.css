@@ -52,13 +52,13 @@ body {
 @keyframes color {
   100%,
   0% {
-    stroke: #d62d20; }
+    stroke: #316dce; }
   40% {
-    stroke: #0057e7; }
+    stroke: #316dce; }
   66% {
-    stroke: #008744; }
+    stroke: #316dce; }
   80%,
   90% {
-    stroke: #ffa700; } }
+    stroke: #316dce; } }
 
 /*# sourceMappingURL=ButtonLoader.css.map */
